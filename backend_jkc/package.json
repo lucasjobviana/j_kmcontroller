@@ -5,10 +5,13 @@
   "scripts": {
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",    "dev": "tsnd --watch \"./src/**\" --transpile-only ./src/server.ts"
+    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",    
+    "predev": "npm run db:reset",
+    "dev": "tsnd --watch \"./src/**\" --transpile-only ./src/server.ts"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
+    "@types/jsonwebtoken": "8.5.6",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",
     "ts-node": "10.7.0",
@@ -21,11 +24,13 @@
     "@types/node": "16.11.7",
     "express-async-errors": "3.1.1",
     "arg": "^5.0.2",
+    "jsonwebtoken": "8.5.1",
     "express": "^4.18.2",
     "cors": "2.8.5",
     "mysql2": "2.3.0",
     "sequelize": "6.25.5",
     "sequelize-cli": "6.4.1",
+    "joi": "17.9.2",
     "ts-node": "^10.9.1"
   }
 }

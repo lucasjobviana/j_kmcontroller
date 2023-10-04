@@ -2,11 +2,11 @@ import * as express from 'express'
 import { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import * as cors from 'cors';
-// import userRouter from './routes/user.routes';
-// import teamRouter from './routes/team.routes';
-// import matchRouter from './routes/match.routes';
-// import loginRouter from './routes/login.routes';
-// import leaderBoardRouter from './routes/leaderBoard.routes';
+import userRouter from './routes/user.routes';
+import teamRouter from './routes/team.routes';
+import matchRouter from './routes/match.routes';
+import loginRouter from './routes/login.routes';
+import leaderBoardRouter from './routes/leaderBoard.routes';
 import AppResponseError from './AppResponseError';
 
 class App {
@@ -16,7 +16,7 @@ class App {
     this.app = express();
     this.app.use(cors());
     this.app.use(express.json());
-    // this.routes();
+    this.routes();
 
     this.config();
 
@@ -44,13 +44,13 @@ class App {
     this.app.use(accessControl);
   }
 
-  // private routes(): void {
-  //   this.app.use('/users', userRouter);
-  //   this.app.use('/teams', teamRouter);
-  //   this.app.use('/matches', matchRouter);
-  //   this.app.use('/login', loginRouter);
-  //   this.app.use('/leaderboard', leaderBoardRouter);
-  // }
+  private routes(): void {
+    this.app.use('/users', userRouter);
+    this.app.use('/teams', teamRouter);
+    this.app.use('/matches', matchRouter);
+    this.app.use('/login', loginRouter);
+    this.app.use('/leaderboard', leaderBoardRouter);
+  }
 
   public start(PORT: string | number): void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
