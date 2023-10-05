@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { TUserToLogin } from '../interfaces/types/TUserToLogin';
 import AppResponseError from '../AppResponseError';
-import { IUser } from '../interfaces/IUser';
+import { TUser } from '../interfaces/types/TUser';
 import UserModel from '../models/UserModel';
 import { IUserModel } from '../interfaces/IUserModel';
 import getNewToken from '../auth';
@@ -15,7 +15,7 @@ export default class UserService {
     private userModel: IUserModel = new UserModel(),
   ) { }
 
-  public async getAll(): Promise<IUser[]> {
+  public async getAll(): Promise<TUser[]> {
     const allUsers = await this.userModel.findAll();
     return allUsers;
   }

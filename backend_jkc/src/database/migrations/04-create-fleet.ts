@@ -1,9 +1,9 @@
 import { Model, DataTypes, QueryInterface,  } from 'sequelize';
 
-import { IVehicle } from '../../interfaces/IVehicle';
+import { TVehicle } from '../../interfaces/types/TVehicle';
 
 const up = (queryInterface: QueryInterface) => {
-    return queryInterface.createTable<Model<IVehicle>>('vehicles',{
+    return queryInterface.createTable<Model<TVehicle>>('vehicles',{
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,

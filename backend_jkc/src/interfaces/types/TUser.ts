@@ -1,4 +1,4 @@
-export type IUser = {
+export type TUser = {
   id: number,
   username: string,
   role: string,

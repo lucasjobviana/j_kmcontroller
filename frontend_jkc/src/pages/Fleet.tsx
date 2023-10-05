@@ -57,7 +57,7 @@ export const Fleet = () => {
 
   }));
 
-  const getDataFromStorage = async (name) => {
+  const getDataFromStorage = async (name:string) => {
     debounce(async ()=>{
       setIsLoading(true);
       const querySuccess =  await getByName(name);

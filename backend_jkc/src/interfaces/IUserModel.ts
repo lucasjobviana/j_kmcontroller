@@ -1,6 +1,6 @@
-import { IUser } from './IUser';
+import { TUser } from './types/TUser';
 
 export interface IUserModel {
-  findAll(): Promise<IUser[]>,
-  login(email:string): Promise<IUser>,
+  findAll(): Promise<TUser[]>,
+  login(email:string): Promise<TUser>,
 }

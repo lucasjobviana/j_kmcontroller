@@ -1,12 +1,12 @@
-import { GitHub, OpenInNew } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFleetContext } from "../../../contexts";
+import { Delete, Edit } from '@mui/icons-material';
 
 interface ICardProps {
     to:string;
-    obj:{name:string,descrition?:string,id:number}
+    obj:{name:string,descrition?:string,id:number,image:string}
     onClick?: () => void | undefined;
   }
 
@@ -24,6 +24,8 @@ export const J_Card : React.FC<ICardProps> = ({obj}) =>{
         // 16:9    
         pt: '56.25%',
       }}
+      
+      // image={obj.image}
       image={"https://consorciomagalu.com.br/wp-content/uploads/2020/06/onibus-caminhao-consorcio-magalu05.jpg"}
     />
     <CardContent sx={{ flexGrow: 1 }}>
@@ -34,15 +36,15 @@ export const J_Card : React.FC<ICardProps> = ({obj}) =>{
         { obj.name }
       </Typography>
     </CardContent>
-    <CardActions>
+    <CardActions> 
   
-      <Button size="small" startIcon={<GitHub />}  onClick={ () => { navigate(`details/${obj.id}`);} } >Code</Button>
-      <Button size="small" startIcon={<OpenInNew />}  onClick={ async () => {
+      <Button size="small" startIcon={<Edit />}  onClick={ () => { navigate(`details/${obj.id}`);} } >Editar</Button>
+      <Button size="small" startIcon={<Delete />}  onClick={ async () => {
             if(confirm(`Deseja excluir a categoria ${obj.name} `)) {
               await del(obj.id);
             } }
-          } >Deploy</Button>
-      
+          } >Deletar
+      </Button>
     </CardActions>
   </Card>
 </Grid> 

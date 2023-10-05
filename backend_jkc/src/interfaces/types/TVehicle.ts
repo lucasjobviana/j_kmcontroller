@@ -1,4 +1,4 @@
-export type IVehicle = {
+export type TVehicle = {
   id: number,
   name: string,
 };

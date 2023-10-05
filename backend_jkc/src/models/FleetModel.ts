@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import SequelizeFleetModel from '../database/models/SequelizeFleetModel';
-import { IVehicle } from '../interfaces/IVehicle';
+import { TVehicle } from '../interfaces/types/TVehicle';
 import { IVehicleModel } from '../interfaces/IVehicleModel';
 // import SequelizeMatchModel from '../database/models/SequelizeMatchModel';
 
@@ -15,14 +15,14 @@ export default class TeamModel implements IVehicleModel {
   //   return { id: dbData.id, teamName: dbData.teamName };
   // }
 
-  async findAll(whereOption = {}): Promise<IVehicle[]> {
+  async findAll(whereOption = {}): Promise<TVehicle[]> {
     const dbData = await this.model.findAll({ ...whereOption });
     return dbData.map(({ id, name }) => (
       { id, name }
     ));
   }//
 
-  async findAllLikeByName(name = ""): Promise<IVehicle[]> {
+  async findAllLikeByName(name = ""): Promise<TVehicle[]> {
     const dbData = await this.model.findAll({where: {
       name: {
           [Op.like]: `%${name}%`,
@@ -37,7 +37,7 @@ export default class TeamModel implements IVehicleModel {
     await this.model.destroy({where: {id}});
   }
 
-  async updateVehicle(id:string, vehicle:IVehicle): Promise<IVehicle> {
+  async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
     const updatedVehicle = await this.model.update(vehicle, {where: {id}});
     if(updatedVehicle[0] === 0) {
       throw new Error('Vehicle not found');

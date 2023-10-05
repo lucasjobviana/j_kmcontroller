@@ -1,6 +1,6 @@
 // import { IMatchModel } from '../interfaces/IMatchModel';
 // import MatchModel from '../models/MatchModel';
-import { IVehicle } from '../interfaces/IVehicle';
+import { TVehicle } from '../interfaces/types/TVehicle';
 import FleetModel from '../models/FleetModel';
 import { IVehicleModel } from '../interfaces/IVehicleModel';
 // import { ITeamWithMatchesDetails } from '../interfaces/ITeamWithMatchesDetails';
@@ -10,7 +10,6 @@ import { IVehicleModel } from '../interfaces/IVehicleModel';
 export default class FleetService {
   constructor(
     private fleetModel: IVehicleModel = new FleetModel(),
-    // private matchModel: IMatchModel = new MatchModel(),
   ) { }
 
   // public async getById(id: number): Promise<IFleet> {
@@ -18,21 +17,21 @@ export default class FleetService {
   //   return oneTeam;
   // }
 
-  public async getAll(): Promise<IVehicle[]> {
+  public async getAll(): Promise<TVehicle[]> {
     const fleet = await this.fleetModel.findAll({});
     return fleet;
   }
 
-  public async findAllLikeByName(name:string): Promise<IVehicle[]> {
+  public async findAllLikeByName(name:string): Promise<TVehicle[]> {
     const fleet = await this.fleetModel.findAllLikeByName(name);
     return fleet;
   }
 
   public async deleteVehicle(id:string): Promise<void> {
-    await this.fleetModel.deleteVehicle(id);
+    await this.fleetModel.deleteVehicle(id); 
   }
 
-  public async updateVehicle(id:string, vehicle:IVehicle): Promise<IVehicle> {
+  public async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
     const updatedVehicle = await this.fleetModel.updateVehicle(id, vehicle);
     return updatedVehicle;
   }

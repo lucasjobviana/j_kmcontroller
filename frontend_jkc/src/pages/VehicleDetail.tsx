@@ -26,7 +26,7 @@ export const VehicleDetail = () => {
         deleteButtonEnabled
         deleteLabelText='Deletar'
         saveLabelText='Salvar'
-        backTo='/Categorias'
+        backTo='/frota'
         handleClickDelete={ handleDelete}
         handleClickAdd={async () => {const id = await create('Nova Categoria');navigate(`/Categorias/detalhes/${id}`);}}
       />}  >
