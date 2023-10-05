@@ -19,6 +19,11 @@ router.put(
   (req: Request, res: Response) => teamController.updateVehicle(req, res),
 );
 
+router.post(
+  '/',
+  (req: Request, res: Response) => teamController.createVehicle(req, res),
+);
+
 // router.get(
 //   '/:id',
 //   (req: Request, res: Response) => teamController.findById(req, res),

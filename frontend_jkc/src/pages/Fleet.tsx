@@ -88,7 +88,7 @@ export const Fleet = () => {
         addLabelText='Novo veiculo'
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
-        handleClickAdd={async () => {const id = await create('Novo Veiculo');navigate(`detalhes/${id}`);}}
+        handleClickAdd={async () => {const id = await create('Novo Veiculo');navigate(`details/${id}`);}}
       />}  > {fleet.length}
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>

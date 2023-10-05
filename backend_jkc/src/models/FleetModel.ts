@@ -45,6 +45,11 @@ export default class TeamModel implements IVehicleModel {
     return vehicle;
   }
 
+  async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
+    const createdVehicle = await this.model.create(vehicle);
+    return createdVehicle;
+  }
+
   // async findTwoTeamsById(id1: number, id2: number): Promise<ITeams[]> {
   //   const dbData = await this.findAll({ where: { id: [id1, id2] } });
   //   return dbData.map(({ id, teamName }) => (

@@ -2,11 +2,11 @@ import React, { createContext, useCallback, useState, useContext, useEffect } fr
 import { Home, Category, Person, Article, Info, Build, LocalShipping } from '@mui/icons-material';
 
 const defaultDrawerOptions = [
-  {
-    label: 'Blog',
-    icon: <Category />,
-    path: '/frota'
-  },
+  // {
+  //   label: 'Blog',
+  //   icon: <Category />,
+  //   path: '/frota'
+  // },
   {
     label: 'Frota',
     icon: <LocalShipping />,
