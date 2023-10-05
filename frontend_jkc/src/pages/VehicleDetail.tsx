@@ -24,8 +24,9 @@ export const VehicleDetail = () => {
       <LayoutBase title='Frota - Detalhes' toolBar={<J_ToolBar
         addButtonEnabled
         deleteButtonEnabled
-        deleteLabelText='Deletar'
-        saveLabelText='Salvar'
+        // deleteLabelText='Deletar'
+        // saveLabelText='Salvar'
+        // addLabelText='Adicionar'
         backTo='/frota'
         handleClickDelete={ handleDelete}
         handleClickAdd={async () => {const id = await create('Nova Categoria');navigate(`/Categorias/detalhes/${id}`);}}
@@ -43,7 +44,7 @@ export const VehicleDetail = () => {
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
 
-          <FormCategoryDetail categoryId={id} category={category} />
+          <FormCategoryDetail vehicleId={id} vehicle={category} />
         </Box>
       </LayoutBase>
     </>

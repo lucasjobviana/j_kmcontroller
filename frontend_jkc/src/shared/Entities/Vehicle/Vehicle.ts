@@ -10,4 +10,5 @@ export class Vehicle implements IVehicle {
   constructor (name: string) {
     this.name = name;
   }
+  licensePlate: string='sem placa';
 }

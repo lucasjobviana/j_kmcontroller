@@ -10,8 +10,8 @@ import db from '.';
 class SequelizeFleetModel extends Model<InferAttributes<SequelizeFleetModel>,
 InferCreationAttributes<SequelizeFleetModel>> {
   declare id: CreationOptional<number>;
-
   declare name: string;
+  declare licensePlate: string;
 }
 
 SequelizeFleetModel.init({
@@ -22,6 +22,7 @@ SequelizeFleetModel.init({
     autoIncrement: true,
   },
   name: { type: DataTypes.STRING, allowNull: false },
+  licensePlate: { type: DataTypes.STRING, allowNull: false },
 }, {
   sequelize: db,
   modelName: 'vehicles',

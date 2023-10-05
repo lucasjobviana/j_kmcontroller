@@ -31,7 +31,7 @@ export const J_ToolBar: React.FC<IJ_ToolBarProps> = ({
   searchButtonEnabled = false,
   backButtonEnabled = true,
   handleChangeSearchText: handleChangeSearchText = (text) => console.log('HandleChangeSearch: ', text),
-  addLabelText = 'Novo Categoria',
+  addLabelText = 'Adicionar',
   saveLabelText = 'Salvar todos',
   deleteLabelText = 'Deletar seleção',
   backTo = '/',
@@ -51,7 +51,7 @@ export const J_ToolBar: React.FC<IJ_ToolBarProps> = ({
   return (
     <Box >
 
-      <Typography variant={'h6'} whiteSpace={'nowrap'} paddingBottom ={1} display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'end'} flexWrap={'wrap'} paddingRight={1}  component={Paper} gap={1} >
+      <Typography variant={'h6'} whiteSpace={'nowrap'} paddingY ={1} display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'end'} flexWrap={'wrap'} paddingRight={1}  component={Paper} gap={1} >
 
         {
           searchButtonEnabled &&

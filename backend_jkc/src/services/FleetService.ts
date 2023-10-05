@@ -1,21 +1,11 @@
-// import { IMatchModel } from '../interfaces/IMatchModel';
-// import MatchModel from '../models/MatchModel';
 import { TVehicle } from '../interfaces/types/TVehicle';
 import FleetModel from '../models/FleetModel';
 import { IVehicleModel } from '../interfaces/IVehicleModel';
-// import { ITeamWithMatchesDetails } from '../interfaces/ITeamWithMatchesDetails';
-// import TeamDetails from './TeamDetails';
-// import { IMatch } from '../interfaces/IMatch';
 
 export default class FleetService {
   constructor(
     private fleetModel: IVehicleModel = new FleetModel(),
   ) { }
-
-  // public async getById(id: number): Promise<IFleet> {
-  //   const oneTeam = await this.teamModel.findById(id);
-  //   return oneTeam;
-  // }
 
   public async getAll(): Promise<TVehicle[]> {
     const fleet = await this.fleetModel.findAll({});

@@ -11,6 +11,7 @@ const up = (queryInterface: QueryInterface) => {
         autoIncrement: true,
       },
       name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
+      licensePlate: { type: DataTypes.STRING, allowNull: false, field: 'license_plate' },
     });
 
 }

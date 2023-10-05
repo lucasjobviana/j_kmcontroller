@@ -5,20 +5,24 @@ export default {
     await queryInterface.bulkInsert('vehicles', [
       {
         name: 'Montana 2022 verde',
+        license_plate: 'ABC-1234',
       },
       {
         name: 'Volvo ex40 preto',
-          // senha: secret_user
-      },
-      // os logins abaixo são intencionalmente inválidos, pois serão usados nos testes
-      {
-        name:"Volvo ex21 azul"
+        license_plate: 'DEF-5678',
+
       },
       {
-       name:"Parati Turbo 2022"
+        name:"Volvo ex21 azul",
+        license_plate:"GHI-9012",
       },
       {
-        name:"CG 126 2004"
+       name:"Parati Turbo 2022",
+        license_plate:"JKL-3456",
+      },
+      {
+        name:"CG 126 2004",
+        license_plate:"MNO-7890",
        },
       
     ], {});
