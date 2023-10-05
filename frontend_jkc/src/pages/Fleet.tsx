@@ -7,6 +7,7 @@ import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { useFleetContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
+import { J_ListCard } from '../shared/components/list-card-container';
 
 export const Fleet = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -108,6 +109,8 @@ export const Fleet = () => {
             disableRowSelectionOnClick
           />
         </Box>
+
+        <J_ListCard list={fleet} />
       </LayoutBase>
     </>
   );
