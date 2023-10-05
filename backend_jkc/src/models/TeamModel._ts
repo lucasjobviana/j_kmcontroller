@@ -1,6 +1,6 @@
 import SequelizeTeamModel from '../database/models/SequelizeTeamModel';
 import { ITeams } from '../interfaces/ITeams';
-import { ITeamModel } from '../interfaces/ITeamModel';
+import { ITeamModel } from '../interfaces/IVehicleModel';
 import SequelizeMatchModel from '../database/models/SequelizeMatchModel';
 
 export default class TeamModel implements ITeamModel {

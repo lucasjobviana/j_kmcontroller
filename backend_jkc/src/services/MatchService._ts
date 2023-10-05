@@ -3,8 +3,8 @@ import { IMatch } from '../interfaces/IMatch';
 import MatchModel from '../models/MatchModel';
 import { IMatchModel } from '../interfaces/IMatchModel';
 import { TMatchToCreate } from '../interfaces/types/TMatchToCreate';
-import { ITeamModel } from '../interfaces/ITeamModel';
-import TeamModel from '../models/TeamModel';
+import { ITeamModel } from '../interfaces/IVehicleModel';
+import TeamModel from '../models/TeamModel._ts';
 
 export default class MatchService {
   constructor(

@@ -5,12 +5,12 @@ export const getAllVehicles = async () => {
   const categories = await api.get('/categories').then((response) => {
     return response.data;
   });
-  return categories;
-};
+  return categories; 
+}; 
 
 export const getVehiclesByName = async ({ search }) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const categories = await api.get(`/categories/name?search=${search}`, {
+  const categories = await api.get(`/fleet/name?search=${search}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -22,7 +22,7 @@ export const getVehiclesByName = async ({ search }) => {
 
 export const getVehicleById = async (id: number) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const category = await api.get(`/categories/${id}`, {
+  const category = await api.get(`/fleet/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -35,7 +35,7 @@ export const getVehicleById = async (id: number) => {
 export const createVehicle = async (category: Vehicle) => {
   try{
     const token = JSON.parse(localStorage.getItem('token')) ;
-    const newCategory = await api.post('/categories', category, {
+    const newCategory = await api.post('/fleet', category, {
       headers: {
         Authorization: `Bearer ${token}`
       }

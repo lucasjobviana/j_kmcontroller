@@ -1,8 +1,8 @@
 import { IMatchModel } from '../interfaces/IMatchModel';
 import MatchModel from '../models/MatchModel';
 import { ITeams } from '../interfaces/ITeams';
-import TeamModel from '../models/TeamModel';
-import { ITeamModel } from '../interfaces/ITeamModel';
+import TeamModel from '../models/TeamModel._ts';
+import { ITeamModel } from '../interfaces/IVehicleModel';
 import { ITeamWithMatchesDetails } from '../interfaces/ITeamWithMatchesDetails';
 import TeamDetails from './TeamDetails';
 import { IMatch } from '../interfaces/IMatch';

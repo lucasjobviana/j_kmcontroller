@@ -12,7 +12,7 @@ export const Fleet = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { fleet: categories, create, del, getByName } = useFleetContext();
+  const {  fleet, create, del, getByName } = useFleetContext();
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
@@ -50,7 +50,7 @@ export const Fleet = () => {
       ) },
   ];
 
-  const tableRowProps = categories.map((category) => ({
+  const tableRowProps = fleet.map((category) => ({
     id: category.id,
     name: category.name,
 
@@ -88,7 +88,7 @@ export const Fleet = () => {
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
         handleClickAdd={async () => {const id = await create('Novo Veiculo');navigate(`detalhes/${id}`);}}
-      />}  > {categories.length}
+      />}  > {fleet.length}
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
           <DataGrid

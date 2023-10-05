@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IMatch } from '../interfaces/IMatch';
-import MatchService from '../services/MatchService';
+import MatchService from '../services/MatchService._ts';
 import AppResponseError from '../AppResponseError';
 
 export default class MatchController {

@@ -14,14 +14,14 @@ export const VehicleDetail = () => {
   const category = categories.find((category) => Number(category.id) === Number(id));
 
   const handleDelete = async () => {
-    if(confirm(`Deseja excluir a categoria ${id} `)) {
+    if(confirm(`Deseja excluir o veiculo ${id} `)) {
       await del(Number(id));
-      navigate('/Categorias');
+      navigate('/frota');
     }
   };
   return (
     <>
-      <LayoutBase title='Categoria - Detalhes' toolBar={<J_ToolBar
+      <LayoutBase title='Frota - Detalhes' toolBar={<J_ToolBar
         addButtonEnabled
         deleteButtonEnabled
         deleteLabelText='Deletar'

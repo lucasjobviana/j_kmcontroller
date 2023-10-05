@@ -3,10 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import * as cors from 'cors';
 import userRouter from './routes/user.routes';
-import teamRouter from './routes/team.routes';
-import matchRouter from './routes/match.routes';
+// import teamRouter from './routes/team.routes._ts';
+// import matchRouter from './routes/match.routes._ts';
 import loginRouter from './routes/login.routes';
-import leaderBoardRouter from './routes/leaderBoard.routes';
+// import leaderBoardRouter from './routes/leaderBoard.routes._ts';
+import fleetRouter from './routes/fleet.routes';
 import AppResponseError from './AppResponseError';
 
 class App {
@@ -46,10 +47,9 @@ class App {
 
   private routes(): void {
     this.app.use('/users', userRouter);
-    this.app.use('/teams', teamRouter);
-    this.app.use('/matches', matchRouter);
     this.app.use('/login', loginRouter);
-    this.app.use('/leaderboard', leaderBoardRouter);
+    this.app.use('/fleet',fleetRouter);
+
   }
 
   public start(PORT: string | number): void {

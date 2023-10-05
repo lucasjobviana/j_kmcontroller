@@ -54,7 +54,7 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
   }, [fleet]);
 
   const getByName = useCallback( async (name: string) => {
-    const fleet = await defaultStorage('getVehiclesByName', { search:name }); 
+    const fleet = await defaultStorage('getVehiclesByName', { search:name });  
     if(fleet) {
       setFleet(fleet);
       return true;
