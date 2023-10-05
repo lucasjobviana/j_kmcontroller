@@ -30,7 +30,7 @@ export const Fleet = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={ () => { navigate(`detalhes/${expense.row.id}`);} }
+          onClick={ () => { navigate(`details/${expense.row.id}`);} }
         > <Edit />
         </Button>
       ) },

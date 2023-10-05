@@ -22,7 +22,7 @@ export const FormCategoryDetail: React.FC<IFormCategoryDetailProps> = ({ childre
         const category = new Vehicle(v.name);
         category.id = Number(categoryId);
         await update(category);
-        navigate('/Categorias');
+        navigate('/frota');
       }} >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>
           <J_TextField name='name' label='Nome' value={category.name} defaultV={category.name}  />

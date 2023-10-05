@@ -48,9 +48,9 @@ export const createVehicle = async (category: Vehicle) => {
   }
 };
 
-export const updateVehicle = async (category: Vehicle) => {
+export const updateVehicle = async (vehicle: Vehicle) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const updatedCategory = await api.put(`/categories/${category.id}`, category, {
+  const updatedCategory = await api.put(`/fleet/${vehicle.id}`, vehicle, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -63,7 +63,7 @@ export const updateVehicle = async (category: Vehicle) => {
 export const deleteVehicle = async (id: number) => {
   console.log('id para deletar no api . delete;', id);
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const deletedCategory = await api.delete(`/categories/${id}`,  {
+  const deletedCategory = await api.delete(`/fleet/${id}`,  {
     headers: {
       Authorization: `Bearer ${token}`
     }

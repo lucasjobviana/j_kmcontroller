@@ -8,7 +8,7 @@ export const AppRoutes = () => {
       <PostProvider>
         <Routes> 
           <Route path="/frota" element={<Fleet />} />
-          <Route path="/frota/detalhes/:id" element={<VehicleDetail />} />
+          <Route path="/frota/details/:id" element={<VehicleDetail />} />
           {/* <Route path="*" element={<Navigate to="/Login"  />} /> */}
         </Routes>
       </PostProvider>

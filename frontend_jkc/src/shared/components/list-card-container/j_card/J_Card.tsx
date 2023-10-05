@@ -1,14 +1,18 @@
 import { GitHub, OpenInNew } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useFleetContext } from "../../../contexts";
 
 interface ICardProps {
     to:string;
-    obj:{name:string,descrition?:string}
+    obj:{name:string,descrition?:string,id:number}
     onClick?: () => void | undefined;
   }
 
 export const J_Card : React.FC<ICardProps> = ({obj}) =>{
+  const { del } = useFleetContext();
+  const navigate = useNavigate();
     return (
         <Grid item key={`${"title"}`} xs={12} sm={6} md={4}>
   <Card
@@ -32,8 +36,12 @@ export const J_Card : React.FC<ICardProps> = ({obj}) =>{
     </CardContent>
     <CardActions>
   
-      <Button size="small" startIcon={<GitHub />} href={"urlRepository"} target='_blank' >Code</Button>
-      <Button size="small" startIcon={<OpenInNew />} href={"urlProject"} target='_blank' >Deploy</Button>
+      <Button size="small" startIcon={<GitHub />}  onClick={ () => { navigate(`details/${obj.id}`);} } >Code</Button>
+      <Button size="small" startIcon={<OpenInNew />}  onClick={ async () => {
+            if(confirm(`Deseja excluir a categoria ${obj.name} `)) {
+              await del(obj.id);
+            } }
+          } >Deploy</Button>
       
     </CardActions>
   </Card>

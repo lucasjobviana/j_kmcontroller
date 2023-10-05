@@ -23,18 +23,17 @@ export default class FleetController {
     res.status(200).json(fleet);
   }
 
-  // public async findAllHomeWithMatchesDetails(_req: Request, res: Response) {
-  //   const teams = await this.fleetService.getAllHomeWithMatchesDetails();
-  //   res.status(200).json(teams);
-  // }
+  public async deleteVehicle(req: Request, res:Response) {
+    const { id } = req.params;
+    await this.fleetService.deleteVehicle(id);
+    return res.status(204).json({hasDeleted:true})
+  }
 
-  // public async findAllAwayWithMatchesDetails(_req: Request, res: Response) {
-  //   const teams = await this.fleetService.getAllAwayWithMatchesDetails();
-  //   res.status(200).json(teams);
-  // }
+  public async updateVehicle(req: Request, res:Response) {
+    const { id } = req.params;
+    const vehicle = req.body;
+    const updatedVehicle = await this.fleetService.updateVehicle(id,vehicle);
+    return res.status(200).json(updatedVehicle)
+  }
 
-  // public async findAllWithMatchesDetails(_req: Request, res: Response) {
-  //   const teams = await this.fleetService.getAllWithMatchesDetails();
-  //   res.status(200).json(teams);
-  // }
 }

@@ -7,26 +7,6 @@ interface IListCardProps{
   list: IVehicle[],
 }
 
-// const ListItemLink: React.FC<IListCardProps> = ({ to, icon, label, onClick }) => {
-//   const navigate = useNavigate();
-//   const resolvedPath = useResolvedPath(to);
-//   const match = useMatch({ path: resolvedPath.pathname, end: true });
-
-//   const handleClick = () => {
-//     navigate(to);
-//     onClick?.();
-//   };
-
-//   return (
-//     <ListItemButton selected={!!match} onClick={handleClick} >
-//       <ListItemIcon>
-//         {icon}
-//       </ListItemIcon>
-//       <ListItemText primary={label} />
-//     </ListItemButton>
-//   );
-// };
-
 export const J_ListCard: React.FC<IListCardProps> = ({list}) => {
   const mock = list;
   return (

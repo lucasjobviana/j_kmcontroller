@@ -31,7 +31,19 @@ export default class TeamModel implements IVehicleModel {
     return dbData.map(({ id, name }) => (
       { id, name }
     ));
-  }//findAllLikeByName
+  }
+
+  async deleteVehicle(id:string): Promise<void> {
+    await this.model.destroy({where: {id}});
+  }
+
+  async updateVehicle(id:string, vehicle:IVehicle): Promise<IVehicle> {
+    const updatedVehicle = await this.model.update(vehicle, {where: {id}});
+    if(updatedVehicle[0] === 0) {
+      throw new Error('Vehicle not found');
+    }
+    return vehicle;
+  }
 
   // async findTwoTeamsById(id1: number, id2: number): Promise<ITeams[]> {
   //   const dbData = await this.findAll({ where: { id: [id1, id2] } });
