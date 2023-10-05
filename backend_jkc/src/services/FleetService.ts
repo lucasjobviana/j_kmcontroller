@@ -38,6 +38,6 @@ export default class FleetService {
 
   public async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
     const createdVehicle = await this.fleetModel.createVehicle(vehicle);
-    return createdVehicle;
+    return createdVehicle; 
   }
 }

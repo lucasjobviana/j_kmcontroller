@@ -5,6 +5,7 @@ export interface IVehicleModel {
   findAllLikeByName(name:string):Promise<TVehicle[]>,
   updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle>,
   deleteVehicle(id:string): Promise<void>,
+  createVehicle(vehicle:TVehicle): Promise<TVehicle>,
   // findById(id: number): Promise<ITeams>,
   // findTwoTeamsById(id1: number, id2: number): Promise<ITeams[]>,
   // findAllWithMatches(): Promise<ITeams[]>,
