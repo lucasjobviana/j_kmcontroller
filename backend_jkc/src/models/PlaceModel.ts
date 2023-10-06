@@ -26,9 +26,9 @@ export default class PlaceModel implements IPlaceModel{
     ));
   }
 
-  // async deleteVehicle(id:string): Promise<void> { 
-  //   await this.model.destroy({where: {id}});
-  // }
+  async deletePlace(id:string): Promise<void> { 
+    await this.model.destroy({where: {id}});
+  }
 
   // async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
   //   const updatedVehicle = await this.model.update(vehicle, {where: {id}});

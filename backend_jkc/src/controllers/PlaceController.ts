@@ -24,11 +24,11 @@ export default class PlaceController {
     res.status(200).json(fleet);
   }
 
-  // public async deleteVehicle(req: Request, res:Response) {
-  //   const { id } = req.params;
-  //   await this.fleetService.deleteVehicle(id);
-  //   return res.status(204).json({hasDeleted:true})
-  // }
+  public async deletePlace(req: Request, res:Response) {
+    const { id } = req.params;
+    await this.placeService.deleteVehicle(id);
+    return res.status(204).json({hasDeleted:true})
+  }
 
   // public async updateVehicle(req: Request, res:Response) {
   //   const { id } = req.params;

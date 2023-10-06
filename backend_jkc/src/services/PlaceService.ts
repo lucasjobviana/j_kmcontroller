@@ -1,4 +1,3 @@
-import { TVehicle } from '../interfaces/types/TVehicle';
 import PlaceModel from '../models/PlaceModel';
 import { IPlaceModel } from '../interfaces/IPlaceModel';
 import { TPlace } from '../interfaces/types/TPlace';
@@ -18,9 +17,9 @@ export default class PlaceService {
     return place;
   }
 
-  // public async deleteVehicle(id:string): Promise<void> {
-  //   await this.placeModel.deleteVehicle(id); 
-  // }
+  public async deleteVehicle(id:string): Promise<void> {
+    await this.placeModel.deletePlace(id); 
+  }
 
   // public async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
   //   const updatedVehicle = await this.placeModel.updateVehicle(id, vehicle);

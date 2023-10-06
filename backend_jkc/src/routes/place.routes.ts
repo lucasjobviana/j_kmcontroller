@@ -9,10 +9,10 @@ router.get(
   (req: Request, res: Response) => placeController.findAllLikeByName(req, res),
 ); 
 
-// router.delete(
-//   '/:id',
-//   (req: Request, res: Response) => placeController.deleteVehicle(req, res),
-// );
+router.delete(
+  '/:id',
+  (req: Request, res: Response) => placeController.deletePlace(req, res),
+);
 
 // router.put(
 //   '/:id',
