@@ -4,5 +4,4 @@ export interface IVehicle {
     licensePlate: string;
     description: string;
     image: string;
-    userId: number;
 }

@@ -4,7 +4,7 @@ import { Form } from '@unform/web';
 import { J_TextField } from './text-field';
 import { Box, Button } from '@mui/material';
 import { useFleetContext } from '../../contexts';
-import { Vehicle } from './../../Entities';
+import { Vehicle } from '../../Entities';
 import { useNavigate } from 'react-router-dom';
 
 export interface IFormVehicleDetailProps extends IReactRCProps {
@@ -12,17 +12,17 @@ export interface IFormVehicleDetailProps extends IReactRCProps {
   vehicle?: Vehicle;
 }
 
-export const FormCategoryDetail: React.FC<IFormVehicleDetailProps> = ({ children, vehicleId, vehicle, ...rest }) => {
+export const FormVehicleDetail: React.FC<IFormVehicleDetailProps> = ({ children, vehicleId, vehicle, ...rest }) => {
   const {  update } = useFleetContext();
   const navigate = useNavigate();
 
   if(vehicle) {
     return (
       <Form {...rest} onSubmit={async (v) => {
-        const category = new Vehicle(v.name);
-        category.id = Number(vehicleId);
-        category.licensePlate = v.licensePlate;
-        await update(category);
+        const vehicle = new Vehicle(v.name, v.licensePlate);
+        vehicle.id = Number(vehicleId); 
+        vehicle.licensePlate = v.licensePlate;
+        await update(vehicle);
         navigate('/frota');
       }} >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>

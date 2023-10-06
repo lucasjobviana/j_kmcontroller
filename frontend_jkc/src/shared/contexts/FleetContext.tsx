@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import { IReactRCProps } from '../tools';
-import { IVehicle, Vehicle } from '../../../../Entities';
+import { IVehicle, Vehicle } from '../../shared/Entities';
 import  { mapToDefaultStorage }  from '../tools';
 
 interface IVehicleContext  {

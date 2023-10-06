@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useFleetContext } from "../../../contexts";
+import { usePlaceContext } from "../../../contexts";
 import { Delete, Edit } from '@mui/icons-material';
 
 interface ICardProps {
@@ -11,7 +11,8 @@ interface ICardProps {
   }
 
 export const J_Card : React.FC<ICardProps> = ({obj}) =>{
-  const { del } = useFleetContext();
+  console.log('obj',obj);
+  const { del } = usePlaceContext();
   const navigate = useNavigate();
     return (
         <Grid item key={`${"title"}`} xs={12} sm={6} md={4}>
@@ -25,8 +26,7 @@ export const J_Card : React.FC<ICardProps> = ({obj}) =>{
         pt: '56.25%',
       }}
       
-      // image={obj.image}
-      image={"https://consorciomagalu.com.br/wp-content/uploads/2020/06/onibus-caminhao-consorcio-magalu05.jpg"}
+       image={obj.image}
     />
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography gutterBottom variant="h5" component="h2">

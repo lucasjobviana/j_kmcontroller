@@ -1,4 +1,5 @@
 export * from './text-field';
-export * from './FormCategoryDetail';
+export * from './FormVehicleDetail';
 export * from './FormPostDetail';
+export * from './FormPlaceDetail';
 export * from './auto-complete-field';

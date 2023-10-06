@@ -12,11 +12,11 @@ const defaultDrawerOptions = [
     icon: <LocalShipping />,
     path: '/frota'
   },
-  // {
-  //   label: 'Postagens',
-  //   icon: <Article />,
-  //   path: '/Postagens'
-  // },
+  {
+    label: 'Destinos',
+    icon: <Info />,
+    path: '/places'
+  },
   // {
   //   label: 'Perfil',
   //   icon: <Person />,

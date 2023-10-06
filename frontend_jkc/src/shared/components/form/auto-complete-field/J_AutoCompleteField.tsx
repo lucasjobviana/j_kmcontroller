@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextField, BaseTextFieldProps, Autocomplete } from '@mui/material';
 import { useField } from '@unform/core';
 import { J_Skeleton } from '../../../tools';
-import { useFleetContext } from '../../../contexts';
+import { usePlaceContext } from '../../../contexts';
 
 export interface IJ_AutoCompleteFieldProps extends BaseTextFieldProps {
   name?: string;
@@ -14,7 +14,7 @@ export interface IJ_AutoCompleteFieldProps extends BaseTextFieldProps {
 export const J_AutoCompleteField: React.FC<IJ_AutoCompleteFieldProps> = ({ name, defaultV, ...rest }) => {
   const { fieldName, registerField, defaultValue, error, clearError } = useField(name);
   const [value, setValue] = useState(defaultV);
-  const { getByName, fleet: categories } = useFleetContext();
+  const { getByName, fleet: categories } = usePlaceContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {

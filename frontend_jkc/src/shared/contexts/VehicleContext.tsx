@@ -23,8 +23,8 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
   const defaultStorage = mapToDefaultStorage();
   const [fleet, setFleet] = useState<IVehicle[]|[]>([]);
 
-  const create = useCallback( async (name='Novo Veiculo') => {
-    const vehicle = new Vehicle(name);
+  const create = useCallback( async (name='Novo Veiculo', licensePlate='Não emplacado') => {
+    const vehicle = new Vehicle(name, licensePlate); 
     const newVehicle = await defaultStorage('createVehicle', vehicle);
     if(newVehicle) {
       setFleet((fleet) => [...fleet, newVehicle]);
@@ -53,10 +53,15 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
     console.log('get all Vehicle');
   }, [fleet]);
 
-  const getByName = useCallback( async (name: string) => {
-    const fleet = await defaultStorage('getVehiclesByName', { search:name });  
+  const getByName = useCallback( async (name: string) => { 
+    const fleet = await defaultStorage('getVehiclesByName', { search:name });
+     
     if(fleet) {
-      setFleet(fleet);
+      const newFleet = fleet.map((v:IVehicle) => {
+        return new Vehicle(v.name, v.licensePlate, v.id)
+      });
+       
+      setFleet(newFleet);
       return true;
     }
     return false;

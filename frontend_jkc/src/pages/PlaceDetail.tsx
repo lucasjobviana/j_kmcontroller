@@ -3,50 +3,52 @@ import { Box, Paper, Typography } from '@mui/material';
 // import { Delete, Edit } from '@mui/icons-material';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
-import { useFleetContext } from '../shared/contexts';
-import { FormVehicleDetail } from '../shared/components/form';
+import { usePlaceContext } from '../shared/contexts';
+import { FormPlaceDetail } from '../shared/components/form';
 
-export const VehicleDetail = () => {
+export const PlaceDetail = () => {
+  const { del } = usePlaceContext();
   const { id='nova' } = useParams<'id'>();
-  const { create, del, fleet } = useFleetContext();
+  const { places } = usePlaceContext();
   const navigate = useNavigate();
-  const vehicle = fleet.find((vehicle) => Number(vehicle.id) === Number(id)) || undefined;
+  const place = places.find((category) => Number(category.id) === Number(id));
 
   const handleDelete = async () => {
-    if(confirm(`Deseja excluir o veiculo ${id} `)) {
+    if(confirm(`Deseja excluir o destino ${id} `)) {
       await del(Number(id));
-      navigate('/frota');
+      navigate('/places');
     }
   };
   return (
     <>
-      <LayoutBase title='Frota - Detalhes' toolBar={<J_ToolBar
+      <LayoutBase title='Destino - Detalhes' toolBar={<J_ToolBar
         addButtonEnabled
         deleteButtonEnabled
         // deleteLabelText='Deletar'
         // saveLabelText='Salvar'
         // addLabelText='Adicionar'
-        backTo='/frota'
+        backTo='/places'
         handleClickDelete={ handleDelete}
-        handleClickAdd={async () => {const id = await create('Nova Categoria');navigate(`/Categorias/detalhes/${id}`);}}
+        // handleClickAdd={async () => {const id = await create('Nova Categoria');navigate(`/Categorias/detalhes/${id}`);}}
       />}  >
 
         <Box height={30} display={'flex'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} marginBottom={1} component={Paper} variant='outlined' >
           <Typography variant='h6' component='h1' >
             {
-              vehicle ?
-                `${id||'nova'} - ${vehicle.name}` :
-                'Veiculo não encontrado'
+              place ?
+                `${id||'nova'} - ${place.name}` :
+                'Destino não encontrado'
             }
           </Typography>
         </Box>
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
-            {
-              vehicle ?
-              <FormVehicleDetail vehicleId={id} vehicle={vehicle} />
-              :'Veiculo não encontrado'
+        {
+              place ?
+              <FormPlaceDetail placeId={id} place={place} />
+              : 'Destino não encontrado'
             }
+          
         </Box>
       </LayoutBase>
     </>

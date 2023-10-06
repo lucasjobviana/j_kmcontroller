@@ -1,5 +1,5 @@
 import { getAllVehicles as getAllVehicles, getVehicleById as getVehicleById, createVehicle, updateVehicle, deleteVehicle, getVehiclesByName as getVehiclesByName,
-  createUser, login, getPostsByName, createPost, deletePost, updatePost } from '../services/api';
+  createUser, login, getPlacesByName, createPost, deletePlace, updatePost } from '../services/api';
 
 import { createUserLS, loginLS, getCategoriesByNameLS, createCategoryLS, updateCategoryLS, deleteCategoryLS } from '../services/localStorage';
 import { getPostsByTitleLS, createPostLS, deletePostLS, updatePostLS } from '../services/localStorage/posts';
@@ -9,16 +9,19 @@ export const mapToDefaultStorage = (usingBD = true) => {
   const mapFunction = (functionName:string, functionParameter:any) => {
     if (usingBD) {
       switch (functionName) {//getVehiclesByName
-      case 'getAllVehicles': return getAllVehicles();
+        
+      case 'getAllVehicles': return getAllVehicles(); 
       case 'getVehiclesByName': return getVehiclesByName(functionParameter);
       case 'getVehicleById': return getVehicleById(functionParameter);
       case 'createVehicle': return createVehicle(functionParameter);
       case 'updateVehicle': return updateVehicle(functionParameter);
       case 'deleteVehicle': return deleteVehicle(functionParameter);
       case 'createUser': return createUser(functionParameter);
-      case 'getPostsByName': return getPostsByName(functionParameter);
+      
+      case 'getPlacesByName': return getPlacesByName(functionParameter);
+      case 'deletePlace': return deletePlace(functionParameter);
+
       case 'createPost': return createPost(functionParameter);
-      case 'deletePost': return deletePost(functionParameter);
       case 'updatePost': return updatePost(functionParameter);
       case 'login': return login(functionParameter);
       default: return null;

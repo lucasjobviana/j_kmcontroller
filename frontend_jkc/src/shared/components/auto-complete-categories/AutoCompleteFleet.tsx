@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useFleetContext } from '../../contexts';
+import { usePlaceContext } from '../../contexts';
 import { Autocomplete, TextField } from '@mui/material';
 import {  useDebounce } from '../../tools';
 import { useField } from '@unform/core';
@@ -14,7 +14,7 @@ interface IAutoCompleteFleetProps {
 }
 
 export const AutoCompleteFleet: React.FC<IAutoCompleteFleetProps>  = ({ id }) => {
-  const { fleet } = useFleetContext();
+  const { fleet } = usePlaceContext();
   const { fieldName, registerField, error, clearError } = useField('vehicleIds');
   const { debounce } = useDebounce();
   const [selectedId, setSelectedId] = useState<number | undefined>(id);
