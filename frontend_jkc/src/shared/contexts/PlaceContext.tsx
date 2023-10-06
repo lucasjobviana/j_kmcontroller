@@ -1,13 +1,13 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import { IReactRCProps } from '../tools';
-import {  IPlace } from '../../shared/Entities';
+import {  IPlace, Place } from '../../shared/Entities';
 import  { mapToDefaultStorage }  from '../tools';
 
 interface IPlaceContext  {
     places: IPlace[] | [];
     // create: (name: string ) => Promise<boolean>;
     del: (id: number) => void;
-    // update: (vehicle: Place) => void;
+    update: (place: Place) => void;
     // getAll: () => void;
     // getById: (id: number) => void;
     getByName: (name: string) => Promise<boolean>;
@@ -33,10 +33,10 @@ export const PlaceProvider: React.FC<IPlaceProviderProps> = ({ children }) => {
   //   return false;
   // }, [fleet]);
 
-  // const update = useCallback( async (vehicle: Place) => {
-  //   const hasUpdated = await defaultStorage('updateVehicle', vehicle);
-  //   console.log('Vehicle updated', hasUpdated);
-  // }, [fleet]);
+  const update = useCallback( async (place: Place) => {
+    const hasUpdated = await defaultStorage('updatePlace', place);
+    console.log('Place updated', hasUpdated);
+  }, [places]);
 
   const del = useCallback( async (id: number) => {
     const status = await defaultStorage('deletePlace', id);
@@ -69,7 +69,7 @@ export const PlaceProvider: React.FC<IPlaceProviderProps> = ({ children }) => {
   // }, [fleet]);
 
   return (
-    <PlaceContext.Provider value={{ places, getByName, setPlaces, del }}>
+    <PlaceContext.Provider value={{ places, getByName, setPlaces, del, update }}>
       {children}
     </PlaceContext.Provider>
   );

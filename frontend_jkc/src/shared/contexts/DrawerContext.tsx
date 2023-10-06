@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
-import { Home, Category, Person, Article, Info, Build, LocalShipping } from '@mui/icons-material';
+import { Home, Category, Person, Article, Place, Build, LocalShipping } from '@mui/icons-material';
 
 const defaultDrawerOptions = [
   // {
@@ -14,7 +14,7 @@ const defaultDrawerOptions = [
   },
   {
     label: 'Destinos',
-    icon: <Info />,
+    icon: <Place />,
     path: '/places'
   },
   // {

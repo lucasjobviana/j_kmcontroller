@@ -21,10 +21,10 @@ export default class PlaceService {
     await this.placeModel.deletePlace(id); 
   }
 
-  // public async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
-  //   const updatedVehicle = await this.placeModel.updateVehicle(id, vehicle);
-  //   return updatedVehicle;
-  // }
+  public async updatePlace(id:string, place:TPlace): Promise<TPlace> {
+    const updatedPlace = await this.placeModel.updatePlace(id, place);
+    return updatedPlace;
+  }
 
   // public async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
   //   const createdVehicle = await this.placeModel.createVehicle(vehicle);

@@ -30,7 +30,7 @@ export const Places = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={ () => { navigate(`details/${expense.row.id}`);} }
+          onClick={ () => { navigate(`details/${expense.row.id}`);} } 
         > <Edit />
         </Button>
       ) },

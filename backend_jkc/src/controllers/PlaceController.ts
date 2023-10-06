@@ -30,12 +30,12 @@ export default class PlaceController {
     return res.status(204).json({hasDeleted:true})
   }
 
-  // public async updateVehicle(req: Request, res:Response) {
-  //   const { id } = req.params;
-  //   const vehicle = req.body;
-  //   const updatedVehicle = await this.fleetService.updateVehicle(id,vehicle);
-  //   return res.status(200).json(updatedVehicle)
-  // }
+  public async updatePlace(req: Request, res:Response) {
+    const { id } = req.params;
+    const place = req.body;
+    const updatedPlace = await this.placeService.updatePlace(id,place);
+    return res.status(200).json(updatedPlace)
+  }
 
   // public async createVehicle(req: Request, res:Response) {
   //   const vehicle = req.body;

@@ -30,13 +30,13 @@ export default class PlaceModel implements IPlaceModel{
     await this.model.destroy({where: {id}});
   }
 
-  // async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
-  //   const updatedVehicle = await this.model.update(vehicle, {where: {id}});
-  //   if(updatedVehicle[0] === 0) {
-  //     throw new Error('Vehicle not found');
-  //   }
-  //   return vehicle;
-  // } 
+  async updatePlace(id:string, place:TPlace): Promise<TPlace> {
+    const updatedPlace = await this.model.update(place, {where: {id}});
+    if(updatedPlace[0] === 0) {
+      throw new Error('Place not found');
+    }
+    return place;
+  } 
 
   // async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
   //   const createdVehicle = await this.model.create(vehicle);

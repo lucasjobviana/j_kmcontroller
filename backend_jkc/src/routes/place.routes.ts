@@ -14,10 +14,10 @@ router.delete(
   (req: Request, res: Response) => placeController.deletePlace(req, res),
 );
 
-// router.put(
-//   '/:id',
-//   (req: Request, res: Response) => placeController.updateVehicle(req, res),
-// );
+router.put(
+  '/:id',
+  (req: Request, res: Response) => placeController.updatePlace(req, res),
+);
 
 // router.post(
 //   '/',
