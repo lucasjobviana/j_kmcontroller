@@ -23,8 +23,8 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
   const defaultStorage = mapToDefaultStorage();
   const [fleet, setFleet] = useState<IVehicle[]|[]>([]);
 
-  const create = useCallback( async (name='Novo Veiculo') => {
-    const vehicle = new Vehicle(name);
+  const create = useCallback( async (name='Novo Veiculo',licensePlate='Sem placa') => {
+    const vehicle = new Vehicle(name, licensePlate);
     const newVehicle = await defaultStorage('createVehicle', vehicle);
     if(newVehicle) {
       setFleet((fleet) => [...fleet, newVehicle]);

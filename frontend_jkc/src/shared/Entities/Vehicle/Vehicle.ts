@@ -14,6 +14,4 @@ export class Vehicle implements IVehicle {
       this.id = id;
     }
   }
-
-  
 }

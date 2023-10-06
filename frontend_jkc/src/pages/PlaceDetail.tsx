@@ -1,6 +1,6 @@
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Paper, Typography } from '@mui/material';
-// import { Delete, Edit } from '@mui/icons-material';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { usePlaceContext } from '../shared/contexts';
@@ -24,9 +24,6 @@ export const PlaceDetail = () => {
       <LayoutBase title='Destino - Detalhes' toolBar={<J_ToolBar
         addButtonEnabled
         deleteButtonEnabled
-        // deleteLabelText='Deletar'
-        // saveLabelText='Salvar'
-        // addLabelText='Adicionar'
         backTo='/places'
         handleClickDelete={ handleDelete}
         handleClickAdd={async () => {const id = await create('Novo destino');navigate(`/places/details/${id}`);}}
@@ -43,12 +40,11 @@ export const PlaceDetail = () => {
         </Box>
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
-        {
-              place ?
+          {
+            place ?
               <FormPlaceDetail placeId={id} place={place} />
               : 'Destino não encontrado'
-            }
-          
+          }
         </Box>
       </LayoutBase>
     </>

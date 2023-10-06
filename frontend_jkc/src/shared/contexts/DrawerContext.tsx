@@ -1,12 +1,7 @@
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
-import { Home, Category, Person, Article, Place, Build, LocalShipping } from '@mui/icons-material';
+import { Place, LocalShipping } from '@mui/icons-material';
 
 const defaultDrawerOptions = [
-  // {
-  //   label: 'Blog',
-  //   icon: <Category />,
-  //   path: '/frota'
-  // },
   {
     label: 'Frota',
     icon: <LocalShipping />,
@@ -17,21 +12,6 @@ const defaultDrawerOptions = [
     icon: <Place />,
     path: '/places'
   },
-  // {
-  //   label: 'Perfil',
-  //   icon: <Person />,
-  //   path: '/Perfil'
-  // },
-  // {
-  //   label: 'Configurações',
-  //   icon: <Build />,
-  //   path: '/Configuracoes'
-  // },
-  // {
-  //   label: 'Sobre o blog',
-  //   icon: <Info />,
-  //   path: '/Sobre'
-  // }
 ];
 
 interface IDrawerContext {

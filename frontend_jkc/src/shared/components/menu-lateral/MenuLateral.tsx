@@ -40,7 +40,6 @@ export const MenuLateral: React.FC<IReactRCProps> = ({ children }) => {
 
   return (
     <>
-
       <Drawer open={isDrawerOpen} variant={hasSmDown ? 'temporary':'permanent'} onClose={toggleDrawer} >
         <Box height={'100vh'} width={theme.spacing(menuSize)} display='flex' flexDirection='column' >
           <Box height={theme.spacing(16)} display='flex' alignItems='center' justifyContent='center' >
@@ -68,8 +67,6 @@ export const MenuLateral: React.FC<IReactRCProps> = ({ children }) => {
       <Box height='100vh' marginLeft={hasSmDown? 0:theme.spacing(menuSize)} >
         {children}
       </Box>
-
     </>
   );
-
 };

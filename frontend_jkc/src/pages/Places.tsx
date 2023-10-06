@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import React,{ useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Box, Button, Paper } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
@@ -7,7 +7,13 @@ import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { usePlaceContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
-// import { J_ListCard } from '../shared/components/list-card-container';
+
+interface Expense{
+  row: {
+    id: number;
+    name: string;
+  };
+}
 
 export const Places = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,21 +29,24 @@ export const Places = () => {
     field: header.name, headerName: header.label, editable: false, width: 150
   }));
   const tableHeadersWithButtons = [...tableHeaders,
-    { field: 'btnEdit',
+    { 
+      field: 'btnEdit',
       headerName: 'Editar',
       type: 'button',
-      renderCell: (expense) => (
+      renderCell: (expense:Expense) => (
         <Button
           variant="contained"
           color="primary"
           onClick={ () => { navigate(`details/${expense.row.id}`);} } 
         > <Edit />
         </Button>
-      ) },
-    { field: 'btnDeletar',
+      ) 
+    },
+    { 
+      field: 'btnDeletar',
       headerName: 'Deletar',
       type: 'button',
-      renderCell: (expense) => (
+      renderCell: (expense:Expense) => (
         <Button
           variant="contained"
           color="primary"
@@ -89,9 +98,8 @@ export const Places = () => {
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
         handleClickAdd={async () => {const id = await create('Novo destino');navigate(`details/${id}`);}}
-        // handleClickAdd={async () => {const id = 1;navigate(`details/${id}`);}}
 
-/>}  > {places.length}
+      />}  > {places.length}
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
           <DataGrid
@@ -111,7 +119,6 @@ export const Places = () => {
             disableRowSelectionOnClick
           />
         </Box>
-
         {/* <J_ListCard list={place} /> */}
       </LayoutBase>
     </>

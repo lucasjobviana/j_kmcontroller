@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Fleet, VehicleDetail, Places, PlaceDetail } from '../pages';
 import { FleetProvider, PlaceProvider } from '../shared/contexts';

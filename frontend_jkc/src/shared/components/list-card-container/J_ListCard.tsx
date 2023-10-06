@@ -11,16 +11,13 @@ export const J_ListCard: React.FC<IListCardProps> = ({list}) => {
   const mock = list;
   return (
     <>
-   
-    <Container sx={{ py: 8 }} maxWidth="md">
-
-<Grid container spacing={4}>
-{
-      mock.map((obj)=>(<J_Card to="asd" obj={obj} />))
-    }
-</Grid>
-</Container> 
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <Grid container spacing={4}>
+          {
+            mock.map((obj)=>(<J_Card key={obj.name} to="asd" obj={obj} />))
+          }
+        </Grid>
+      </Container> 
     </>
   );
-
 };
