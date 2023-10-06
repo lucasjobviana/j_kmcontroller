@@ -37,10 +37,10 @@ export default class PlaceController {
     return res.status(200).json(updatedPlace)
   }
 
-  // public async createVehicle(req: Request, res:Response) {
-  //   const vehicle = req.body;
-  //   const createdVehicle = await this.fleetService.createVehicle(vehicle);
-  //   return res.status(201).json(createdVehicle) 
-  // }
+  public async createPlace(req: Request, res:Response) {
+    const place = req.body;
+    const createdPlace = await this.placeService.createPlace(place);
+    return res.status(201).json(createdPlace) 
+  }
 
 }

@@ -6,5 +6,5 @@ export interface IPlaceModel {
   findAllLikeByName(name:string):Promise<TPlace[]>,
   updatePlace(id:string, place:TPlace): Promise<TPlace>,
   deletePlace(id:string): Promise<void>,
-  // createPlace(place:TPlace): Promise<TPlace>,
+  createPlace(place:TPlace): Promise<TPlace>,
 }

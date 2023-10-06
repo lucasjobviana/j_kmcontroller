@@ -26,8 +26,8 @@ export default class PlaceService {
     return updatedPlace;
   }
 
-  // public async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
-  //   const createdVehicle = await this.placeModel.createVehicle(vehicle);
-  //   return createdVehicle; 
-  // }
+  public async createPlace(place:TPlace): Promise<TPlace> {
+    const createdPlace = await this.placeModel.createPlace(place);
+    return createdPlace; 
+  }
 }

@@ -38,9 +38,9 @@ export default class PlaceModel implements IPlaceModel{
     return place;
   } 
 
-  // async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
-  //   const createdVehicle = await this.model.create(vehicle);
-  //   return createdVehicle;
-  // }
+  async createPlace(place:TPlace): Promise<TPlace> {
+    const createdPlace = await this.model.create(place);
+    return createdPlace;
+  }
 
 }

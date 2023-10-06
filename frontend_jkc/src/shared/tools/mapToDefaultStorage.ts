@@ -1,5 +1,5 @@
 import { getAllVehicles as getAllVehicles, getVehicleById as getVehicleById, createVehicle, updateVehicle, deleteVehicle, getVehiclesByName as getVehiclesByName,
-  createUser, login, getPlacesByName, createPost, deletePlace, updatePlace } from '../services/api';
+  createUser, login, getPlacesByName, createPlace, deletePlace, updatePlace } from '../services/api';
 
 import { createUserLS, loginLS, getCategoriesByNameLS, createCategoryLS, updateCategoryLS, deleteCategoryLS } from '../services/localStorage';
 import { getPostsByTitleLS, createPostLS, deletePostLS, updatePostLS } from '../services/localStorage/posts';
@@ -21,8 +21,8 @@ export const mapToDefaultStorage = (usingBD = true) => {
       case 'getPlacesByName': return getPlacesByName(functionParameter);
       case 'deletePlace': return deletePlace(functionParameter);
       case 'updatePlace': return updatePlace(functionParameter);
+      case 'createPlace': return createPlace(functionParameter);
 
-      case 'createPost': return createPost(functionParameter);
       case 'login': return login(functionParameter);
       default: return null;
       }

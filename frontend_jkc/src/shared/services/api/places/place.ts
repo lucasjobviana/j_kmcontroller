@@ -33,21 +33,21 @@ export const getPlacesByName = async ({ search }) => {
 //   return category;
 // };
 
-// export const createVehicle = async (category: Place) => {
-//   try{
-//     const token = JSON.parse(localStorage.getItem('token')) ;
-//     const newCategory = await api.post('/fleet', category, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     }).then((response) => {
-//       return response.data;
-//     });
-//     return newCategory;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const createPlace = async (place: Place) => {
+  try{
+    const token = JSON.parse(localStorage.getItem('token')) ;
+    const newPlace = await api.post('/places', place, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((response) => {
+      return response.data;
+    });
+    return newPlace;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const updatePlace = async (place: Place) => {
   const token = JSON.parse(localStorage.getItem('token')) ;

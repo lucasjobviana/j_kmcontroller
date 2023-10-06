@@ -7,7 +7,7 @@ import { usePlaceContext } from '../shared/contexts';
 import { FormPlaceDetail } from '../shared/components/form';
 
 export const PlaceDetail = () => {
-  const { del } = usePlaceContext();
+  const { del, create } = usePlaceContext();
   const { id='nova' } = useParams<'id'>();
   const { places } = usePlaceContext();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const PlaceDetail = () => {
         // addLabelText='Adicionar'
         backTo='/places'
         handleClickDelete={ handleDelete}
-        // handleClickAdd={async () => {const id = await create('Nova Categoria');navigate(`/Categorias/detalhes/${id}`);}}
+        handleClickAdd={async () => {const id = await create('Novo destino');navigate(`/places/details/${id}`);}}
       />}  >
 
         <Box height={30} display={'flex'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} marginBottom={1} component={Paper} variant='outlined' >

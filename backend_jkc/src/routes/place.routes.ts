@@ -19,9 +19,9 @@ router.put(
   (req: Request, res: Response) => placeController.updatePlace(req, res),
 );
 
-// router.post(
-//   '/',
-//   (req: Request, res: Response) => placeController.createVehicle(req, res),
-// );
+router.post(
+  '/',
+  (req: Request, res: Response) => placeController.createPlace(req, res),
+);
 
 export default router;

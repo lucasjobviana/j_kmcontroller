@@ -5,7 +5,7 @@ import  { mapToDefaultStorage }  from '../tools';
 
 interface IPlaceContext  {
     places: IPlace[] | [];
-    // create: (name: string ) => Promise<boolean>;
+    create: (name: string ) => Promise<boolean>;
     del: (id: number) => void;
     update: (place: Place) => void;
     // getAll: () => void;
@@ -23,15 +23,15 @@ export const PlaceProvider: React.FC<IPlaceProviderProps> = ({ children }) => {
   const defaultStorage = mapToDefaultStorage();
   const [places, setPlaces] = useState<IPlace[]|[]>([]); 
 
-  // const create = useCallback( async (name='Novo Veiculo') => {
-  //   const vehicle = new Place(name);
-  //   const newVehicle = await defaultStorage('createVehicle', vehicle);
-  //   if(newVehicle) {
-  //     setFleet((fleet) => [...fleet, newVehicle]);
-  //     return newVehicle.id;
-  //   }
-  //   return false;
-  // }, [fleet]);
+  const create = useCallback( async (name='Novo Veiculo', description='Ausente' ,fullAddress='Ausente') => {
+    const place = new Place(name, description,fullAddress);
+    const newPlace = await defaultStorage('createPlace', place);
+    if(newPlace) {
+      setPlaces((place) => [...place, newPlace]);
+      return newPlace.id;
+    }
+    return false;
+  }, [places]);
 
   const update = useCallback( async (place: Place) => {
     const hasUpdated = await defaultStorage('updatePlace', place);
@@ -69,7 +69,7 @@ export const PlaceProvider: React.FC<IPlaceProviderProps> = ({ children }) => {
   // }, [fleet]);
 
   return (
-    <PlaceContext.Provider value={{ places, getByName, setPlaces, del, update }}>
+    <PlaceContext.Provider value={{ places, getByName, setPlaces, del, update, create }}>
       {children}
     </PlaceContext.Provider>
   );

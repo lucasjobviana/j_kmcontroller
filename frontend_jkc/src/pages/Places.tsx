@@ -13,7 +13,7 @@ export const Places = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const {  places, getByName,del } = usePlaceContext(); 
+  const {  places, getByName, del, create } = usePlaceContext(); 
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
@@ -50,7 +50,7 @@ export const Places = () => {
         </Button>
       ) },
   ];
-  console.log('jfkldsfldstlfdskljl', places)
+   
   const tableRowProps = places.map((category) => ({
     id: category.id,
     name: category.name,
@@ -88,8 +88,8 @@ export const Places = () => {
         addLabelText='Novo destino'
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
-        // handleClickAdd={async () => {const id = await create('Novo Veiculo');navigate(`details/${id}`);}}
-        handleClickAdd={async () => {const id = 1;navigate(`details/${id}`);}}
+        handleClickAdd={async () => {const id = await create('Novo destino');navigate(`details/${id}`);}}
+        // handleClickAdd={async () => {const id = 1;navigate(`details/${id}`);}}
 
 />}  > {places.length}
 
