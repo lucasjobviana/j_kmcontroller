@@ -8,6 +8,8 @@ import { J_ToolBar } from '../shared/components/tool-bar';
 import { useFleetContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
 import { J_ListCard } from '../shared/components/list-card-container';
+import { Vehicle } from '../shared/Entities';
+import { ViewBlock } from '../shared/components/view-block';
 
 interface Expense{
   row: {
@@ -18,6 +20,7 @@ interface Expense{
 
 export function Fleet() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const { fleet, create, del, getByName } = useFleetContext();
@@ -76,6 +79,11 @@ export function Fleet() {
     });
   };
 
+  const handleRowClick = (vehicle:Vehicle) => {
+    if(!selectedVehicle.some((v)=>v.id === vehicle.id))
+      setSelectedVehicle([...selectedVehicle, vehicle]);
+  };
+
   const search = useMemo(() => {
     return searchParams.get('search') || '';
   }, [searchParams]);
@@ -84,6 +92,7 @@ export function Fleet() {
     getDataFromStorage(search);
   }, [search]);
 
+  console.log('selectedVehicles', selectedVehicle);
   return (
     <LayoutBase
       title="Frota"
@@ -111,6 +120,7 @@ export function Fleet() {
           loading={ isLoading }
           columns={ tableHeadersWithButtons }
           rowHeight={ 45 }
+          onRowClick={ (row) => handleRowClick(row.row) }
 
           initialState={ {
             pagination: {
@@ -124,7 +134,41 @@ export function Fleet() {
         />
       </Box>
 
-      <J_ListCard list={ fleet } />
+      <J_ListCard list={ fleet } handleClickCard={handleRowClick} />
+
+      {
+        selectedVehicle.length > 0
+        && (
+          <Box>
+            <h3>Veiculos selecionados</h3>
+            <ul>
+              {selectedVehicle.map((vehicle) => (
+                <li key={ vehicle.id }>
+                  {vehicle.name}
+                </li>
+              ))}
+            </ul>
+          </Box>
+        )
+      }
+
+      {
+        selectedVehicle.length > 0
+        && (
+          <>
+            {/* /  <h3>Veiculos selecionados</h3> */}
+           
+            {selectedVehicle.map((vehicle) => (
+              <ViewBlock key={ vehicle.id }>
+                {vehicle.name}
+              </ViewBlock>
+            ))}
+             
+          </>
+        )
+      }
+
+  
     </LayoutBase>
   );
 }

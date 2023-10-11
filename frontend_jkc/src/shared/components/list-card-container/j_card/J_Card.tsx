@@ -49,5 +49,4 @@ export const J_Card : React.FC<ICardProps> = ({obj}) =>{
       </Card>
     </Grid> 
   );
-
 };
