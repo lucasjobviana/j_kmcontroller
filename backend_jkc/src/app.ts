@@ -9,6 +9,7 @@ import loginRouter from './routes/login.routes';
 // import leaderBoardRouter from './routes/leaderBoard.routes._ts';
 import fleetRouter from './routes/fleet.routes';
 import placeRouter from './routes/place.routes';
+import workShop from './routes/workShop.routes';
 import AppResponseError from './AppResponseError';
 
 class App {
@@ -51,6 +52,7 @@ class App {
     this.app.use('/login', loginRouter);
     this.app.use('/fleet',fleetRouter);
     this.app.use('/places',placeRouter);
+    this.app.use('/workshop',workShop);
   }
 
   public start(PORT: string | number): void {

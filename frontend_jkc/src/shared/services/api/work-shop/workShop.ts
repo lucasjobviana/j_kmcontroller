@@ -1,5 +1,5 @@
 import { api } from '..';
-import { Place } from '../../../Entities';
+import { WorkShop } from '../../../Entities';
 
 // export const getAllVehicles = async () => {
 //   const categories = await api.get('/categories').then((response) => {
@@ -8,16 +8,17 @@ import { Place } from '../../../Entities';
 //   return categories; 
 // }; 
 
-export const getPlacesByName = async ({ search }) => {
+export const getWorkShopsByName = async ({ search }) => {
+
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const places = await api.get(`/places/name?search=${search}`, {
+  const workShops = await api.get(`/workshop/name?search=${search}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }).then((response) => {
     return response.data;
   });
-  return places;
+  return workShops;
 };
 
 // export const getVehicleById = async (id: number) => {
@@ -32,10 +33,10 @@ export const getPlacesByName = async ({ search }) => {
 //   return category;
 // };
 
-export const createPlace = async (place: Place) => {
+export const createWorkShop = async (workShop: WorkShop) => {
   try{
     const token = JSON.parse(localStorage.getItem('token')) ;
-    const newPlace = await api.post('/places', place, {
+    const newPlace = await api.post('/workshop', workShop, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -48,22 +49,22 @@ export const createPlace = async (place: Place) => {
   }
 };
 
-export const updatePlace = async (place: Place) => {
+export const updateWorkShop = async (workShop: WorkShop) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const updatedPlace = await api.put(`/places/${place.id}`, place, {
+  const updatedWorkShop = await api.put(`/workshop/${workShop.id}`, workShop, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }).then((response) => {
     return response.data;
   });
-  return updatedPlace;
+  return updatedWorkShop;
 };
 
-export const deletePlace = async (id: number) => {
+export const deleteWorkShop = async (id: number) => {
   console.log('id para deletar no api . delete;', id);
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const deletedPlace = await api.delete(`/places/${id}`,  {
+  const deletedWorkShop = await api.delete(`/workshop/${id}`,  {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -73,6 +74,6 @@ export const deletePlace = async (id: number) => {
     }
     return response.data;
   });
-  console.log('category deleted:', deletedPlace);
-  return deletedPlace;
+  console.log('workshop deleted:', deletedWorkShop);
+  return deletedWorkShop;
 };

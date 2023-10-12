@@ -4,3 +4,4 @@ export * from './VehicleContext';
 export * from './LoginUserContext';
 export * from './PostContext';
 export * from './PlaceContext';
+export * from './WorkShopContext';

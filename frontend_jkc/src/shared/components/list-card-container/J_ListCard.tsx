@@ -11,7 +11,7 @@ interface IListCardProps{
 export const J_ListCard: React.FC<IListCardProps> = ({list}) => {
   const mock = list;
   return (
-    <>
+    <> 
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
           {
