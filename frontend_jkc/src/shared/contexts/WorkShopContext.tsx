@@ -35,7 +35,7 @@ export const WorkShopProvider: React.FC<IWorkShopsProviderProps> = ({ children }
 
   const update = useCallback( async (workShop: WorkShop) => {
     const hasUpdated = await defaultStorage('updateWorkShop', workShop);
-    console.log('WorkShop updated', hasUpdated);
+    console.log('WorkShop updated', hasUpdated, workShop);
   }, [workShops]);
 
   const del = useCallback( async (id: number) => {

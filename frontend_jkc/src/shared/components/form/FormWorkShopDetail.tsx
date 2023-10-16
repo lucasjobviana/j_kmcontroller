@@ -1,7 +1,7 @@
 import React from 'react';
 import { IReactRCProps } from '../../tools';
 import { Form } from '@unform/web';
-import { J_TextField } from './text-field';
+import { J_TextField } from './text-field'; 
 import { Box, Button } from '@mui/material';
 import { useWorkShopContext } from '../../contexts';
 import { WorkShop } from '../../Entities';
@@ -16,19 +16,21 @@ export const FormWorkShopDetail: React.FC<IFormWorkShopDetailProps> = ({ childre
   const {  update } = useWorkShopContext();
   const navigate = useNavigate();
 
-  if(workShop) {
+  if(workShop) { 
     return (
       <Form {...rest} onSubmit={async (v) => {
-        const workShop = new WorkShop(v.name, v.description, v.fullAddress, v.phone,Number(workShopId));
-         
-        await update(workShop);
+        const ws = new WorkShop(v.name, v.description, v.fullAddress, v.phone, Number(workShopId));
+        console.log('Resultado no meu formulario ',ws);
+        console.log(v.name,v.description,v.fullAddress,v.phone,workShopId);
+        console.log('v do form: ',v);
+        await update(ws);
         navigate('/workShops');
       }} >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>
           <J_TextField name='name' label='Nome' value={workShop.name} defaultV={workShop.name}  />
           <J_TextField name='description' label='Descrição' value={workShop.description} defaultV={workShop.description}  />
           <J_TextField name='fullAddress' label='Endereço' value={workShop.fullAddress} defaultV={workShop.fullAddress}  />
-          <J_TextField name='description' label='Contato' value={workShop.phone} defaultV={workShop.phone}  />
+          <J_TextField name='phone' label='Contato' value={workShop.phone} defaultV={workShop.phone}  />
           <Button variant='outlined' type='submit'>Salvar</Button>
           {children}
         </Box>

@@ -11,6 +11,7 @@ export function WorkShopEdit() {
   const { create, del, workShops } = useWorkShopContext();
   const navigate = useNavigate();
   const workShop = workShops.find((ws) => Number(ws.id) === Number(id)) || undefined;
+  console.log('meu workshop é: ', workShop);
 
   const handleDelete = async () => {
     if (confirm(`Deseja excluir a oficina ${id} `)) {
