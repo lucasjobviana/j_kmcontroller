@@ -10,8 +10,8 @@ export default {
         phone: '32345678',
       },
       {
-        name: 'Officina do Tião',
-        description: 'Officina do Tião ao lado do posto Villa Nova',
+        name: 'Officina do João',
+        description: 'Officina do João ao lado do posto Villa Nova',
         full_address: 'Rua Amazonas, 1234',
         phone: '32345678',
       },

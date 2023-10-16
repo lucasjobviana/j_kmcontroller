@@ -1,5 +1,5 @@
 import { getAllVehicles as getAllVehicles, getVehicleById as getVehicleById, createVehicle, updateVehicle, deleteVehicle, getVehiclesByName as getVehiclesByName,
-  createUser, login, getPlacesByName, createPlace, deletePlace, updatePlace,getWorkShopsByName,deleteWorkShop, updateWorkShop, createWorkShop } from '../services/api';
+  createUser, login, getServiceTasksByName, createServiceTask, deleteServiceTask, updateServiceTask,getWorkShopsByName,deleteWorkShop, updateWorkShop, createWorkShop } from '../services/api';
 
 // import { createUserLS, loginLS, getCategoriesByNameLS, createCategoryLS, updateCategoryLS, deleteCategoryLS } from '../services/localStorage';
 // import { getPostsByTitleLS, createPostLS, deletePostLS, updatePostLS } from '../services/localStorage/posts';
@@ -18,10 +18,10 @@ export const mapToDefaultStorage = (usingBD = true) => {
       case 'deleteVehicle': return deleteVehicle(functionParameter);
       case 'createUser': return createUser(functionParameter);
       
-      case 'getPlacesByName': return getPlacesByName(functionParameter);
-      case 'deletePlace': return deletePlace(functionParameter);
-      case 'updatePlace': return updatePlace(functionParameter);
-      case 'createPlace': return createPlace(functionParameter);
+      case 'getServiceTasksByName': return getServiceTasksByName(functionParameter);
+      case 'deleteServiceTask': return deleteServiceTask(functionParameter);
+      case 'updateServiceTask': return updateServiceTask(functionParameter);
+      case 'createServiceTask': return createServiceTask(functionParameter);
 
       case 'getWorkShopsByName': return getWorkShopsByName(functionParameter);
       case 'deleteWorkShop': return deleteWorkShop(functionParameter);

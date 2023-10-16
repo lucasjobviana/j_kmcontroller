@@ -1,24 +1,23 @@
 import { Model, DataTypes, QueryInterface,  } from 'sequelize';
 
-import { TPlace } from '../../interfaces/types/TPlace';
+import { TServiceTask } from '../../interfaces/types/TServiceTask';
 
 const up = (queryInterface: QueryInterface) => {
-    return queryInterface.createTable<Model<TPlace>>('places',{
+    return queryInterface.createTable<Model<TServiceTask>>('services',{
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true, 
         autoIncrement: true,
       },
       name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
       description: { type: DataTypes.STRING, allowNull: false, field: 'description' },
-      fullAddress: { type: DataTypes.STRING, allowNull: false, field: 'full_address' },
     });
 
 }
 
 const down = (queryInterface: QueryInterface) => {
-    return queryInterface.dropTable('places');
+    return queryInterface.dropTable('services');
 }
 
 export default {

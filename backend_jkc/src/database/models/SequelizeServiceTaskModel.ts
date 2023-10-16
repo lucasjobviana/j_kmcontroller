@@ -7,15 +7,14 @@ import {
 } from 'sequelize';
 import db from '.';
 
-class SequelizePlaceModel extends Model<InferAttributes<SequelizePlaceModel>,
-InferCreationAttributes<SequelizePlaceModel>> {
+class SequelizeServiceTaskModel extends Model<InferAttributes<SequelizeServiceTaskModel>,
+InferCreationAttributes<SequelizeServiceTaskModel>> {
   declare id: CreationOptional<number>;
   declare name: string;
   declare description: string;
-  declare fullAddress: string;
 }
 
-SequelizePlaceModel.init({
+SequelizeServiceTaskModel.init({
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -24,12 +23,11 @@ SequelizePlaceModel.init({
   },
   name: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false },
-  fullAddress: { type: DataTypes.STRING, allowNull: false },
 }, {
   sequelize: db,
-  modelName: 'places',
+  modelName: 'services',
   timestamps: false,
   underscored: true,
 });
 
-export default SequelizePlaceModel;
+export default SequelizeServiceTaskModel;

@@ -8,7 +8,7 @@ import userRouter from './routes/user.routes';
 import loginRouter from './routes/login.routes';
 // import leaderBoardRouter from './routes/leaderBoard.routes._ts';
 import fleetRouter from './routes/fleet.routes';
-import placeRouter from './routes/place.routes';
+import serviceTaskRouter from './routes/serviceTask.routes';
 import workShop from './routes/workShop.routes';
 import AppResponseError from './AppResponseError';
 
@@ -51,7 +51,7 @@ class App {
     this.app.use('/users', userRouter);
     this.app.use('/login', loginRouter);
     this.app.use('/fleet',fleetRouter);
-    this.app.use('/places',placeRouter);
+    this.app.use('/services',serviceTaskRouter);
     this.app.use('/workshop',workShop);
   }
 

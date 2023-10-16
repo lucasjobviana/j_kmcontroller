@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
-import { Place, LocalShipping, Factory } from '@mui/icons-material';
+import { Build, LocalShipping, Factory } from '@mui/icons-material';
 
 const defaultDrawerOptions = [
   {
@@ -8,9 +8,9 @@ const defaultDrawerOptions = [
     path: '/frota'
   },
   {
-    label: 'Destinos',
-    icon: <Place />,
-    path: '/places'
+    label: 'Serviços',
+    icon: <Build />,
+    path: '/services'
   },
   {
     label: 'Oficinas',

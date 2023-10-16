@@ -5,7 +5,7 @@ import { Delete, Edit } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
-import { usePlaceContext } from '../shared/contexts';
+import { useServiceTaskContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
 
 interface Expense{
@@ -15,11 +15,11 @@ interface Expense{
   };
 }
 
-export const Places = () => {
+export const ServiceTasks = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const {  places, getByName, del, create } = usePlaceContext(); 
+  const { serviceTasks, getByName, del, create } = useServiceTaskContext(); 
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
@@ -37,7 +37,7 @@ export const Places = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={ () => { navigate(`details/${expense.row.id}`);} } 
+          onClick={ () => { navigate(`edit/${expense.row.id}`);} } 
         > <Edit />
         </Button>
       ) 
@@ -51,7 +51,7 @@ export const Places = () => {
           variant="contained"
           color="primary"
           onClick={ async () => {
-            if(confirm(`Deseja excluir a categoria ${expense.row.name} `)) {
+            if(confirm(`Realmente deseja excluir o serviço ${expense.row.name} ?`)) {
               await del(expense.row.id);
             } }
           }
@@ -60,9 +60,9 @@ export const Places = () => {
       ) },
   ];
    
-  const tableRowProps = places.map((category) => ({
-    id: category.id,
-    name: category.name,
+  const tableRowProps = serviceTasks.map((service) => ({
+    id: service.id,
+    name: service.name,
 
   }));
 
@@ -85,7 +85,7 @@ export const Places = () => {
 
   return (
     <>
-      <LayoutBase title='Destinos' toolBar={<J_ToolBar
+      <LayoutBase title='Serviços' toolBar={<J_ToolBar
         searchButtonEnabled
         addButtonEnabled
         deleteButtonEnabled
@@ -94,12 +94,12 @@ export const Places = () => {
         addButtonLoading={isLoading}
         saveButtonLoading={isLoading}
         deleteButtonLoading={isLoading}
-        addLabelText='Novo destino'
+        addLabelText='Novo serviço'
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
-        handleClickAdd={async () => {const id = await create('Novo destino');navigate(`details/${id}`);}}
+        handleClickAdd={async () => {const id = await create('Novo serviço');navigate(`edit/${id}`);}}
 
-      />}  > {places.length}
+      />}  > {serviceTasks.length}
 
         <Box component={Paper} variant='outlined' sx={ { height: 'auto', width: '100%' } }>
           <DataGrid

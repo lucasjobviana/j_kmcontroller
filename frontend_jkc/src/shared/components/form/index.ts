@@ -1,4 +1,4 @@
 export * from './text-field';
 export * from './FormVehicleDetail';
-export * from './FormPlaceDetail';
+export * from './FormServiceTaskDetail';
 export * from './FormWorkShopDetail';

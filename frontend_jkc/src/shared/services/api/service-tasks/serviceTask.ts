@@ -1,5 +1,5 @@
 import { api } from '..';
-import { Place } from '../../../Entities';
+import { ServiceTask } from '../../../Entities';
 
 // export const getAllVehicles = async () => {
 //   const categories = await api.get('/categories').then((response) => {
@@ -8,16 +8,16 @@ import { Place } from '../../../Entities';
 //   return categories; 
 // }; 
 
-export const getPlacesByName = async ({ search }) => {
+export const getServiceTasksByName = async ({ search }) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const places = await api.get(`/places/name?search=${search}`, {
+  const serviceTasks = await api.get(`/services/name?search=${search}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }).then((response) => {
     return response.data;
   });
-  return places;
+  return serviceTasks;
 };
 
 // export const getVehicleById = async (id: number) => {
@@ -32,38 +32,37 @@ export const getPlacesByName = async ({ search }) => {
 //   return category;
 // };
 
-export const createPlace = async (place: Place) => {
+export const createServiceTask = async (serviceTask: ServiceTask) => {
   try{
     const token = JSON.parse(localStorage.getItem('token')) ;
-    const newPlace = await api.post('/places', place, {
+    const newServiceTask = await api.post('/services', serviceTask, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).then((response) => {
       return response.data;
     });
-    return newPlace;
+    return newServiceTask;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updatePlace = async (place: Place) => {
+export const updateServiceTask = async (serviceTask: ServiceTask) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const updatedPlace = await api.put(`/places/${place.id}`, place, {
+  const updatedService = await api.put(`/services/${serviceTask.id}`, serviceTask, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }).then((response) => {
     return response.data;
   });
-  return updatedPlace;
+  return updatedService;
 };
 
-export const deletePlace = async (id: number) => {
-  console.log('id para deletar no api . delete;', id);
+export const deleteServiceTask = async (id: number) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  const deletedPlace = await api.delete(`/places/${id}`,  {
+  const deletedService = await api.delete(`/services/${id}`,  {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -73,6 +72,6 @@ export const deletePlace = async (id: number) => {
     }
     return response.data;
   });
-  console.log('category deleted:', deletedPlace);
-  return deletedPlace;
+  console.log('ServiceTask deleted:', deletedService);
+  return deletedService;
 };
