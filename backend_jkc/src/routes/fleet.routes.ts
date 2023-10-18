@@ -2,7 +2,7 @@ import { Request, Router, Response } from 'express';
 
 import BaseController from '../controllers/BaseController';
 import FleetController from '../controllers/FleetController';
-import { TVehicle } from '../interfaces/types/TVehicle';
+import { TVehicle } from '../interfaces';
 
 const teamController:BaseController<TVehicle> = new FleetController();
 const router = Router();

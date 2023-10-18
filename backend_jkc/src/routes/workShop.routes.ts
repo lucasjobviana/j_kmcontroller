@@ -2,7 +2,7 @@ import { Request, Router, Response } from 'express';
 
 import BaseController from '../controllers/BaseController';
 import WorkShopController from '../controllers/WorkShopController';
-import { TWorkShop } from '../interfaces/types/TWorkShop';
+import { TWorkShop } from '../interfaces';
 
 const workShopController:BaseController<TWorkShop> = new WorkShopController();
 const router = Router();

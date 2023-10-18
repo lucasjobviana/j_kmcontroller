@@ -1,7 +1,7 @@
 import BaseService from './BaseService';
 import BaseModel from '../models/BaseModel';
 import WorkShopModel from '../models/WorkShopModel';
-import { TWorkShop } from '../interfaces/types/TWorkShop';
+import { TWorkShop } from '../interfaces';
 
 export default class WorkShopService extends BaseService<TWorkShop> {
   constructor(

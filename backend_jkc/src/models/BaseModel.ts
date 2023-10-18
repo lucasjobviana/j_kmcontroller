@@ -1,7 +1,5 @@
 import { Op } from 'sequelize';
 
-import { TVehicle } from '../interfaces/types/TVehicle'; 
-
 export default class  BaseModel<T> {
   protected model: any;
   protected propNames: string[];
@@ -21,12 +19,12 @@ export default class  BaseModel<T> {
     });
   }
 
-  private async findAll(whereOption = {}, fields = this.propNames): Promise<TVehicle[]> {
+  private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
     const dbData = await this.model.findAll({ ...whereOption });
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByName(name = "", fields = this.propNames): Promise<TVehicle[]> {
+  public async findAllLikeByName(name = "", fields = this.propNames): Promise<T[]> {
     console.log('classname', this.model.toString())
     return this.findAll({
       where: {
