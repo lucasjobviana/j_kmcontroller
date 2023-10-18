@@ -1,20 +1,16 @@
-import { TVehicle } from '../interfaces/types/TVehicle';
-import FleetModel from '../models/FleetModel';
-import { IVehicleModel } from '../interfaces/IVehicleModel';
 import BaseModel from '../models/BaseModel';
-import SequelizeFleetModel from '../database/models/SequelizeFleetModel';
 
 export default abstract class BaseService<T> {
   constructor(
-    private model: BaseModel<T>,
+    private model: BaseModel<T>, 
   ) { }
 
-  public async findAllLikeByName(name:string) {console.log('executando pelo baseService')
+  public async findAllLikeByName(name:string) {
     const data = await this.model.findAllLikeByName(name);
     return data;
   }
 
-  public async delete(id:string) { console.log('executando pelo baseService')
+  public async delete(id:string) { 
     await this.model.delete(id); 
   }
 

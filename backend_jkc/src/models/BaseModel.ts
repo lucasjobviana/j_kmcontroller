@@ -1,4 +1,5 @@
-import { Model, Op } from 'sequelize';
+import { Op } from 'sequelize';
+
 import { TVehicle } from '../interfaces/types/TVehicle'; 
 
 export default class  BaseModel<T> {
@@ -52,5 +53,4 @@ export default class  BaseModel<T> {
     const createdObj = await this.model.create(obj);
     return createdObj;
   }
-
 }

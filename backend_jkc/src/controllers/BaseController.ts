@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
-import FleetService from '../services/FleetService';
+
 import BaseService from '../services/BaseService';
-import { TVehicle } from '../interfaces/types/TVehicle';
 
 export default abstract class BaseController<T> {
   constructor(
     private service: BaseService<T>,
   ) { }
 
-  public async findAllLikeByName(req: Request, res: Response) { console.log('executando pelo baseController')
+  public async findAllLikeByName(req: Request, res: Response) { 
     const { search } = req.query;
     const data = await this.service.findAllLikeByName(search?.toString()||'');
     res.status(200).json(data);
@@ -32,7 +31,6 @@ export default abstract class BaseController<T> {
     const createdObject = await this.service.create(data);
     return res.status(201).json(createdObject) 
   }
-
 }
 
   // public async findById(req: Request, res: Response) {
