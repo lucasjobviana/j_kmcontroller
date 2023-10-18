@@ -1,7 +1,9 @@
 import { Request, Router, Response } from 'express';
 import FleetController from '../controllers/FleetController';
+import BaseController from '../controllers/BaseController';
+import { TVehicle } from '../interfaces/types/TVehicle';
 
-const teamController = new FleetController();
+const teamController:BaseController<TVehicle> = new FleetController();
 const router = Router();
 
 router.get(
@@ -11,17 +13,17 @@ router.get(
 
 router.delete(
   '/:id',
-  (req: Request, res: Response) => teamController.deleteVehicle(req, res),
+  (req: Request, res: Response) => teamController.delete(req, res),
 );
 
 router.put(
   '/:id',
-  (req: Request, res: Response) => teamController.updateVehicle(req, res),
+  (req: Request, res: Response) => teamController.update(req, res),
 );
 
 router.post(
   '/',
-  (req: Request, res: Response) => teamController.createVehicle(req, res),
+  (req: Request, res: Response) => teamController.create(req, res),
 );
 
 export default router;

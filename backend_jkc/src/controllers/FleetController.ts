@@ -1,45 +1,27 @@
 import { Request, Response } from 'express';
 import FleetService from '../services/FleetService';
+import BaseController from './BaseController';
+import { TVehicle } from '../interfaces/types/TVehicle';
+import BaseService from '../services/BaseService';
 
-export default class FleetController {
+export default class FleetController extends BaseController<TVehicle> {
   constructor(
-    private fleetService = new FleetService(),
-  ) { }
+    private fleetService: BaseService<TVehicle> = new FleetService(),
+  ) { super(fleetService) }
 
-  // public async findById(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   const team = await this.fleetService.getById(Number(id));
-  //   res.status(200).json(team);
+  // public async findAllLikeByName(req: Request, res: Response) { console.log('executando pelo fleetController')
+  //   return super.findAllLikeByName(req,res);
   // }
 
-  public async findAll(_req: Request, res: Response) {
-    const fleet = await this.fleetService.getAll();
-    res.status(200).json(fleet);
-  }
+  // public async delete(req: Request, res:Response) {
+  //   return super.delete(req,res);
+  // }
 
-  public async findAllLikeByName(req: Request, res: Response) {
-    const { search } = req.query;
-    const fleet = await this.fleetService.findAllLikeByName(search?.toString()||'');
-    res.status(200).json(fleet);
-  }
+  // public async update(req: Request, res:Response) {
+  //   return super.update(req,res);
+  // }
 
-  public async deleteVehicle(req: Request, res:Response) {
-    const { id } = req.params;
-    await this.fleetService.deleteVehicle(id);
-    return res.status(204).json({hasDeleted:true})
-  }
-
-  public async updateVehicle(req: Request, res:Response) {
-    const { id } = req.params;
-    const vehicle = req.body;
-    const updatedVehicle = await this.fleetService.updateVehicle(id,vehicle);
-    return res.status(200).json(updatedVehicle)
-  }
-
-  public async createVehicle(req: Request, res:Response) {
-    const vehicle = req.body;
-    const createdVehicle = await this.fleetService.createVehicle(vehicle);
-    return res.status(201).json(createdVehicle) 
-  }
-
+  // public async create(req: Request, res:Response) {
+  //   return super.create(req,res);
+  // }
 }

@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import ServiceTaskService from '../services/ServiceTaskService';
+import { extend } from 'joi';
+import BaseController from './BaseController';
 
-export default class ServiceTaskController {
+export default class ServiceTaskController{
   constructor(
     private serviceTaskService = new ServiceTaskService(),
-  ) { }
+  ) {  }
 
   // public async findById(req: Request, res: Response) {
   //   const { id } = req.params;
