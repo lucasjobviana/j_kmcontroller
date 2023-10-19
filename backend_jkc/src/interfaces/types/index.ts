@@ -5,3 +5,4 @@ export * from './TUserToLogin';
 export * from './TVehicle';
 export * from './TWorkShop';
 export * from './TMaintenance';
+export * from './BaseControllerWithSearchByName';

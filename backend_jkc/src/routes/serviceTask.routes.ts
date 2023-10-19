@@ -1,10 +1,9 @@
 import { Request, Router, Response } from 'express';
 
-import BaseController from '../controllers/BaseController';
 import ServiceTaskController from '../controllers/ServiceTaskController';
-import { TServiceTask } from '../interfaces';
+import { TBaseControllerWithSearchByName, TServiceTask } from '../interfaces';
 
-const serviceTaskController:BaseController<TServiceTask>  = new ServiceTaskController();
+const serviceTaskController:TBaseControllerWithSearchByName<TServiceTask>   = new ServiceTaskController();
 const router = Router();
 
 router.get(

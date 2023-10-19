@@ -24,12 +24,12 @@ export default class  BaseModel<T> {
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByName(name = "", fields = this.propNames): Promise<T[]> {
+  public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<T[]> {
     console.log('classname', this.model.toString())
     return this.findAll({
       where: {
-        name: {
-          [Op.like]: `%${name}%`,
+        [fieldName]: {
+          [Op.like]: `%${searchValue}%`,
         }
       },
     }, fields);

@@ -2,9 +2,9 @@ import { Request, Router, Response } from 'express';
 
 import BaseController from '../controllers/BaseController';
 import WorkShopController from '../controllers/WorkShopController';
-import { TWorkShop } from '../interfaces';
+import { TBaseControllerWithSearchByName, TWorkShop } from '../interfaces';
 
-const workShopController:BaseController<TWorkShop> = new WorkShopController();
+const workShopController:TBaseControllerWithSearchByName<TWorkShop> = new WorkShopController();
 const router = Router();
 
 router.get(

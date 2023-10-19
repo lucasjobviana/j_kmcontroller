@@ -7,10 +7,10 @@ import { TMaintenance } from '../interfaces';
 const maintenanceController:BaseController<TMaintenance> = new MaintenanceController();
 const router = Router();
 
-router.get(
-  '/name',
-  (req: Request, res: Response) => maintenanceController.findAllLikeByName(req, res),
-); 
+// router.get(
+//   '/name',
+//   (req: Request, res: Response) => maintenanceController.findAllLikeByFieldName('name', req, res),
+// ); 
 
 router.delete(
   '/:id',

@@ -1,30 +1,29 @@
 import { Request, Router, Response } from 'express';
 
-import BaseController from '../controllers/BaseController';
 import FleetController from '../controllers/FleetController';
-import { TVehicle } from '../interfaces';
+import { TBaseControllerWithSearchByName, TVehicle } from '../interfaces';
 
-const teamController:BaseController<TVehicle> = new FleetController();
+const vehicleController:TBaseControllerWithSearchByName<TVehicle> = new FleetController();
 const router = Router();
 
 router.get(
   '/name',
-  (req: Request, res: Response) => teamController.findAllLikeByName(req, res),
+  (req: Request, res: Response) => vehicleController.findAllLikeByName(req, res),
 ); 
 
 router.delete(
   '/:id',
-  (req: Request, res: Response) => teamController.delete(req, res),
+  (req: Request, res: Response) => vehicleController.delete(req, res),
 );
 
 router.put(
   '/:id',
-  (req: Request, res: Response) => teamController.update(req, res),
+  (req: Request, res: Response) => vehicleController.update(req, res),
 );
 
 router.post(
   '/',
-  (req: Request, res: Response) => teamController.create(req, res),
+  (req: Request, res: Response) => vehicleController.create(req, res),
 );
 
 export default router;

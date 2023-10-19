@@ -7,10 +7,10 @@ export default abstract class BaseController<T> {
     private service: BaseService<T>,
   ) { }
 
-  public async findAllLikeByName(req: Request, res: Response) { 
+  protected async findAllLikeByFieldName(fieldName:string, req: Request, res: Response) { 
     const { search } = req.query;
-    const data = await this.service.findAllLikeByName(search?.toString()||'');
-    res.status(200).json(data);
+    const data = await this.service.findAllLikeByFieldName(fieldName,search?.toString()||'');
+    return res.status(200).json(data);
   }
 
   public async delete(req: Request, res:Response) {
