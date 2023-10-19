@@ -10,6 +10,7 @@ import loginRouter from './routes/login.routes';
 import fleetRouter from './routes/fleet.routes';
 import serviceTaskRouter from './routes/serviceTask.routes';
 import workShop from './routes/workShop.routes';
+import maintenance from './routes/maintenance.routes';
 import AppResponseError from './AppResponseError';
 
 class App {
@@ -53,6 +54,7 @@ class App {
     this.app.use('/fleet',fleetRouter);
     this.app.use('/services',serviceTaskRouter);
     this.app.use('/workshop',workShop);
+    this.app.use('/maintenance',maintenance);
   }
 
   public start(PORT: string | number): void {

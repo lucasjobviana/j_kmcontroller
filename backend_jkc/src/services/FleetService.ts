@@ -1,33 +1,10 @@
-import { TVehicle } from '../interfaces/types/TVehicle';
+import BaseService from './BaseService';
+import BaseModel from '../models/BaseModel';
 import FleetModel from '../models/FleetModel';
-import { IVehicleModel } from '../interfaces/IVehicleModel';
+import { TVehicle } from '../interfaces';
 
-export default class FleetService {
+export default class FleetService extends BaseService<TVehicle> {
   constructor(
-    private fleetModel: IVehicleModel = new FleetModel(),
-  ) { }
-
-  public async getAll(): Promise<TVehicle[]> {
-    const fleet = await this.fleetModel.findAll({});
-    return fleet;
-  }
-
-  public async findAllLikeByName(name:string): Promise<TVehicle[]> {
-    const fleet = await this.fleetModel.findAllLikeByName(name);
-    return fleet;
-  }
-
-  public async deleteVehicle(id:string): Promise<void> {
-    await this.fleetModel.deleteVehicle(id); 
-  }
-
-  public async updateVehicle(id:string, vehicle:TVehicle): Promise<TVehicle> {
-    const updatedVehicle = await this.fleetModel.updateVehicle(id, vehicle);
-    return updatedVehicle;
-  }
-
-  public async createVehicle(vehicle:TVehicle): Promise<TVehicle> {
-    const createdVehicle = await this.fleetModel.createVehicle(vehicle);
-    return createdVehicle; 
-  }
-}
+    private fleetModel: BaseModel<TVehicle> = new FleetModel(),
+  ) { super(fleetModel) }
+} 

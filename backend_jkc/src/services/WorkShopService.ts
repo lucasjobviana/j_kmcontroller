@@ -1,33 +1,10 @@
-import { TWorkShop } from '../interfaces/types/TWorkShop';
+import BaseService from './BaseService';
+import BaseModel from '../models/BaseModel';
 import WorkShopModel from '../models/WorkShopModel';
-import { IWorkShopModel } from '../interfaces/IWorkShopModel';
+import { TWorkShop } from '../interfaces';
 
-export default class WorkShopService {
+export default class WorkShopService extends BaseService<TWorkShop> {
   constructor(
-    private workshopModel: IWorkShopModel = new WorkShopModel(),
-  ) { }
-
-  public async getAll(): Promise<TWorkShop[]> {
-    const workshop = await this.workshopModel.findAll({});
-    return workshop;
-  }
-
-  public async findAllLikeByName(name:string): Promise<TWorkShop[]> {
-    const workshop = await this.workshopModel.findAllLikeByName(name);
-    return workshop;
-  }
-
-  public async deleteWorkShop(id:string): Promise<void> {
-    await this.workshopModel.deleteWorkShop(id); 
-  }
-
-  public async updateWorkShop(id:string, workShop:TWorkShop): Promise<TWorkShop> {
-    const updatedWorkShop = await this.workshopModel.updateWorkShop(id, workShop);
-    return updatedWorkShop;
-  }
-
-  public async createWorkShop(workShop:TWorkShop): Promise<TWorkShop> {
-    const createdWorkShop = await this.workshopModel.createWorkShop(workShop);
-    return createdWorkShop; 
-  }
+    private workShopModel: BaseModel<TWorkShop> = new WorkShopModel(),
+  ) { super(workShopModel) }
 }

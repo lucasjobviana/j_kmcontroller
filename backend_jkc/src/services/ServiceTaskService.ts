@@ -1,33 +1,10 @@
+import BaseService from './BaseService';
+import BaseModel from '../models/BaseModel';
 import ServiceTaskModel from '../models/ServiceTaskModel';
-import { IServiceTaskModel } from '../interfaces/IServiceTaskModel';
-import { TServiceTask } from '../interfaces/types/TServiceTask';
+import { TServiceTask } from '../interfaces';
 
-export default class ServiceTaskService {
+export default class ServiceTaskService extends BaseService<TServiceTask> {
   constructor(
-    private serviceTaskModel: IServiceTaskModel = new ServiceTaskModel(),
-  ) { }
-
-  // public async getAll(): Promise<TVehicle[]> {
-  //   const fleet = await this.placeModel.findAll({});
-  //   return fleet;
-  // }
-
-  public async findAllLikeByName(name:string): Promise<TServiceTask[]> {
-    const serviceTask = await this.serviceTaskModel.findAllLikeByName(name);
-    return serviceTask;
-  }
-
-  public async deleteServiceTask(id:string): Promise<void> {
-    await this.serviceTaskModel.deleteServiceTask(id); 
-  }
-
-  public async updateServiceTask(id:string, serviceTask:TServiceTask): Promise<TServiceTask> {
-    const updatedTask = await this.serviceTaskModel.updateServiceTask(id, serviceTask);
-    return updatedTask;
-  }
-
-  public async createServiceTask(serviceTask:TServiceTask): Promise<TServiceTask> {
-    const createdTask = await this.serviceTaskModel.createServiceTask(serviceTask);
-    return createdTask; 
-  }
-}
+    private fleetModel: BaseModel<TServiceTask> = new ServiceTaskModel(),
+  ) { super(fleetModel) }
+} 

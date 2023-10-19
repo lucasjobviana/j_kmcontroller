@@ -28,7 +28,7 @@ export function VehicleDetail() {
             deleteButtonEnabled
             backTo="/frota"
             handleClickDelete={ handleDelete }
-            handleClickAdd={ async () => { const id = await create('Nova Categoria'); navigate(`/Categorias/detalhes/${id}`); } }
+            handleClickAdd={ async () => { const id = await create('Novo Veículo'); navigate(`/frota/details/${id}`); } }
           /> 
         }
     >
