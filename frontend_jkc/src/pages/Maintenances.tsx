@@ -5,10 +5,10 @@ import { Delete, Edit } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
-import { useWorkShopContext } from '../shared/contexts';
+import { useMaintenanceContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
 // import { J_ListCard } from '../shared/components/list-card-container';
-import { WorkShop } from '../shared/Entities';
+import { Maintenance } from '../shared/Entities';
 import { ViewBlock } from '../shared/components/view-block';
 
 interface Expense{
@@ -18,16 +18,17 @@ interface Expense{
   };
 }
 
-export function WorkShops() {
+export function Maintenances() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectedWorkShop, setSelectedWorkShop] = useState<WorkShop[]|[]>([]);
+  const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { workShops, create, del, getByName } = useWorkShopContext();
+  const { maintenances, create, del, getAll } = useMaintenanceContext();
+  console.log('esse eh maintenances no page', maintenances);
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
-    { label: 'Nome', name: 'name' },
+    { label: 'Descricao', name: 'name' },
   ];
   const tableHeaders = tableHeaderProps.map((header) => ({
     field: header.name, headerName: header.label, editable: false, width: 150,
@@ -36,7 +37,7 @@ export function WorkShops() {
     { field: 'btnEdit',
       headerName: 'Editar',
       type: 'button',
-      renderCell: (expense:Expense) => (
+      renderCell: (expense:Expense) => ( 
         <Button
           variant="contained"
           color="primary"
@@ -54,7 +55,7 @@ export function WorkShops() {
           variant="contained"
           color="primary"
           onClick={ async () => {
-            if (confirm(`Deseja excluir a oficina ${expense.row.name}?`)) {
+            if (confirm(`Deseja excluir a manutenção ${expense.row.id}?`)) {
               await del(expense.row.id);
             }
           } }
@@ -65,23 +66,22 @@ export function WorkShops() {
       ) },
   ];
 
-  const tableRowProps = workShops.map((workShop) => ({
-    id: workShop.id,
-    name: workShop.name,
-
+  const tableRowProps = maintenances.map((maintenance) => ({
+    id: maintenance.id,
+    name: maintenance.description || 'sem descrição',
   }));
 
-  const getDataFromStorage = async (name:string) => {
+  const getDataFromStorage = async () => {
     debounce(async () => {
       setIsLoading(true);
-      const querySuccess = await getByName(name);
+      const querySuccess = await getAll();
       setTimeout(() => setIsLoading(!querySuccess), 1000);
     });
   };
 
-  const handleRowClick = (workShop:WorkShop) => {
-    if(!selectedWorkShop.some((v)=>v.id === workShop.id))
-      setSelectedWorkShop([...selectedWorkShop, workShop]);
+  const handleRowClick = (maintenance:Maintenance) => {
+    if(!selectedMaintenance.some((v)=>v.id === maintenance.id))
+      setSelectedMaintenance([...selectedMaintenance, maintenance]);
   };
 
   const search = useMemo(() => {
@@ -89,13 +89,13 @@ export function WorkShops() {
   }, [searchParams]);
 
   useEffect(() => {
-    getDataFromStorage(search);
+    getDataFromStorage();
   }, [search]);
 
-  console.log('selectedWorkShops', selectedWorkShop);
+  console.log('selectedMaintenances', selectedMaintenance);
   return (
     <LayoutBase
-      title="Oficinas"
+      title="Manutenções"
       toolBar={ <J_ToolBar
         searchButtonEnabled
         addButtonEnabled
@@ -105,14 +105,14 @@ export function WorkShops() {
         addButtonLoading={ isLoading }
         saveButtonLoading={ isLoading }
         deleteButtonLoading={ isLoading }
-        addLabelText="Nova oficina"
+        addLabelText="Nova manutenção"
         searchText={ search }
         handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
-        handleClickAdd={ async () => { const id = await create('Nova oficina'); navigate(`edit/${id}`); } }
+        handleClickAdd={ async () => { const id = await create('Nova Manutenção'); navigate(`edit/${id}`); } }
       /> }
     >
       {' '}
-      {workShops.length}
+      {maintenances.length}
 
       <Box component={ Paper } variant="outlined" sx={ { height: 'auto', width: '100%' } }>
         <DataGrid
@@ -137,14 +137,14 @@ export function WorkShops() {
       {/* <J_ListCard list={ workShops } handleClickCard={handleRowClick} /> */}
  
       {
-        selectedWorkShop.length > 0
+        selectedMaintenance.length > 0
         && (
           <Box>
-            <h3>Veiculos selecionados</h3>
+            <h3>Manutenções selecionadas</h3>
             <ul>
-              {selectedWorkShop.map((vehicle) => (
-                <li key={ vehicle.id }>
-                  {vehicle.name}
+              {selectedMaintenance.map((maintenance) => (
+                <li key={ maintenance.id }>
+                  {maintenance.description}
                 </li>
               ))}
             </ul>
@@ -153,22 +153,20 @@ export function WorkShops() {
       }
 
       {
-        selectedWorkShop.length > 0
+        selectedMaintenance.length > 0
         && (
           <>
             {/* /  <h3>Veiculos selecionados</h3> */}
            
-            {selectedWorkShop.map((vehicle) => (
-              <ViewBlock key={ vehicle.id }>
-                {vehicle.name}
+            {selectedMaintenance.map((maintenance) => (
+              <ViewBlock key={ maintenance.id }>
+                {maintenance.description}
               </ViewBlock>
             ))}
              
           </>
         )
       }
-
-  
     </LayoutBase>
   );
 }

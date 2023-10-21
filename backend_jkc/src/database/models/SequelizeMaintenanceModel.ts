@@ -45,7 +45,7 @@ SequelizeMaintenanceModel.init({
 }, {
   sequelize: db,
   modelName: 'maintenances',
-  timestamps: true,
+  timestamps: false,
   underscored: true,
 });
 

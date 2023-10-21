@@ -1,5 +1,7 @@
 import { getAllVehicles as getAllVehicles, getVehicleById as getVehicleById, createVehicle, updateVehicle, deleteVehicle, getVehiclesByName as getVehiclesByName,
-  createUser, login, getServiceTasksByName, createServiceTask, deleteServiceTask, updateServiceTask,getWorkShopsByName,deleteWorkShop, updateWorkShop, createWorkShop } from '../services/api';
+  createUser, login, getServiceTasksByName, createServiceTask, deleteServiceTask, updateServiceTask,getWorkShopsByName,deleteWorkShop, updateWorkShop, createWorkShop, 
+  createMaintenance, updateMaintenance, deleteMaintenance, getAllMaintenances
+} from '../services/api';
 
 // import { createUserLS, loginLS, getCategoriesByNameLS, createCategoryLS, updateCategoryLS, deleteCategoryLS } from '../services/localStorage';
 // import { getPostsByTitleLS, createPostLS, deletePostLS, updatePostLS } from '../services/localStorage/posts';
@@ -27,6 +29,11 @@ export const mapToDefaultStorage = (usingBD = true) => {
       case 'deleteWorkShop': return deleteWorkShop(functionParameter);
       case 'updateWorkShop': return updateWorkShop(functionParameter);
       case 'createWorkShop': return createWorkShop(functionParameter);
+
+      case 'getAllMaintenances': return getAllMaintenances();
+      case 'deleteMaintenance': return deleteMaintenance(functionParameter);
+      case 'updateMaintenance': return updateMaintenance(functionParameter);
+      case 'createMaintenance': return createMaintenance(functionParameter);
 
       case 'login': return login(functionParameter);
       default: return null;

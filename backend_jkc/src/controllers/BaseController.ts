@@ -13,6 +13,11 @@ export default abstract class BaseController<T> {
     return res.status(200).json(data);
   }
 
+  // public async findAll(_req: Request, res: Response) {
+  //   const data = await this.service.findAll();
+  //   res.status(200).json(data);
+  // }
+
   public async delete(req: Request, res:Response) {
     const { id } = req.params;
     await this.service.delete(id);

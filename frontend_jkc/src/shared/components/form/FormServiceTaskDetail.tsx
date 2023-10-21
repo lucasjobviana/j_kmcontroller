@@ -3,7 +3,7 @@ import { IReactRCProps } from '../../tools';
 import { Form } from '@unform/web';
 import { J_TextField } from './text-field';
 import { Box, Button } from '@mui/material';
-import { useServiceTaskContext } from '../../contexts';
+import { useMaintenanceContext } from '../../contexts';
 import { ServiceTask } from '../../Entities';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export interface IFormServiceTaskDetailProps extends IReactRCProps {
 }
 
 export const FormServiceTaskDetail: React.FC<IFormServiceTaskDetailProps> = ({ children, serviceTaskId, serviceTask: serviceTask, ...rest }) => {
-  const { update } = useServiceTaskContext();
+  const { update } = useMaintenanceContext();
   const navigate = useNavigate();
 
   if(serviceTask) {

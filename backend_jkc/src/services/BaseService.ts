@@ -10,6 +10,11 @@ export default abstract class BaseService<T> {
     return data;
   }
 
+  // public async findAll() {
+  //   const data = await this.model.findAll();
+  //   return data;
+  // }
+
   public async delete(id:string) { 
     await this.model.delete(id); 
   }
