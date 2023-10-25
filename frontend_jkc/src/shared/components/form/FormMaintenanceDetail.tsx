@@ -40,7 +40,7 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>
           <J_TextField name='description' label='Descrição' value={maintenance.description} defaultV={maintenance.description}  />
           <AutoCompleteVehicles id={vehicleId}  />
-          <AutoCompleteWorkshops id={workshopId}  />
+          <AutoCompleteWorkshops id={workshopId} name={workshopName}  />
           <J_TextField name='initialDate' label='Inicio' value={maintenance.initialDate} defaultV={maintenance.initialDate.toString()}  />
           <J_TextField name='endDate' label='Fim' value={maintenance.endDate} defaultV={maintenance.endDate.toString()}  />
           <J_TextField name='vehicle' label='Veiculo' value={vehicleName} defaultV={vehicleName}  />

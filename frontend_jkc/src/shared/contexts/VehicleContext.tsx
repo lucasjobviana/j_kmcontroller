@@ -58,9 +58,9 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
      
     if(fleet) {
       const newFleet = fleet.map((v:IVehicle) => {
-        return new Vehicle(v.name, v.licensePlate, v.id)
+        return new Vehicle(v.name, v.licensePlate, v.id);
       });
-       
+      console.log('context .... ja resgatei meu fleet e vou setalo',fleet);
       setFleet(newFleet);
       return true;
     }

@@ -20,9 +20,9 @@ export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id })
   const [selectedId, setSelectedId] = useState<number | undefined>(id);
   const [opcoes, setOpcoes] = useState<TAutoCompleteOption[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('alfredo');
 
-  const populate = () =>{
+  const populate = async () =>{
     setIsLoading(true);
 
     debounce(async () => {
@@ -34,9 +34,11 @@ export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id })
     });
   };
 
-  useEffect(()=>{
-    populate();
-  },[]);
+  useEffect(() => {
+    setOpcoes(
+      fleet.map((vehicle) => ({ id: vehicle.id, label: vehicle.name }))
+    );
+  }, [fleet]);
 
   useEffect(() => {
     registerField({
@@ -48,15 +50,6 @@ export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id })
 
   useEffect(() => {
     populate();
-    // setIsLoading(true);
-
-    // debounce(async () => {
-    //   await getByName('');
-    //   setIsLoading(false);
-    //   setOpcoes(
-    //     fleet.map((vehicle) => ({ id: vehicle.id, label: vehicle.name }))
-    //   );
-    // });
   }, [searchText]);
 
   const autoCompleteSelectedOption = useMemo(() => {

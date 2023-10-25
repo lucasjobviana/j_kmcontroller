@@ -11,16 +11,17 @@ type TAutoCompleteOption = {
 
 interface IAutoCompleteFleetProps {
   id?: number;
+  name?: string;
 }
 
-export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id }) => {
+export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id,name }) => {
   const { workShops, getByName } = useWorkShopContext();
   const { fieldName, registerField, error, clearError } = useField('workshopsIds');
   const { debounce } = useDebounce();
   const [selectedId, setSelectedId] = useState<number | undefined>(id);
   const [opcoes, setOpcoes] = useState<TAutoCompleteOption[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(name);
 
 
   const populate = async () =>{
@@ -35,9 +36,11 @@ export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id }
     });
   };
 
-  useEffect(()=>{
-    populate();
-  },[]);
+  useEffect(() => {
+    setOpcoes(
+      workShops.map((workshop) => ({ id: workshop.id, label: workshop.name }))
+    );
+  }, [workShops]);
 
   useEffect(() => {
     registerField({
@@ -68,11 +71,13 @@ export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id }
       loadingText='Carregando...'
 
       disablePortal
+      
 
       options={opcoes}
       loading={isLoading}
 
       value={autoCompleteSelectedOption}
+     
       onInputChange={(_, newValue) => setSearchText(newValue)}
       onChange={(_, newValue) => { setSelectedId(newValue?.id); setSearchText(''); clearError(); }}
 
