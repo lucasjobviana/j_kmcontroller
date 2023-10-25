@@ -6,6 +6,8 @@ import { Box, Button } from '@mui/material';
 import { useMaintenanceContext } from '../../contexts';
 import { Maintenance } from '../../Entities';
 import { useNavigate } from 'react-router-dom';
+import { AutoCompleteVehicles } from '../auto-complete-vehicles';
+import { AutoCompleteWorkshops } from '../auto-complete-workshops';
 
 export interface IFormMaintenanceDetailProps extends IReactRCProps {
   maintenanceId?: string;
@@ -18,7 +20,9 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
 
   if(maintenance) { console.log('maintenance       no form: ',maintenance);
     const vehicleName = maintenance.vehicle ? maintenance.vehicle.name : 'Desconhecido';
+    const vehicleId = maintenance.vehicle ? maintenance.vehicle.id : 0;
     const workshopName = maintenance.workshop ? maintenance.workshop.name : 'Desconhecido';
+    const workshopId = maintenance.workshop ? maintenance.workshop.id : 0;
 
     return (
       <Form {...rest} onSubmit={async (v) => {
@@ -35,6 +39,8 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
       }} >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>
           <J_TextField name='description' label='Descrição' value={maintenance.description} defaultV={maintenance.description}  />
+          <AutoCompleteVehicles id={vehicleId}  />
+          <AutoCompleteWorkshops id={workshopId}  />
           <J_TextField name='initialDate' label='Inicio' value={maintenance.initialDate} defaultV={maintenance.initialDate.toString()}  />
           <J_TextField name='endDate' label='Fim' value={maintenance.endDate} defaultV={maintenance.endDate.toString()}  />
           <J_TextField name='vehicle' label='Veiculo' value={vehicleName} defaultV={vehicleName}  />
