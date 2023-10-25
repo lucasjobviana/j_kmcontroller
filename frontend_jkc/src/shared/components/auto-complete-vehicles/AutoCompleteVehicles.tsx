@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useFleetContext } from '../../contexts';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete } from '@mui/material';
 import {  useDebounce } from '../../tools';
 import { useField } from '@unform/core';
+import { J_TextField } from '..';
 
 type TAutoCompleteOption = {
   id: number;
@@ -11,9 +12,14 @@ type TAutoCompleteOption = {
 
 interface IAutoCompleteFleetProps {
   id?: number;
+  name?: string;
+  label?: string;
+  value?: string;
+  defaultValue?: string;
+  // name='initialDate' label='Inicio' value={maintenance.initialDate} defaultV={maintenance.initialDate.toString()}
 }
 
-export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id }) => {
+export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id, name, defaultValue }) => {
   const { fleet, getByName } = useFleetContext();
   const { fieldName, registerField, error, clearError } = useField('vehiclesIds');
   const { debounce } = useDebounce();
@@ -78,7 +84,11 @@ export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id })
       onChange={(_, newValue) => { setSelectedId(newValue?.id); setSearchText(''); clearError(); }}
 
       renderInput={(params) => (
-        <TextField
+        <J_TextField
+
+          name={name}
+          defaultV={defaultValue}
+
           {...params}
 
           label="Carro"

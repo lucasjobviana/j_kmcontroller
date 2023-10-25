@@ -8,7 +8,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
   ) { super(SequelizeMaintenanceModel,['id','initialDate','endDate','workshopId','vehicleId','description'])  }
 
   public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<TMaintenance[]> {
-    console.log('classname', this.model.toString(), fieldName, searchValue,'acabou')
+
     return SequelizeMaintenanceModel.findAll({
       where: {
         [fieldName]: {

@@ -43,7 +43,7 @@ export const createMaintenance = async (maintenance: Maintenance) => {
     }).then((response) => {
       return response.data;
     });
-    return newMaintenance;
+    return newMaintenance; 
   } catch (error) {
     console.log(error);
   }
@@ -51,6 +51,7 @@ export const createMaintenance = async (maintenance: Maintenance) => {
 
 export const updateMaintenance = async (maintenance: Maintenance) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
+  console.log('updateMaintenance da api:', maintenance);
   const updatedMaintenance = await api.put(`/maintenance/${maintenance.id}`, maintenance, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -58,6 +59,7 @@ export const updateMaintenance = async (maintenance: Maintenance) => {
   }).then((response) => {
     return response.data;
   });
+  console.log('Maintenance updated:', updatedMaintenance);
   return updatedMaintenance;
 };
 
