@@ -7,7 +7,6 @@ import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { useMaintenanceContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
-// import { J_ListCard } from '../shared/components/list-card-container';
 import { Maintenance } from '../shared/Entities';
 import { ViewBlock } from '../shared/components/view-block';
 
@@ -24,7 +23,6 @@ export function Maintenances() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const { maintenances, create, del, getAll } = useMaintenanceContext();
-  console.log('esse eh maintenances no page', maintenances);
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
@@ -92,7 +90,7 @@ export function Maintenances() {
     getDataFromStorage();
   }, [search]);
 
-  console.log('selectedMaintenances', selectedMaintenance);
+
   return (
     <LayoutBase
       title="Manutenções"

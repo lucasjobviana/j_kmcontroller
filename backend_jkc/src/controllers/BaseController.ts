@@ -28,7 +28,7 @@ export default abstract class BaseController<T> {
     const { id } = req.params;
     const data = req.body;
     console.log('cheguei no update', id,data)
-    const updatedObject = await this.service.update(id,data);
+   const updatedObject = await this.service.update(id,data);
     return res.status(200).json(updatedObject)
   }
 

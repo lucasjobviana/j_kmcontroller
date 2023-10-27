@@ -20,14 +20,11 @@ export default class  BaseModel<T> {
   }
 
   private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
-    console.log('whereOption', whereOption)
     const dbData = await this.model.findAll({ ...whereOption });
-    console.log('dbData', dbData)
     return this.filterToSelectedFields(dbData, fields);
   }
 
   public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<T[]> {
-    console.log('classname', this.model.toString(), fieldName, searchValue,'acabou')
     return this.findAll({
       where: {
         [fieldName]: {

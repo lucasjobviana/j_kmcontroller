@@ -11,7 +11,6 @@ interface ICardProps {
   }
 
 export const J_Card : React.FC<ICardProps> = ({obj}) =>{
-  console.log('obj',obj);
   const { del } = useMaintenanceContext();
   const navigate = useNavigate();
   return (

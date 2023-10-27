@@ -18,7 +18,7 @@ router.delete(
 
 router.put(
   '/:id',
-  (req: Request, res: Response) => {console.log('fadsfdas');maintenanceController.update(req, res)},
+  (req: Request, res: Response) => {maintenanceController.update(req, res)},
 );
 
 router.post(

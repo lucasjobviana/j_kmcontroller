@@ -92,7 +92,7 @@ export function WorkShops() {
     getDataFromStorage(search);
   }, [search]);
 
-  console.log('selectedWorkShops', selectedWorkShop);
+
   return (
     <LayoutBase
       title="Oficinas"

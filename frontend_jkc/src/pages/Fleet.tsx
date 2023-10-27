@@ -92,7 +92,7 @@ export function Fleet() {
     getDataFromStorage(search);
   }, [search]);
 
-  console.log('selectedVehicles', selectedVehicle);
+
   return (
     <LayoutBase
       title="Frota"

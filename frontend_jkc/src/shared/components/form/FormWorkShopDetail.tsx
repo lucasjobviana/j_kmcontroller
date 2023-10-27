@@ -20,9 +20,6 @@ export const FormWorkShopDetail: React.FC<IFormWorkShopDetailProps> = ({ childre
     return (
       <Form {...rest} onSubmit={async (v) => {
         const ws = new WorkShop(v.name, v.description, v.fullAddress, v.phone, Number(workShopId));
-        console.log('Resultado no meu formulario ',ws);
-        console.log(v.name,v.description,v.fullAddress,v.phone,workShopId);
-        console.log('v do form: ',v);
         await update(ws);
         navigate('/workShops');
       }} >
