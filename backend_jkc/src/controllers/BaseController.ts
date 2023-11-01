@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import BaseService from '../services/BaseService';
 
@@ -28,6 +28,7 @@ export default abstract class BaseController<T> {
     const { id } = req.params;
     const data = req.body;
     console.log('cheguei no update', id,data)
+  //  throw new Error('pamonha')
    const updatedObject = await this.service.update(id,data);
     return res.status(200).json(updatedObject)
   }

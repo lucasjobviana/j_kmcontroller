@@ -20,6 +20,8 @@ export default abstract class BaseService<T> {
   }
 
   public async update(id:string, obj:T){
+    console.log('cheguei no update do service')
+    console.log(id, obj, typeof id, typeof obj)
     const updatedObj = await this.model.update(id, obj);
     return updatedObj;
   }

@@ -1,4 +1,4 @@
-import { Request, Router, Response } from 'express';
+import { Request, Router, Response, NextFunction } from 'express';
 
 import ServiceTaskController from '../controllers/ServiceTaskController';
 import { TBaseControllerWithSearchByName, TServiceTask } from '../interfaces';
