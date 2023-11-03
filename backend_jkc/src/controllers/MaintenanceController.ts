@@ -12,7 +12,7 @@ export default class MaintenanceController extends BaseController<TMaintenance> 
   ) { super(maintenanceService) }
 
   public async findAllLikeByVehicle(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): Promise<Response<any, Record<string, any>>> {
-    const a =  await super.findAllLikeByFieldName('vehicleId', req, res);
-    return a;
+    const maintenances =  await super.findAllLikeByFieldName('vehicleId', req, res);
+    return maintenances;
   } 
 }

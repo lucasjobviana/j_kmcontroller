@@ -2,7 +2,7 @@ import { QueryInterface } from 'sequelize';
 
 export default { 
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.bulkInsert('maintenance_service_association', [
+    await queryInterface.bulkInsert('maintenance_service_associations', [
       {
         maintenance_id: 1,
         service_id: 1,
@@ -31,6 +31,6 @@ export default {
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.bulkDelete('maintenance_service_association', {});
+    await queryInterface.bulkDelete('maintenance_service_associations', {});
   },
 }

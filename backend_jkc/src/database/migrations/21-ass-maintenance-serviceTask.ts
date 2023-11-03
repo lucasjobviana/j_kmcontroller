@@ -6,7 +6,7 @@ type TAss = {
 }
 
 const up = (queryInterface: QueryInterface) => {
-  return queryInterface.createTable<Model<TAss>>('maintenance_service_association', {
+  return queryInterface.createTable<Model<TAss>>('maintenance_service_associations', {
     maintenanceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -31,7 +31,7 @@ const up = (queryInterface: QueryInterface) => {
 }
 
 const down = (queryInterface: QueryInterface) => {
-    return queryInterface.dropTable('maintenance_service_association');
+    return queryInterface.dropTable('maintenance_service_associations');
 }
 
 export default {

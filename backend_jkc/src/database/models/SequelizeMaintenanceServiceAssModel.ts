@@ -41,19 +41,19 @@ MaintenanceServiceAssociation.init({
   underscored: true,
 });
 
-SequelizeServiceTaskModel.belongsToMany(SequelizeMaintenanceModel, {
-  through: MaintenanceServiceAssociation, // Modelo de associação
-  foreignKey: 'serviceId', // Chave estrangeira na tabela de associação
-  otherKey: 'maintenanceId', // Chave estrangeira na tabela de manutenções 
-  as: 'maintenances', // Nome do relacionamento
-}); 
+// SequelizeServiceTaskModel.belongsToMany(SequelizeMaintenanceModel, {
+//   through: MaintenanceServiceAssociation, // Modelo de associação
+//   foreignKey: 'serviceId', // Chave estrangeira na tabela de associação
+//   otherKey: 'maintenanceId', // Chave estrangeira na tabela de manutenções 
+//   as: 'maintenances', // Nome do relacionamento
+// }); 
 
-SequelizeMaintenanceModel.belongsToMany(SequelizeServiceTaskModel, {
-  through: MaintenanceServiceAssociation, // Modelo de associação
-  foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
-  otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
-  as: 'services', // Nome do relacionamento
-});
+// SequelizeMaintenanceModel.belongsToMany(SequelizeServiceTaskModel, {
+//   through: MaintenanceServiceAssociation, // Modelo de associação
+//   foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
+//   otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
+//   as: 'services', // Nome do relacionamento
+// });
 
 export default MaintenanceServiceAssociation;
 

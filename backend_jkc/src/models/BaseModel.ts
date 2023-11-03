@@ -26,6 +26,7 @@ export default class  BaseModel<T> {
   }
 
   public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<T[]> {
+    console.log('se for maintenance to chamando errado')
     return this.findAll({
       where: {
         [fieldName]: {

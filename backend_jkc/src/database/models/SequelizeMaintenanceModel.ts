@@ -8,8 +8,9 @@ import {
 import db from '.';
 import SequelizeWorkShopModel from './SequelizeWorkShopModel';
 import SequelizeFleetModel from './SequelizeFleetModel';
-import MaintenanceServiceAssociation from './SequelizeMaintenanceServiceAssModel';
+// import MaintenanceServiceAssociation from './SequelizeMaintenanceServiceAssModel';
 import SequelizeServiceTaskModel from './SequelizeServiceTaskModel';
+import MaintenanceServiceAssociation from './SequelizeMaintenanceServiceAssModel';
 
 class SequelizeMaintenanceModel extends Model<InferAttributes<SequelizeMaintenanceModel>,
 InferCreationAttributes<SequelizeMaintenanceModel>> {
@@ -67,13 +68,20 @@ SequelizeMaintenanceModel.hasOne(
 SequelizeFleetModel.belongsTo(
   SequelizeMaintenanceModel,
   { foreignKey: 'id', targetKey: 'vehicleId', as: 'vehicle' },
-);
+); 
 
-// SequelizeMaintenanceModel.belongsToMany(SequelizeServiceTaskModel, {
-//   through: MaintenanceServiceAssociation, // Modelo de associação
-//   foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
-//   otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
-//   as: 'services', // Nome do relacionamento
-// });
+SequelizeMaintenanceModel.belongsToMany(SequelizeServiceTaskModel, {
+  through: MaintenanceServiceAssociation, // Modelo de associação
+  // foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
+  // otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
+  // as: 'services', // Nome do relacionamento
+});
+
+SequelizeServiceTaskModel.belongsToMany(SequelizeMaintenanceModel, {
+  through: MaintenanceServiceAssociation, // Modelo de associação
+  // foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
+  // otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
+  // as: 'services', // Nome do relacionamento
+});
 
 export default SequelizeMaintenanceModel;
