@@ -28,9 +28,9 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   const servicesList = useArray<ServiceTask|[]>(services);
 
   if(maintenance) {  
-    const vehicleId = maintenance.vehicle ? maintenance.vehicle.id : 55;
-    const workshopName = maintenance.workshop ? maintenance.workshop.name : 'Desconhecido';
-    const workshopId = maintenance.workshop ? maintenance.workshop.id : 55;
+    // const vehicleId = maintenance.vehicle ? maintenance.vehicle.id : 55;
+    // const workshopName = maintenance.workshop ? maintenance.workshop.name : 'Desconhecido';
+    // const workshopId = maintenance.workshop ? maintenance.workshop.id : 55;
      
      
     console.clear();

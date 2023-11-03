@@ -16,24 +16,24 @@ InferCreationAttributes<MaintenanceServiceAssociation>> {
 }
 
 MaintenanceServiceAssociation.init({
-  // maintenanceId: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   primaryKey: true,
-  //   references: {
-  //     model: 'maintenances', // Nome da tabela de manutenções
-  //     key: 'id',
-  //   },
-  // },
-  // serviceId: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   primaryKey: true,
-  //   references: {
-  //     model: 'services', // Nome da tabela de serviços
-  //     key: 'id',
-  //   },
-  // },
+  maintenanceId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    references: {
+      model: 'maintenances', // Nome da tabela de manutenções
+      key: 'id',
+    },
+  },
+  serviceId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    references: {
+      model: 'services', // Nome da tabela de serviços
+      key: 'id',
+    },
+  },
 }, {
   sequelize: db,
   modelName: 'maintenance_service_association',

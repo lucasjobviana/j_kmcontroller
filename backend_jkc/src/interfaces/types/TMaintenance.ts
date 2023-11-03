@@ -1,3 +1,5 @@
+import { TServiceTask } from "./TServiceTask";
+
 export type TMaintenance = {
     id: number,
     description?: string,
@@ -6,4 +8,5 @@ export type TMaintenance = {
     workshopId: number,
     vehicleId: number,
     serviceId?: number[],
+    services?: TServiceTask[],
 };
