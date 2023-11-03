@@ -19,6 +19,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
       },
       include: [
         { model: SequelizeServiceTaskModel, as: 'services', attributes: ['id','name','description'] },
+        
       ]
     });
     console.log(a.map((m)=>m.dataValues))

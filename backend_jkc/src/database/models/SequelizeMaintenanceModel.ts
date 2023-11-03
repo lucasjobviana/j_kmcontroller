@@ -74,14 +74,14 @@ SequelizeMaintenanceModel.belongsToMany(SequelizeServiceTaskModel, {
   through: MaintenanceServiceAssociation, // Modelo de associação
   // foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
   // otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
-  // as: 'services', // Nome do relacionamento
+  as: 'services', // Nome do relacionamento
 });
 
 SequelizeServiceTaskModel.belongsToMany(SequelizeMaintenanceModel, {
   through: MaintenanceServiceAssociation, // Modelo de associação
   // foreignKey: 'maintenanceId', // Chave estrangeira na tabela de associação
   // otherKey: 'serviceId', // Chave estrangeira na tabela de serviços
-  // as: 'services', // Nome do relacionamento
+  as: 'maintenances', // Nome do relacionamento
 });
 
 export default SequelizeMaintenanceModel;

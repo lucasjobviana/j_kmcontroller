@@ -1,4 +1,4 @@
-import { IVehicle, IWorkShop } from '..';
+import { IServiceTask, IVehicle, IWorkShop } from '..';
 import { IMaintenance } from './IMaintenance';
 
 export class Maintenance implements IMaintenance {
@@ -11,6 +11,7 @@ export class Maintenance implements IMaintenance {
   serviceId?: number[] | undefined;
   vehicle?: IVehicle;
   workshop?: IWorkShop;
+  services?: IServiceTask[];
   
   constructor (id?: number) {
     if (id) {

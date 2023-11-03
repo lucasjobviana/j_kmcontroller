@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useWorkShopContext } from '../../contexts';
+import { useServiceTaskContext } from '../../contexts';
 import { Autocomplete, TextField } from '@mui/material';
 import {  useDebounce } from '../../tools';
 import { useField } from '@unform/core';
@@ -9,14 +9,15 @@ type TAutoCompleteOption = {
   label: string;
 }
 
-interface IAutoCompleteFleetProps {
+interface IAutoCompleteServiceTaskProps {
+  propName: string;
   id?: number;
   name?: string;
 }
 
-export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id,name }) => {
-  const { workShops, getByName } = useWorkShopContext();
-  const { fieldName, registerField, error, clearError } = useField('workshopId');
+export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  = ({ propName, id,name }) => {
+  const { serviceTasks, getByName } = useServiceTaskContext();
+  const { fieldName, registerField, error, clearError } = useField(propName);
   const { debounce } = useDebounce();
   const [selectedId, setSelectedId] = useState<number | undefined>(id);
   const [opcoes, setOpcoes] = useState<TAutoCompleteOption[]>([]);
@@ -31,16 +32,16 @@ export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id,n
       await getByName('');
       setIsLoading(false);
       setOpcoes(
-        workShops.map((workshop) => ({ id: workshop.id, label: workshop.name }))
+        serviceTasks.map((service) => ({ id: service.id, label: service.name }))
       );
     });
   };
 
   useEffect(() => {
     setOpcoes(
-      workShops.map((workshop) => ({ id: workshop.id, label: workshop.name }))
+      serviceTasks.map((service) => ({ id: service.id, label: service.name }))
     );
-  }, [workShops]);
+  }, [serviceTasks]);
 
   useEffect(() => {
     registerField({
@@ -85,7 +86,7 @@ export const AutoCompleteWorkshops: React.FC<IAutoCompleteFleetProps>  = ({ id,n
         <TextField
           {...params}
 
-          label="Oficina"
+          label="Novo serviço"
           variant='filled'
           size='small' fullWidth
           error={!!error}

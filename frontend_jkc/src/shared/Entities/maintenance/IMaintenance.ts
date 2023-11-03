@@ -1,4 +1,4 @@
-import { IVehicle, IWorkShop } from '..';
+import { IServiceTask, IVehicle, IWorkShop } from '..';
 
 export interface IMaintenance {
     id: number,
@@ -10,4 +10,5 @@ export interface IMaintenance {
     serviceId?: number[],
     vehicle?: IVehicle,
     workshop?: IWorkShop,
+    services?: IServiceTask[]
 }

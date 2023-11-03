@@ -21,7 +21,7 @@ interface IAutoCompleteFleetProps {
 
 export const AutoCompleteVehicles: React.FC<IAutoCompleteFleetProps>  = ({ id, name, defaultValue }) => {
   const { fleet, getByName } = useFleetContext();
-  const { fieldName, registerField, error, clearError } = useField('vehiclesIds');
+  const { fieldName, registerField, error, clearError } = useField('vehicleId');
   const { debounce } = useDebounce();
   const [selectedId, setSelectedId] = useState<number | undefined>(id);
   const [opcoes, setOpcoes] = useState<TAutoCompleteOption[]>([]);
