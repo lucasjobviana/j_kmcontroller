@@ -27,6 +27,17 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   const services = maintenance?.services ? maintenance.services : [];
   const servicesList = useArray<ServiceTask|[]>(services);
 
+  const handleSelectService = (id: number, indexOnList:number) => {
+    console.log('handleSelectService');
+    alert(`id: ${id} indexOnList: ${indexOnList}`);
+    if (!servicesList.value.find((service)=>service.id===id)){
+      servicesList.removeIndex(indexOnList);// = new ServiceTask('Selecione o serviço','Serviço não selecionado',id);
+      servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado',id));
+    }else{
+      alert('Serviço já adicionado');
+    }
+  }; 
+
   if(maintenance) {  
     // const vehicleId = maintenance.vehicle ? maintenance.vehicle.id : 55;
     // const workshopName = maintenance.workshop ? maintenance.workshop.name : 'Desconhecido';
@@ -63,7 +74,7 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
           <J_DataPicker value={maintenance.endDate} name='endDateJ' /> 
          
           Serviços:<br />
-          {/* <AutoCompleteServiceTask id={0} name={'fgh'}  /> */}
+          
           <Button variant='contained' color='primary' onClick={()=>servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado'))} ><Add /></Button>      
           <Box component={Paper} variant='outlined' paddingX={1}  display='flex' flexDirection='column' bgcolor={theme.palette.background.paper}  color={theme.palette.text.primary} gap={2} width={'100'} >
 
@@ -83,7 +94,7 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
                       textOverflow={'ellipsis'}
                       variant={isBiggerThanSM ? 'h4' : 'h5'}
                     >
-                      <AutoCompleteServiceTask propName={`serviceId_${index}`} id={service.id} name={service.name}  />
+                      <AutoCompleteServiceTask propName={`serviceId_${index}`} id={service.id} name={service.name} onSelect={handleSelectService} selectedList={servicesList.value.map((s)=>s.id)}  />
                     </Typography>
       
                     <Button variant='contained' color='primary' onClick={()=>servicesList.removeIndex(index)} ><Delete /></Button>      

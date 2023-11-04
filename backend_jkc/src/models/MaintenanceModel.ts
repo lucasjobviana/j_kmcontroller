@@ -4,8 +4,6 @@ import { TMaintenance } from '../interfaces';
 import { Op } from 'sequelize';
 import SequelizeServiceTaskModel from '../database/models/SequelizeServiceTaskModel';
 import MaintenanceServiceAssociation from '../database/models/SequelizeMaintenanceServiceAssModel';
-// import MaintenanceServiceAssociation from '../database/models/SequelizeMaintenanceServiceAssModel';
-// import MaintenanceServiceAssociation from '../database/models/SequelizeMaintenanceServiceAssModel';
 
 export default class MaintenanceModel extends BaseModel<TMaintenance>{
   constructor(
@@ -43,48 +41,24 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
     const transaction = await SequelizeMaintenanceModel.sequelize?.transaction();
     try {
       const data = services.map((s)=>s.dataValues);
-      // await MaintenanceServiceAssociation.destroy({ where: { maintenanceId: id } }, { transaction });
-      // await MaintenanceServiceAssociation.destroy({ where: { maintenanceId: id } });
       console.log('vou criar a association')
       console.log( data.map((s)=>({maintenanceId: id, serviceId: s.id})))
-      // await MaintenanceServiceAssociation.bulkCreate(
-      //    data.map((s)=>({maintenanceId: id, serviceId: s.id})),
-      //    { transaction }
-      //  );console.log('ja criou a association')
       const updatedObj = await this.model.update(obj, {where: {id}}, { transaction:transaction });
       await MaintenanceServiceAssociation.destroy({ where: { maintenance_id:obj.id }, transaction:transaction });
       await MaintenanceServiceAssociation.bulkCreate(
         data.map((s)=>({maintenanceId: id, serviceId: s.id})),
         { transaction:transaction }
         );console.log('ja criou a association')
-      // const objWithoutServices = { 
-        // description: obj.description,
-        // initialDate: obj.initialDate,
-        // endDate: obj.endDate,
-        // workshopId: obj.workshopId,
-        // vehicleId: obj.vehicleId,
-        // id: obj.id,
 
-      // }
-      // const updatedObj = await super.update(id, obj);
       console.log('ja atualizou o maintenance')
       console.log(updatedObj)
-      // if(updatedObj[0] === 0) {
-      //   throw new Error(`${this.model} not found`);
-      // }
      
       await transaction?.commit();
       console.log('deu tudo certo')
       return obj;
-  } catch (error) {
+    } catch (error) {
       await transaction?.rollback(); throw error;
-  }
-
-    // const updatedObj = await this.model.update(obj, {where: {id}});
-    // if(updatedObj[0] === 0) {
-    //   throw new Error(`${this.model} not found`);
-    // }
-    // return obj;
+    }
   } 
   
 } 

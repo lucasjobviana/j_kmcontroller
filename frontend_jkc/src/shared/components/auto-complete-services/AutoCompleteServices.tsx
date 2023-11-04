@@ -13,9 +13,11 @@ interface IAutoCompleteServiceTaskProps {
   propName: string;
   id?: number;
   name?: string;
+  onSelect: (id: number, indexOnList: number) => void;
+  selectedList: number[];
 }
 
-export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  = ({ propName, id,name }) => {
+export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  = ({ propName, id, name, onSelect, selectedList }) => {
   const { serviceTasks, getByName } = useServiceTaskContext();
   const { fieldName, registerField, error, clearError } = useField(propName);
   const { debounce } = useDebounce();
@@ -26,6 +28,7 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
 
 
   const populate = async () =>{
+    const servicesNotSelecteds = serviceTasks.filter((service) => !selectedList.includes(service.id));
     setIsLoading(true);
 
     debounce(async () => {
@@ -38,6 +41,7 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
   };
 
   useEffect(() => {
+    // const servicesNotSelecteds = serviceTasks.filter((service) => !selectedList.includes(service.id));
     setOpcoes(
       serviceTasks.map((service) => ({ id: service.id, label: service.name }))
     );
@@ -46,8 +50,8 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
   useEffect(() => {
     registerField({
       name: fieldName,
-      getValue: () => selectedId,
-      setValue: (_, newSelectedId) => setSelectedId(newSelectedId),
+      getValue: () => { return selectedId;},
+      setValue: (_, newSelectedId) => { onSelect(Number(newSelectedId),Number(propName.split('_')[1])); setSelectedId(newSelectedId);},
     });
   }, [registerField, fieldName, selectedId]);
 
@@ -64,6 +68,8 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
     return selectedOption;
   }, [selectedId, opcoes]);
 
+   
+
   return(
     <Autocomplete
       openText='Abrir'
@@ -74,13 +80,13 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
       disablePortal
       
 
-      options={opcoes}
+      options={opcoes.filter((service) => !selectedList.includes(service.id))}
       loading={isLoading}
 
       value={autoCompleteSelectedOption}
      
       onInputChange={(_, newValue) => setSearchText(newValue)}
-      onChange={(_, newValue) => { setSelectedId(newValue?.id); setSearchText(''); clearError(); }}
+      onChange={(_, newValue) => { onSelect(Number(newValue?.id),Number(propName.split('_')[1])); setSelectedId(newValue?.id); setSearchText(''); clearError(); }}
 
       renderInput={(params) => (
         <TextField
