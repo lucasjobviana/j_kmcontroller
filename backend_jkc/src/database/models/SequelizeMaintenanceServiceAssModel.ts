@@ -11,8 +11,8 @@ import SequelizeMaintenanceModel from './SequelizeMaintenanceModel';
 
 class MaintenanceServiceAssociation extends Model<InferAttributes<MaintenanceServiceAssociation>,
 InferCreationAttributes<MaintenanceServiceAssociation>> {
-  // declare maintenanceId: number;
-  // declare serviceId: number;
+  declare maintenanceId: number;
+  declare serviceId: number;
 }
 
 MaintenanceServiceAssociation.init({

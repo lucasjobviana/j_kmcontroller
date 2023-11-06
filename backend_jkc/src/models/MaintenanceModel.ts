@@ -44,9 +44,9 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
       console.log('vou criar a association')
       console.log( data.map((s)=>({maintenanceId: id, serviceId: s.id})))
       const updatedObj = await this.model.update(obj, {where: {id}}, { transaction:transaction });
-      await MaintenanceServiceAssociation.destroy({ where: { maintenance_id:obj.id }, transaction:transaction });
+      await MaintenanceServiceAssociation.destroy({ where: { maintenanceId: id }, transaction: transaction });
       await MaintenanceServiceAssociation.bulkCreate(
-        data.map((s)=>({maintenanceId: id, serviceId: s.id})),
+        data.map((s)=>({maintenanceId: Number(id), serviceId: s.id})),
         { transaction:transaction }
         );console.log('ja criou a association')
 

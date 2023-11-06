@@ -28,7 +28,6 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
 
 
   const populate = async () =>{
-    const servicesNotSelecteds = serviceTasks.filter((service) => !selectedList.includes(service.id));
     setIsLoading(true);
 
     debounce(async () => {
@@ -41,7 +40,6 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
   };
 
   useEffect(() => {
-    // const servicesNotSelecteds = serviceTasks.filter((service) => !selectedList.includes(service.id));
     setOpcoes(
       serviceTasks.map((service) => ({ id: service.id, label: service.name }))
     );
