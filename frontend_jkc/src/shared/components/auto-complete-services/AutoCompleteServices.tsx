@@ -21,7 +21,7 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
   const { serviceTasks, getByName } = useServiceTaskContext();
   const { fieldName, registerField, error, clearError } = useField(propName);
   const { debounce } = useDebounce();
-  const [selectedId, setSelectedId] = useState<number | undefined>(id);
+  // const [selectedId, setSelectedId] = useState<number | undefined>(id);
   const [opcoes, setOpcoes] = useState<TAutoCompleteOption[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchText, setSearchText] = useState(name);
@@ -48,26 +48,37 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
   useEffect(() => {
     registerField({
       name: fieldName,
-      getValue: () => { return selectedId;},
-      setValue: (_, newSelectedId) => { onSelect(Number(newSelectedId),Number(propName.split('_')[1])); setSelectedId(newSelectedId);},
+      getValue: () => { return id;},
+      setValue: (_, newSelectedId) => { onSelect(Number(newSelectedId),Number(propName.split('_')[1]));}, //setSelectedId(newSelectedId);},
     });
-  }, [registerField, fieldName, selectedId]);
+  }, [registerField, fieldName, id]);
 
   useEffect(() => {
     populate();
   }, [searchText]);
 
-  const autoCompleteSelectedOption = useMemo(() => {
-    if (!selectedId) return null;
+  // const autoCompleteSelectedOption = useMemo(() => {
+  //   if (!selectedId) return null;
 
-    const selectedOption = opcoes.find(opcao => opcao.id === selectedId);
+  //   const selectedOption = opcoes.find(opcao => opcao.id === selectedId);
+  //   if (!selectedOption) return null;
+
+  //   return selectedOption;
+  // }, [selectedId, opcoes]);
+  
+  const autoCompleteSelectedOption = useMemo(() => {
+    if (!id) return null;
+
+    const selectedOption = opcoes.find(opcao => opcao.id === id);
     if (!selectedOption) return null;
 
     return selectedOption;
-  }, [selectedId, opcoes]);
+  }, [id, opcoes]);
 
    
 
+   
+  // console.log('vou retornar autocomplete',opcoes,selectedList,selectedId,autoCompleteSelectedOption,id,'fim');
   return(
     <Autocomplete
       openText='Abrir'
@@ -84,13 +95,13 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
       value={autoCompleteSelectedOption}
      
       onInputChange={(_, newValue) => setSearchText(newValue)}
-      onChange={(_, newValue) => { onSelect(Number(newValue?.id),Number(propName.split('_')[1])); setSelectedId(newValue?.id); setSearchText(''); clearError(); }}
+      onChange={(_, newValue) => { onSelect(Number(newValue?.id),Number(propName.split('_')[1])); /*setSelectedId(newValue?.id);*/ setSearchText(''); clearError(); }}
 
       renderInput={(params) => (
         <TextField
           {...params}
 
-          label="Novo serviço"
+          label={`Serviço ${Number(propName.split('_')[1])+1}`}
           variant='filled'
           size='small' fullWidth
           error={!!error}

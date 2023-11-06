@@ -29,12 +29,14 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
 
   const handleSelectService = (id: number, indexOnList:number) => {
     if (!servicesList.value.find((service)=>service.id===id)){
-      servicesList.removeIndex(indexOnList);// = new ServiceTask('Selecione o serviço','Serviço não selecionado',id);
+      servicesList.removeIndex(indexOnList);
       servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado',id));
     }else{
       alert('Serviço já adicionado');
     }
   }; 
+
+  console.log('main',servicesList.value);
 
   if(maintenance) {  
     return (
@@ -63,7 +65,7 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
           <Button variant='contained' color='primary' onClick={()=>servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado'))} ><Add /></Button>      
           <Box component={Paper} variant='outlined' paddingX={1}  display='flex' flexDirection='column' bgcolor={theme.palette.background.paper}  color={theme.palette.text.primary} gap={2} width={'100'} >
 
-            {
+            { 
               servicesList && servicesList.value.length > 0 && servicesList.value.map((service,index)=>
                 <>
                   <Box display={'flex'} height={
@@ -79,10 +81,10 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
                       textOverflow={'ellipsis'}
                       variant={isBiggerThanSM ? 'h4' : 'h5'}
                     >
-                      <AutoCompleteServiceTask propName={`serviceId_${index}`} id={service.id} name={service.name} onSelect={handleSelectService} selectedList={servicesList.value.map((s)=>s.id)}  />
+                      <AutoCompleteServiceTask propName={`serviceId_${index}`} id={servicesList.value[index].id} name={servicesList.value[index].name} onSelect={handleSelectService} selectedList={servicesList.value.map((s)=>s.id)}  />
                     </Typography>
       
-                    <Button variant='contained' color='primary' onClick={()=>servicesList.removeIndex(index)} ><Delete /></Button>      
+                    <Button variant='contained' color='primary' onClick={()=>{console.log(index,servicesList,servicesList.value[index]);servicesList.removeIndex(index);}} ><Delete /></Button>      
           
                   </Box>
                   <Box flex={1}  >{children}</Box>
