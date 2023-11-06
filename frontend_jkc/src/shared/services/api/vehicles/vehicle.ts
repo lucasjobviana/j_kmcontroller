@@ -61,7 +61,6 @@ export const updateVehicle = async (vehicle: Vehicle) => {
 };
 
 export const deleteVehicle = async (id: number) => {
-  console.log('id para deletar no api . delete;', id);
   const token = JSON.parse(localStorage.getItem('token')) ;
   const deletedCategory = await api.delete(`/fleet/${id}`,  {
     headers: {

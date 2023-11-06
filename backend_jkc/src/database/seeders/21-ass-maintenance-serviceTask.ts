@@ -33,4 +33,4 @@ export default {
   down: async (queryInterface: QueryInterface) => {
     await queryInterface.bulkDelete('maintenance_service_associations', {});
   },
-}
+};

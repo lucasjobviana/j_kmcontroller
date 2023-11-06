@@ -9,7 +9,6 @@ export const convertoToBrazilianDateFormat = (data:string) => {
 };
 
 export const convertFromBrazilianDateFormat = (brazilianDate:string) => {
-  console.log('convertFromBrazilianDateFormat', brazilianDate);
   const parts = brazilianDate.split('-');
   if (parts.length === 3) {
     const newDate = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));

@@ -27,9 +27,9 @@ class App {
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
     this.app.use((err:AppResponseError | Error, _req:Request, res: Response, _n:NextFunction) => {
-      console.log('cheguei no meu middleware de eero')
-      console.log(err)
-      console.log('________')
+      console.log('Middleware de erro');
+      console.log(err);
+      console.log('________');
       if (err instanceof AppResponseError) {
         return res.status(err.statusCode).json({ message: err.message });
       }
@@ -56,16 +56,6 @@ class App {
     this.app.use('/services',serviceTaskRouter);
     this.app.use('/workshop',workShop);
     this.app.use('/maintenance',maintenance);
-    // this.app.use((err:AppResponseError | Error, _req:Request, res: Response, _n:NextFunction) => {
-    //   console.log('cheguei no meu middleware de eero')
-    //   console.log(err)
-    //   console.log('________')
-    //   if (err instanceof AppResponseError) {
-    //     return res.status(err.statusCode).json({ message: err.message });
-    //   }
-
-    //   return res.status(500).json({ message: 'Erro não tratado.', messageError: err.message });
-    // });
   }
 
   public start(PORT: string | number): void {
@@ -75,5 +65,5 @@ class App {
 
 export { App };
 
-// Essa segunda exportação é estratégica, e a execução dos testes de cobertura depende dela
+// export by test
 export const { app } = new App();

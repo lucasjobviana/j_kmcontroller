@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { Op } from 'sequelize';
 
 export default class  BaseModel<T> {
@@ -18,15 +17,14 @@ export default class  BaseModel<T> {
       });
       return obj;
     });
-  }
+  };
 
   private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
     const dbData = await this.model.findAll({ ...whereOption });
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<T[]> {
-    console.log('se for maintenance to chamando errado')
+  public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<T[]> {
     return this.findAll({
       where: {
         [fieldName]: {
@@ -41,8 +39,6 @@ export default class  BaseModel<T> {
   }
 
   public async update(id:string, obj:T): Promise<T> {
-    console.log('cheguei no update do model')
-    console.log(id, obj, typeof id, typeof obj, typeof this.model)
     const updatedObj = await this.model.update(obj, {where: {id}});
     if(updatedObj[0] === 0) {
       throw new Error(`${this.model} not found`);

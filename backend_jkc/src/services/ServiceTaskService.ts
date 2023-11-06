@@ -6,5 +6,5 @@ import { TServiceTask } from '../interfaces/types/TServiceTask';
 export default class ServiceTaskService extends BaseService<TServiceTask> {
   constructor(
     private fleetModel: BaseModel<TServiceTask> = new ServiceTaskModel(),
-  ) { super(fleetModel) }
+  ) { super(fleetModel); }
 } 

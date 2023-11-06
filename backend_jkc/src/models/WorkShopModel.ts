@@ -4,5 +4,5 @@ import { TWorkShop } from '../interfaces';
 
 export default class WorkShopModel  extends BaseModel<TWorkShop>{
   constructor(
-  ) { super(SequelizeWorkShopModel,['id','name','description','fullAddress','phone'])  }
+  ) { super(SequelizeWorkShopModel,['id','name','description','fullAddress','phone']);  }
 }

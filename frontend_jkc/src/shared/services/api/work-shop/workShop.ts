@@ -62,7 +62,6 @@ export const updateWorkShop = async (workShop: WorkShop) => {
 };
 
 export const deleteWorkShop = async (id: number) => {
-  console.log('id para deletar no api . delete;', id);
   const token = JSON.parse(localStorage.getItem('token')) ;
   const deletedWorkShop = await api.delete(`/workshop/${id}`,  {
     headers: {

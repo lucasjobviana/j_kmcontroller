@@ -49,7 +49,7 @@ export const WorkShopProvider: React.FC<IWorkShopsProviderProps> = ({ children }
   }, [workShops]);
 
   const getAll = useCallback( () => {
-    console.log('get all WorkShop');
+    console.log('get all WorkShop - not implemented');
   }, [workShops]);
 
   const getByName = useCallback( async (name: string) => {
@@ -62,7 +62,7 @@ export const WorkShopProvider: React.FC<IWorkShopsProviderProps> = ({ children }
   }, [workShops]);
 
   const getById = useCallback( (id: number) => {
-    console.log('get workshop by id: ', id);
+    console.log('get workshop by id: ', id, ' - not implemented');
   }, [workShops]);
 
   return (

@@ -43,14 +43,12 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
     if(status  === true) {
       const newFleet = fleet.filter((vehicle) => Number(vehicle.id) !== id);
       setFleet(newFleet);
-      console.log('Vehicle deleted', newFleet);
 
     }
-    console.log('del method deleted', status, status === true);
   }, [fleet]);
 
   const getAll = useCallback( () => {
-    console.log('get all Vehicle');
+    console.log('get all Vehicle - not implemented');
   }, [fleet]);
 
   const getByName = useCallback( async (name: string) => { 
@@ -60,7 +58,6 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
       const newFleet = fleet.map((v:IVehicle) => {
         return new Vehicle(v.name, v.licensePlate, v.id);
       });
-      console.log('context .... ja resgatei meu fleet e vou setalo',fleet);
       setFleet(newFleet);
       return true;
     }
@@ -68,7 +65,7 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
   }, [fleet]);
 
   const getById = useCallback( (id: number) => {
-    console.log('get vehicle by id: ', id);
+    console.log('get vehicle by id: ', id, ' - not implemented');
   }, [fleet]);
 
   return (

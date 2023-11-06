@@ -25,15 +25,15 @@ const up = (queryInterface: QueryInterface) => {
         key: 'id',
       }, 
     },  
-    });
+  });
 
-}
+};
 
 const down = (queryInterface: QueryInterface) => {
-    return queryInterface.dropTable('maintenances');
-}
+  return queryInterface.dropTable('maintenances');
+};
 
 export default {
-    up,
-    down,
-}
+  up,
+  down,
+};

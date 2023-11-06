@@ -28,13 +28,13 @@ const up = (queryInterface: QueryInterface) => {
       }, 
     }, 
   });
-}
+};
 
 const down = (queryInterface: QueryInterface) => {
-    return queryInterface.dropTable('maintenance_service_associations');
-}
+  return queryInterface.dropTable('maintenance_service_associations');
+};
 
 export default {
-    up,
-    down,
-}
+  up,
+  down,
+};

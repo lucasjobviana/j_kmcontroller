@@ -47,9 +47,6 @@ export const ServiceTaskProvider: React.FC<IServiceTaskProviderProps> = ({ child
     }
   }, [serviceTasks]);
 
-  // const getAll = useCallback( () => {
-  //   console.log('get all Vehicle');
-  // }, [fleet]);
 
   const getByName = useCallback( async (name: string) => {
     const serviceTask = await defaultStorage('getServiceTasksByName', { search:name });   
@@ -60,10 +57,6 @@ export const ServiceTaskProvider: React.FC<IServiceTaskProviderProps> = ({ child
     }
     return false;
   }, [serviceTasks]);
-
-  // const getById = useCallback( (id: number) => {
-  //   console.log('get vehicle by id: ', id);
-  // }, [fleet]);
 
   return (
     <ServiceTaskContext.Provider value={{ serviceTasks, getByName, setServices, del, update, create }}>

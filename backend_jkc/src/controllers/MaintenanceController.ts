@@ -9,7 +9,7 @@ import { ParsedQs } from 'qs';
 export default class MaintenanceController extends BaseController<TMaintenance> implements ISearchAbleByVehicleId {
   constructor(
     private maintenanceService: BaseService<TMaintenance> = new MaintenanceService(),
-  ) { super(maintenanceService) }
+  ) { super(maintenanceService); }
 
   public async findAllLikeByVehicle(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): Promise<Response<any, Record<string, any>>> {
     const maintenances =  await super.findAllLikeByFieldName('vehicleId', req, res);

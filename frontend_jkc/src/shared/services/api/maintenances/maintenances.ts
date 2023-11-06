@@ -1,11 +1,10 @@
 import { api } from '..';
 import { Maintenance } from '../../../Entities';
 
-export const getAllMaintenances = async () => { console.log('getAllMaintenances');
+export const getAllMaintenances = async () => { 
   const maintenances = await api.get('/maintenance').then((response) => {
     return response.data;
   }); 
-  console.log('maintenences:', maintenances);
   return maintenances; 
 }; 
 
@@ -51,7 +50,7 @@ export const createMaintenance = async (maintenance: Maintenance) => {
 
 export const updateMaintenance = async (maintenance: Maintenance) => {
   const token = JSON.parse(localStorage.getItem('token')) ;
-  console.log('updateMaintenance da api:', maintenance);
+
   const updatedMaintenance = await api.put(`/maintenance/${maintenance.id}`, maintenance, {
     headers: {
       Authorization: `Bearer ${token}`

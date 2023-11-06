@@ -27,8 +27,6 @@ export const PostProvider: React.FC<IPostProviderProps> = ({ children }) => {
     const post = new Post(title);
     const newPost = await defaultStorage('createPost', post);
     if(newPost) {
-      console.log('post created_____________', newPost);
-      // setPosts((posts) => [...posts, newPost]);
       setPosts((posts)=> posts.map((p) => p.id === post.id ? newPost : p));
       return newPost.id;
     }
@@ -38,8 +36,6 @@ export const PostProvider: React.FC<IPostProviderProps> = ({ children }) => {
   const update = useCallback( async (post: Post) => {
     const hasUpdated = await defaultStorage('updatePost', post);
     if(hasUpdated) {
-      console.log('post updated_____________', hasUpdated);
-
       setPosts((posts)=> posts.map((p) => p.id === post.id ? hasUpdated : p));
     }
     return hasUpdated;
@@ -50,20 +46,16 @@ export const PostProvider: React.FC<IPostProviderProps> = ({ children }) => {
     if(status  === true) {
       const newPosts = posts.filter((post) => post.id !== id);
       setPosts(newPosts);
-      console.log('post deleted', newPosts);
     }
-    console.log('del method deleted', status, status === true);
     return status;
   }, [posts]);
 
   const getAll = useCallback( () => {
-    console.log('get all posts');
+    console.log('get all posts - not implemented');
   }, [posts]);
 
   const getByName = useCallback( async (name: string) => {
     const posts = await defaultStorage('getPostsByName', { search:name });
-    console.log('get by name do context: __________                 ');
-    console.log(posts);
     if(posts) {
       setPosts(posts);
       return true;
@@ -72,7 +64,7 @@ export const PostProvider: React.FC<IPostProviderProps> = ({ children }) => {
   }, [posts]);
 
   const getById = useCallback( (id: number) => {
-    console.log('get posts by id: ', id);
+    console.log('get posts by id: ', id, ' - not implemented');
   }, [posts]);
 
   return (

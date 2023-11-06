@@ -3,11 +3,9 @@ import {
   Model,
   InferAttributes,
   InferCreationAttributes,
-  CreationOptional,
 } from 'sequelize';
 import db from '.';
-import SequelizeServiceTaskModel from './SequelizeServiceTaskModel';
-import SequelizeMaintenanceModel from './SequelizeMaintenanceModel';
+
 
 class MaintenanceServiceAssociation extends Model<InferAttributes<MaintenanceServiceAssociation>,
 InferCreationAttributes<MaintenanceServiceAssociation>> {
@@ -21,7 +19,7 @@ MaintenanceServiceAssociation.init({
     allowNull: false,
     primaryKey: true,
     references: {
-      model: 'maintenances', // Nome da tabela de manutenções
+      model: 'maintenances', 
       key: 'id',
     },
   },
@@ -30,7 +28,7 @@ MaintenanceServiceAssociation.init({
     allowNull: false,
     primaryKey: true,
     references: {
-      model: 'services', // Nome da tabela de serviços
+      model: 'services', 
       key: 'id',
     },
   },

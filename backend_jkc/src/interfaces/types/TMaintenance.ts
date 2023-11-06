@@ -1,4 +1,4 @@
-import { TServiceTask } from "./TServiceTask";
+import { TServiceTask } from './TServiceTask';
 
 export type TMaintenance = {
     id: number,

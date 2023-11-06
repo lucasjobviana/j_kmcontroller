@@ -1,5 +1,4 @@
 import { TServiceTask } from './types/TServiceTask';
-// import { TServiceTask } from './types/TServiceTask';
 
 export interface IServiceTaskModel {
   // findAll(whereOption:object): Promise<TVehicle[]>,
