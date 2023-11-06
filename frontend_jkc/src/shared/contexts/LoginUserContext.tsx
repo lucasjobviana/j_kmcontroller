@@ -25,10 +25,8 @@ export const LoginUserProvider: React.FC<ILoginUserProviderProps> = ({ children 
     if(hash) {
       newUser.hash = hash;
       setUser(newUser);
-      console.log('Novo usuário criado: ', newUser);
       return true;
     }
-    console.log('Não foi possivel criar um novo usuário:', newUser);
     return false;
   }, [user]);
 
@@ -40,10 +38,8 @@ export const LoginUserProvider: React.FC<ILoginUserProviderProps> = ({ children 
       user.hash = hash;
       setUser(user);
       localStorage.setItem('token', JSON.stringify(hash.token));
-      console.log('Usuário logado: ', user);
       return true;
     }
-    console.log('Não foi possivel logar o usuário:', newUser);
     return false;
   }, [user]);
 

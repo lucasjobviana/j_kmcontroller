@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useServiceTaskContext } from '../../../contexts';
+import { useMaintenanceContext } from '../../../contexts';
 import { Delete, Edit } from '@mui/icons-material';
 
 interface ICardProps {
@@ -11,8 +11,7 @@ interface ICardProps {
   }
 
 export const J_Card : React.FC<ICardProps> = ({obj}) =>{
-  console.log('obj',obj);
-  const { del } = useServiceTaskContext();
+  const { del } = useMaintenanceContext();
   const navigate = useNavigate();
   return (
     <Grid item key={`${'title'}`} xs={12} sm={6} md={4}>

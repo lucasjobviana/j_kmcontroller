@@ -54,7 +54,7 @@ export function WorkShops() {
           variant="contained"
           color="primary"
           onClick={ async () => {
-            if (confirm(`Deseja excluir a categoria ${expense.row.name} `)) {
+            if (confirm(`Deseja excluir a oficina ${expense.row.name}?`)) {
               await del(expense.row.id);
             }
           } }
@@ -92,7 +92,7 @@ export function WorkShops() {
     getDataFromStorage(search);
   }, [search]);
 
-  console.log('selectedWorkShops', selectedWorkShop);
+
   return (
     <LayoutBase
       title="Oficinas"

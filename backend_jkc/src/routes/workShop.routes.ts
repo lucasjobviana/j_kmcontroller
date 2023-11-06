@@ -1,6 +1,5 @@
 import { Request, Router, Response } from 'express';
 
-import BaseController from '../controllers/BaseController';
 import WorkShopController from '../controllers/WorkShopController';
 import { TBaseControllerWithSearchByName, TWorkShop } from '../interfaces';
 

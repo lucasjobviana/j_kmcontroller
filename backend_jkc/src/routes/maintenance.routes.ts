@@ -1,25 +1,24 @@
 import { Request, Router, Response } from 'express';
 
-import BaseController from '../controllers/BaseController';
 import MaintenanceController from '../controllers/MaintenanceController';
-import { TMaintenance } from '../interfaces';
+import { TBaseControllerWithSearchByVehicle,TMaintenance } from '../interfaces';
 
-const maintenanceController:BaseController<TMaintenance> = new MaintenanceController();
+const maintenanceController:TBaseControllerWithSearchByVehicle<TMaintenance> = new MaintenanceController();
 const router = Router();
 
-// router.get(
-//   '/name',
-//   (req: Request, res: Response) => maintenanceController.findAllLikeByFieldName('name', req, res),
-// ); 
+router.get(
+  '/',
+  (req: Request, res: Response) => maintenanceController.findAllLikeByVehicle(req, res),
+); 
 
 router.delete(
   '/:id',
-  (req: Request, res: Response) => maintenanceController.delete(req, res),
+  (req: Request, res: Response) => {maintenanceController.delete(req, res);},
 );
 
 router.put(
   '/:id',
-  (req: Request, res: Response) => maintenanceController.update(req, res),
+  (req: Request, res: Response) => {maintenanceController.update(req, res);},
 );
 
 router.post(

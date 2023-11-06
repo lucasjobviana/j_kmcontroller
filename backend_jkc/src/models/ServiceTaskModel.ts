@@ -4,5 +4,5 @@ import { TServiceTask } from '../interfaces';
 
 export default class ServiceTaskModel extends BaseModel<TServiceTask>{
   constructor(
-  ) { super(SequelizeServiceTaskModel,['id','name','description'])  }
-} 
+  ) { super(SequelizeServiceTaskModel,['id','name','description']);  }
+}  

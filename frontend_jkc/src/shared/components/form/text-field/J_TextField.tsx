@@ -12,7 +12,7 @@ export interface IJ_TextFieldProps extends BaseTextFieldProps {
 export const J_TextField: React.FC<IJ_TextFieldProps> = ({ name='name', defaultV, ...rest }) => {
   const { fieldName, registerField, defaultValue, error, clearError } = useField(name=name.toString());
   const [value, setValue] = useState(defaultV);
-  console.log('J_TextField', name, fieldName, defaultV, value);
+
 
   useEffect(() => {
     registerField({

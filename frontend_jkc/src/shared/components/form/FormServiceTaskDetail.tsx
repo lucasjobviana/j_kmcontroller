@@ -13,7 +13,7 @@ export interface IFormServiceTaskDetailProps extends IReactRCProps {
 }
 
 export const FormServiceTaskDetail: React.FC<IFormServiceTaskDetailProps> = ({ children, serviceTaskId, serviceTask: serviceTask, ...rest }) => {
-  const { update } = useServiceTaskContext();
+  const { update } = useServiceTaskContext(); 
   const navigate = useNavigate();
 
   if(serviceTask) {

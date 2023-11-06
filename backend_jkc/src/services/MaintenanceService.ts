@@ -6,5 +6,5 @@ import { TMaintenance } from '../interfaces';
 export default class MaintenanceService extends BaseService<TMaintenance> {
   constructor(
     private maintenanceModel: BaseModel<TMaintenance> = new MaintenanceModel(),
-  ) { super(maintenanceModel) }
+  ) { super(maintenanceModel); }
 } 

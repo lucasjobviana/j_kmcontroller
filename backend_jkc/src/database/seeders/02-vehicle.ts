@@ -13,17 +13,17 @@ export default {
 
       },
       {
-        name:"Volvo ex21 azul",
-        license_plate:"GHI-9012",
+        name:'Volvo ex21 azul',
+        license_plate:'GHI-9012',
       },
       {
-       name:"Parati Turbo 2022",
-        license_plate:"JKL-3456",
+        name:'Parati Turbo 2022',
+        license_plate:'JKL-3456',
       },
       {
-        name:"CG 126 2004",
-        license_plate:"MNO-7890",
-       },
+        name:'CG 126 2004',
+        license_plate:'MNO-7890',
+      },
       
     ], {});
   },
@@ -31,4 +31,4 @@ export default {
   down: async (queryInterface: QueryInterface) => {
     await queryInterface.bulkDelete('vehicles', {});
   },
-}
+};

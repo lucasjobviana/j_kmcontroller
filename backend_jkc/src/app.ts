@@ -1,12 +1,9 @@
-import * as express from 'express'
+import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import * as cors from 'cors';
 import userRouter from './routes/user.routes';
-// import teamRouter from './routes/team.routes._ts';
-// import matchRouter from './routes/match.routes._ts';
 import loginRouter from './routes/login.routes';
-// import leaderBoardRouter from './routes/leaderBoard.routes._ts';
 import fleetRouter from './routes/fleet.routes';
 import serviceTaskRouter from './routes/serviceTask.routes';
 import workShop from './routes/workShop.routes';
@@ -22,6 +19,7 @@ class App {
     this.app.use(express.json());
     this.routes();
 
+
     this.config();
 
     // Não remover essa rota
@@ -29,6 +27,9 @@ class App {
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
     this.app.use((err:AppResponseError | Error, _req:Request, res: Response, _n:NextFunction) => {
+      console.log('Middleware de erro');
+      console.log(err);
+      console.log('________');
       if (err instanceof AppResponseError) {
         return res.status(err.statusCode).json({ message: err.message });
       }
@@ -64,5 +65,5 @@ class App {
 
 export { App };
 
-// Essa segunda exportação é estratégica, e a execução dos testes de cobertura depende dela
+// export by test
 export const { app } = new App();

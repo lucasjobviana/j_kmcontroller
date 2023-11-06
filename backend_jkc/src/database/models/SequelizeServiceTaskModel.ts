@@ -6,8 +6,6 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
-import MaintenanceServiceAssociation from './SequelizeMaintenanceServiceAssModel';
-import SequelizeMaintenanceModel from './SequelizeMaintenanceModel';
 
 class SequelizeServiceTaskModel extends Model<InferAttributes<SequelizeServiceTaskModel>,
 InferCreationAttributes<SequelizeServiceTaskModel>> {

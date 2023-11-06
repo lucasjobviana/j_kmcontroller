@@ -6,5 +6,5 @@ import { TWorkShop } from '../interfaces';
 export default class WorkShopService extends BaseService<TWorkShop> {
   constructor(
     private workShopModel: BaseModel<TWorkShop> = new WorkShopModel(),
-  ) { super(workShopModel) }
+  ) { super(workShopModel); }
 }

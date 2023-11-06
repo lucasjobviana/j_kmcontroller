@@ -17,15 +17,14 @@ export default class  BaseModel<T> {
       });
       return obj;
     });
-  }
+  };
 
   private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
     const dbData = await this.model.findAll({ ...whereOption });
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByFieldName(fieldName='name', searchValue = "",  fields = this.propNames): Promise<T[]> {
-    console.log('classname', this.model.toString())
+  public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<T[]> {
     return this.findAll({
       where: {
         [fieldName]: {

@@ -4,7 +4,6 @@ import { User } from '../../../Entities';
 export const createUser = async (user: User) => {
   try{
     const newUser = await api.post('/user', user).then((response) => {
-      console.log(response.data);
       return response.data;
     });
     return newUser;

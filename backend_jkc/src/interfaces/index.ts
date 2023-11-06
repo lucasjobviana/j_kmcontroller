@@ -4,3 +4,4 @@ export * from './IUserModel';
 export * from './IVehicleModel';
 export * from './IWorkShopModel';
 export * from './ISearchAbleByName';
+export * from './ISearchAbleByVehicleId';
