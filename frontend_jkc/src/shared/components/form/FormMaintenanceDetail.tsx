@@ -25,11 +25,9 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   const isBiggerThanMD = !useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const services = maintenance?.services ? maintenance.services : [];
-  const servicesList = useArray<ServiceTask|[]>(services);
+  const servicesList = useArray<ServiceTask>(services);
 
   const handleSelectService = (id: number, indexOnList:number) => {
-    console.log('handleSelectService');
-    alert(`id: ${id} indexOnList: ${indexOnList}`);
     if (!servicesList.value.find((service)=>service.id===id)){
       servicesList.removeIndex(indexOnList);// = new ServiceTask('Selecione o serviço','Serviço não selecionado',id);
       servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado',id));
@@ -39,16 +37,6 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   }; 
 
   if(maintenance) {  
-    // const vehicleId = maintenance.vehicle ? maintenance.vehicle.id : 55;
-    // const workshopName = maintenance.workshop ? maintenance.workshop.name : 'Desconhecido';
-    // const workshopId = maintenance.workshop ? maintenance.workshop.id : 55;
-     
-     
-    console.clear();
-    console.log(maintenance);
-    console.log(servicesList.value);
-
-
     return (
       <Form {...rest} onSubmit={async (v) => {
         const mt = new Maintenance();
@@ -58,11 +46,8 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
         mt.endDate = v.endDateJ.toDate(); 
         mt.vehicleId = v.vehicleId;
         mt.workshopId = v.workshopId;
-        mt.services = Object.keys(v).filter((key)=>key.includes('serviceId_')).map((key)=>new ServiceTask(v[key],v[key],Number(v[key])));
-        console.log('mt');
-        console.log(mt);
-        console.log('v');
-        console.log(v);
+        const allServices = Object.keys(v).filter((key)=>key.includes('serviceId_')).map((key)=>new ServiceTask(v[key],v[key],Number(v[key])));
+        mt.services = allServices.filter((service)=>service.id>0);
         await update(mt);
         navigate('/maintenances');
       }} >
@@ -79,7 +64,7 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
           <Box component={Paper} variant='outlined' paddingX={1}  display='flex' flexDirection='column' bgcolor={theme.palette.background.paper}  color={theme.palette.text.primary} gap={2} width={'100'} >
 
             {
-              services && services.length > 0 && servicesList.value.map((service,index)=>
+              servicesList && servicesList.value.length > 0 && servicesList.value.map((service,index)=>
                 <>
                   <Box display={'flex'} height={
                     isBiggerThanSM ? isBiggerThanMD ? theme.spacing(6) : theme.spacing(4) : theme.spacing(2)
