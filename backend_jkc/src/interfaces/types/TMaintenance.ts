@@ -9,4 +9,10 @@ export type TMaintenance = {
     vehicleId: number,
     serviceId?: number[],
     services?: TServiceTask[],
+    maintenance_service_association?: {
+        maintenanceId: number,
+        serviceId: number,
+        totalPrice: number,
+        description: string,
+    }[],
 };

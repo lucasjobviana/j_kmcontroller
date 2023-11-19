@@ -37,7 +37,7 @@ export const J_TextField: React.FC<IJ_TextFieldProps> = ({ name='name', defaultV
       error={!!error}
       helperText={error}
       variant='filled'
-      size='small' fullWidth
+      size='small' 
     />
   );
 };

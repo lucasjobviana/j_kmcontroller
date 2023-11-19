@@ -12,12 +12,12 @@ export default {
         description: 'Trocar óleo do câmbio.',
       },
       {
-        name: 'Troca de óleo do diferencial',
-        description: 'Trocar óleo do diferencial.',
+        name: 'Troca do parafuso do cárter',
+        description: 'Trocar parafuseta da rebinboca do parafuso do cárter.',
       },
       {
-        name: 'Troca de óleo do freio',
-        description: 'Trocar óleo do freio.',
+        name: 'Troca de pneu',
+        description: 'Trocar pneu.',
       }
     ], {});
   },

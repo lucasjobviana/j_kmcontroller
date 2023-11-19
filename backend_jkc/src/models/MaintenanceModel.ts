@@ -24,6 +24,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
   }
 
   public async update(id:string, obj:TMaintenance): Promise<TMaintenance> {
+    console.log('model update by maintenance:/n\n', obj, '\n\n');
     const services = await SequelizeServiceTaskModel.findAll(
       { where: { id: obj.services?.map((s)=>s.id) } },
     );
@@ -35,10 +36,12 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
     const transaction = await SequelizeMaintenanceModel.sequelize?.transaction();
     try {
       const data = services.map((s)=>s.dataValues);
+      const description = obj.maintenance_service_association?.map((s)=>s.description);
+      const totalPrice = obj.maintenance_service_association?.map((s)=>s.totalPrice);
       await this.model.update(obj, {where: {id}}, { transaction:transaction });
       await MaintenanceServiceAssociation.destroy({ where: { maintenanceId: id }, transaction: transaction });
       await MaintenanceServiceAssociation.bulkCreate(
-        data.map((s)=>({maintenanceId: Number(id), serviceId: s.id})),
+        data.map((s,index)=>({maintenanceId: Number(id), serviceId: s.id, totalPrice: totalPrice?.[index], description: description?.[index]})),
         { transaction:transaction }
       );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { IReactRCProps } from '../../tools';
 import { Form } from '@unform/web';
 import { J_TextField } from './text-field'; 
-import { Box, Button, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Paper, useMediaQuery, useTheme } from '@mui/material';
 import { useMaintenanceContext } from '../../contexts';
 import { Maintenance, ServiceTask } from '../../Entities';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ export interface IFormMaintenanceDetailProps extends IReactRCProps {
   maintenance?: Maintenance;
 }
 
+type  TMaintenanceService = {id: number, name:string, price?: number, description?: string};
 export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ children, maintenanceId, maintenance, ...rest }) => {
   const { update } = useMaintenanceContext();
   const theme = useTheme();
@@ -25,12 +26,22 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   const isBiggerThanMD = !useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const services = maintenance?.services ? maintenance.services : [];
-  const servicesList = useArray<ServiceTask>(services);
+  const serviceWithMaintenance = services.map((service)=> {
+    return {
+      ...service,
+      price: service.maintenance_service_association.totalPrice,
+      description: service.maintenance_service_association.description,
+    };
+    
+  });
+  const servicesList = useArray<TMaintenanceService>(serviceWithMaintenance);
 
   const handleSelectService = (id: number, indexOnList:number) => {
     if (!servicesList.value.find((service)=>service.id===id)){
       servicesList.removeIndex(indexOnList);
-      servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado',id));
+       
+      // const service = new ServiceTask('Selecione o serviço','Serviço não selecionado',id);
+      servicesList.add({id,price:0,description:'Descrição do serviço nesta manutenção'});
     }else{
       alert('Serviço já adicionado');
     }
@@ -49,7 +60,27 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
         mt.vehicleId = v.vehicleId;
         mt.workshopId = v.workshopId;
         const allServices = Object.keys(v).filter((key)=>key.includes('serviceId_')).map((key)=>new ServiceTask(v[key],v[key],Number(v[key])));
-        mt.services = allServices.filter((service)=>service.id>0);
+        mt.services = allServices.filter((service,index)=>{
+          if(service.id>0){
+            console.log('maintenance_service_association',service.id, v[`price_${index}`], v[`descService_${index}`]);
+            mt.maintenance_service_association?.push({
+              maintenanceId: mt.id,
+              serviceId: service.id,
+              description: v[`descService_${index}`],
+              totalPrice: Number(v[`price_${index}`]) ,
+            });
+            return { 
+              id: service.id,
+              // maintenance_service_association: {
+              //   description: v[`descService_${index}`],
+              //   totalPrice: v[`price_${index}`],
+              // },
+            };
+          }
+        });
+        // mt.services = allServices.filter((service)=>service.id>0);
+        console.log('v',v);
+        console.log('mt',mt);
         await update(mt);
         navigate('/maintenances');
       }} >
@@ -62,17 +93,17 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
          
           Serviços:<br />
           
-          <Button variant='contained' color='primary' onClick={()=>servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado'))} ><Add /></Button>      
-          <Box component={Paper} variant='outlined' paddingX={1}  display='flex' flexDirection='column' bgcolor={theme.palette.background.paper}  color={theme.palette.text.primary} gap={2} width={'100'} >
+          <Box component={Paper} variant='outlined'  display='flex' flexDirection='column' bgcolor={theme.palette.background.paper}  color={theme.palette.text.primary} gap={2} width={'100'} >
+            <Button variant='contained' color='primary' onClick={()=>servicesList.add(new ServiceTask('Selecione o serviço','Serviço não selecionado'))} ><Add /></Button>      
 
             { 
-              servicesList && servicesList.value.length > 0 && servicesList.value.map((service,index)=>
+              servicesList && servicesList.value.length > 0 && servicesList.value.map((_,index)=>
                 <>
                   <Box display={'flex'} height={
                     isBiggerThanSM ? isBiggerThanMD ? theme.spacing(6) : theme.spacing(4) : theme.spacing(2)
                   }  justifyContent={'space-between'} alignItems={'center'} gap={1}  >
                
-                    <Typography
+                    {/* <Typography
                       component='h6'
                       flex={1}
                       textAlign={'center'}
@@ -81,11 +112,13 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
                       textOverflow={'ellipsis'}
                       variant={isBiggerThanSM ? 'h4' : 'h5'}
                     >
-                      <AutoCompleteServiceTask propName={`serviceId_${index}`} id={servicesList.value[index].id} name={servicesList.value[index].name} onSelect={handleSelectService} selectedList={servicesList.value.map((s)=>s.id)}  />
-                    </Typography>
+                    </Typography> */}
+                    <AutoCompleteServiceTask propName={`serviceId_${index}`} id={servicesList.value[index].id} name={servicesList.value[index].name} onSelect={handleSelectService} selectedList={servicesList.value.map((s)=>s.id)} />
+                    <J_TextField name={`descService_${index}`} label='Descrição' value={servicesList.value[index].description} defaultV={servicesList.value[index].description}  fullWidth />
+                    <J_TextField name={`price_${index}`} label='Preço total' value={servicesList.value[index].price} defaultV={servicesList.value[index].price?.toString()} type='number' size='small' sx={{maxWidth:95}} />
       
-                    <Button variant='contained' color='primary' onClick={()=>{console.log(index,servicesList,servicesList.value[index]);servicesList.removeIndex(index);}} ><Delete /></Button>      
           
+                    <Button variant='contained' color='primary' onClick={()=>{console.log(index,servicesList,servicesList.value[index]);servicesList.removeIndex(index);}} ><Delete /></Button>      
                   </Box>
                   <Box flex={1}  >{children}</Box>
                 </>

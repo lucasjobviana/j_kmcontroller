@@ -80,34 +80,36 @@ export const AutoCompleteServiceTask: React.FC<IAutoCompleteServiceTaskProps>  =
    
   // console.log('vou retornar autocomplete',opcoes,selectedList,selectedId,autoCompleteSelectedOption,id,'fim');
   return(
-    <Autocomplete
-      openText='Abrir'
-      closeText='Fechar'
-      noOptionsText='Sem opções'
-      loadingText='Carregando...'
+    <>
+      <Autocomplete
+        openText='Abrir'
+        closeText='Fechar'
+        noOptionsText='Sem opções'
+        loadingText='Carregando...'
 
-      disablePortal
+        disablePortal
       
 
-      options={opcoes.filter((service) => !selectedList.includes(service.id))}
-      loading={isLoading}
+        options={opcoes.filter((service) => !selectedList.includes(service.id))}
+        loading={isLoading}
 
-      value={autoCompleteSelectedOption}
+        value={autoCompleteSelectedOption}
      
-      onInputChange={(_, newValue) => setSearchText(newValue)}
-      onChange={(_, newValue) => { onSelect(Number(newValue?.id),Number(propName.split('_')[1])); /*setSelectedId(newValue?.id);*/ setSearchText(''); clearError(); }}
+        onInputChange={(_, newValue) => setSearchText(newValue)}
+        onChange={(_, newValue) => { onSelect(Number(newValue?.id),Number(propName.split('_')[1])); /*setSelectedId(newValue?.id);*/ setSearchText(''); clearError(); }}
 
-      renderInput={(params) => (
-        <TextField
-          {...params}
-
-          label={`Serviço ${Number(propName.split('_')[1])+1}`}
-          variant='filled'
-          size='small' fullWidth
-          error={!!error}
-          helperText={error}
-        />
-      )}
-    />
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            sx={{minWidth:250}}
+            label={`Serviço ${Number(propName.split('_')[1])+1}`}
+            variant='filled'
+            size='small' fullWidth
+            error={!!error}
+            helperText={error}
+          />
+        )}
+      />
+    </>
   );
 };
