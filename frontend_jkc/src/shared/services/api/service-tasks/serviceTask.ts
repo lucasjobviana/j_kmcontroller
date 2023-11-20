@@ -71,6 +71,10 @@ export const deleteServiceTask = async (id: number) => {
       return true;
     }
     return response.data;
+  }).catch((error) => {
+    console.log(error);
+    alert(error.message);
+    return false;
   });
   console.log('ServiceTask deleted:', deletedService);
   return deletedService;

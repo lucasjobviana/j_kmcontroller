@@ -10,7 +10,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
   ) { super(SequelizeMaintenanceModel,['id','initialDate','endDate','workshopId','vehicleId','description']);  }
 
   public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<TMaintenance[]> {
-    const a = await this.model.findAll({
+    const maintenances = await this.model.findAll({
       where: {
         [fieldName]: {
           [Op.like]: `%${searchValue}%`,
@@ -20,7 +20,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
         { model: SequelizeServiceTaskModel, as: 'services', attributes: ['id','name','description'] },
       ],
     });
-    return a;
+    return maintenances;
   }
 
   public async update(id:string, obj:TMaintenance): Promise<TMaintenance> {
@@ -55,5 +55,4 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
       await transaction?.rollback(); throw error;
     }
   } 
-  
 } 
