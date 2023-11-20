@@ -24,7 +24,7 @@ export default class  BaseModel<T> {
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<T[]> {
+  public async findAllLikeByFieldName(fieldName='name', searchValue = '', fields = this.propNames): Promise<T[]> {
     return this.findAll({
       where: {
         [fieldName]: {
@@ -33,6 +33,11 @@ export default class  BaseModel<T> {
       },
     }, fields);
   }
+
+  // public async findOne(id:string, fields = this.propNames): Promise<T> {
+  //   const dbData = await this.model.findOne({where: {id}});
+  //   return this.filterToSelectedFields([dbData], fields)[0];
+  // }
 
   public async delete(id:string): Promise<void> { 
     await this.model.destroy({where: {id}});

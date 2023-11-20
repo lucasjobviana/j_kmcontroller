@@ -12,6 +12,8 @@ export const errorInterceptor = (error: AxiosError) => {
   if (code === 400) {
     switch (message) {
     case 'Service is associated with one or more Maintenance': return Promise.reject(new Error('Este serviço não pode ser excluido pois está associado a uma ou mais manutenções'));
+    case 'Vehicle is associated with one or more Maintenance': return Promise.reject(new Error('Este veículo não pode ser excluido pois está associado a uma ou mais manutenções'));
+    case 'Workshop is associated with one or more Maintenance': return Promise.reject(new Error('Esta oficina não pode ser excluida pois está associada a uma ou mais manutenções'));
     // case '"displayName" length must be at least 8 characters long': return Promise.reject(new Error('O nome deve ter pelo menos 8 caracteres'));
     // case '"password" length must be at least 6 characters long': return Promise.reject(new Error('A senha deve ter pelo menos 6 caracteres'));
     // case '"email" must be a valid email': return Promise.reject(new Error('O email deve ser válido'));

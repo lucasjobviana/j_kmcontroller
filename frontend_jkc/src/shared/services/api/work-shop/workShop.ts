@@ -72,6 +72,10 @@ export const deleteWorkShop = async (id: number) => {
       return true;
     }
     return response.data;
+  }).catch((error) => {
+    console.log(error);
+    alert(error.message);
+    return false;
   });
   console.log('workshop deleted:', deletedWorkShop);
   return deletedWorkShop;
