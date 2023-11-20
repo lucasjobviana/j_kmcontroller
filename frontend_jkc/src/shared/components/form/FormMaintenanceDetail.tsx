@@ -12,6 +12,7 @@ import { J_DataPicker } from '../j-data-picker';
 import { useArray } from 'react-hanger';
 import { Delete, Add } from '@mui/icons-material';
 import { AutoCompleteServiceTask } from '../auto-complete-services';
+import { useServiceTaskContext } from '../../contexts';
 
 export interface IFormMaintenanceDetailProps extends IReactRCProps {
   maintenanceId?: string;
@@ -21,6 +22,7 @@ export interface IFormMaintenanceDetailProps extends IReactRCProps {
 type  TMaintenanceService = {id: number, name:string, price?: number, description?: string};
 export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ children, maintenanceId, maintenance, ...rest }) => {
   const { update } = useMaintenanceContext();
+  const { serviceTasks } = useServiceTaskContext();
   const theme = useTheme();
   const isBiggerThanSM = !useMediaQuery(theme.breakpoints.down('sm'));
   const isBiggerThanMD = !useMediaQuery(theme.breakpoints.down('md'));
@@ -28,7 +30,8 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
   const services = maintenance?.services ? maintenance.services : [];
   const serviceWithMaintenance = services.map((service)=> {
     return {
-      ...service,
+      id: service.id,
+      name: service.name,
       price: service.maintenance_service_association.totalPrice,
       description: service.maintenance_service_association.description,
     };
@@ -38,10 +41,11 @@ export const FormMaintenanceDetail: React.FC<IFormMaintenanceDetailProps> = ({ c
 
   const handleSelectService = (id: number, indexOnList:number) => {
     if (!servicesList.value.find((service)=>service.id===id)){
-      servicesList.removeIndex(indexOnList);
-       
+      // servicesList.removeIndex(indexOnList);
+      const name = serviceTasks.find((service)=>service.id===id)?.name || '';
+      servicesList.value[indexOnList] = {id, name, price:0,description:'Descrição do serviço nesta manutenção'};
       // const service = new ServiceTask('Selecione o serviço','Serviço não selecionado',id);
-      servicesList.add({id,price:0,description:'Descrição do serviço nesta manutenção'});
+      // servicesList.add({id, name:'', price:0,description:'Descrição do serviço nesta manutenção'});
     }else{
       alert('Serviço já adicionado');
     }

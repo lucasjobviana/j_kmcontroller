@@ -35,7 +35,8 @@ export default class MaintenanceModel extends BaseModel<TMaintenance>{
 
     const transaction = await SequelizeMaintenanceModel.sequelize?.transaction();
     try {
-      const data = services.map((s)=>s.dataValues);
+      // const data = obj.services.map((s)=>s.dataValues);
+      const data = obj.services;
       const description = obj.maintenance_service_association?.map((s)=>s.description);
       const totalPrice = obj.maintenance_service_association?.map((s)=>s.totalPrice);
       await this.model.update(obj, {where: {id}}, { transaction:transaction });
