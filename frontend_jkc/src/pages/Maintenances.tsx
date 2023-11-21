@@ -22,7 +22,7 @@ export function Maintenances() {
   const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { maintenances, create, del, getAll } = useMaintenanceContext();
+  const { maintenances, create, del, getAll, getByVehicleName } = useMaintenanceContext();
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
@@ -69,10 +69,10 @@ export function Maintenances() {
     name: maintenance.description || 'sem descrição',
   }));
 
-  const getDataFromStorage = async () => {
+  const getDataFromStorage = async (vehicleName:string) => {
     debounce(async () => {
       setIsLoading(true);
-      const querySuccess = await getAll();
+      const querySuccess = await getByVehicleName(vehicleName);
       setTimeout(() => setIsLoading(!querySuccess), 1000);
     });
   };
@@ -87,7 +87,7 @@ export function Maintenances() {
   }, [searchParams]);
 
   useEffect(() => {
-    getDataFromStorage();
+    getDataFromStorage(search);
   }, [search]);
 
 

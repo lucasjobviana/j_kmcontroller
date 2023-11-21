@@ -11,6 +11,7 @@ interface IMaintenanceContext  {
     // getAll: () => void;
     // getById: (id: number) => void;
     getAll: () => Promise<boolean>;
+    getByVehicleName: (name?: string) => Promise<boolean>;
     setMaintenances: React.Dispatch<React.SetStateAction<IMaintenance[] | []>>;
 }
 
@@ -46,13 +47,30 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
       console.log('Maintenance deleted', newMaintenance);
     }
   }, [maintenances]);
-
+ 
   const getAll = useCallback( async () => {
+    console.clear();
+    console.log('get all Maintenance');
+    console.log(maintenances);
+    console.log(name);
     const maintenance = await defaultStorage('getAllMaintenances', { search:name });    
 
     if(maintenance) {
       setMaintenances(maintenance);
       console.log('Maintenance get all', maintenance);
+      return true;
+    }
+    return false;
+  }, [maintenances]);
+
+  const getByVehicleName = useCallback( async (name: string='') => { 
+    const maintenances = await defaultStorage('getMaintenancesByVehicleName', { search:name });
+     
+    if(maintenances) {
+      // const newFleet = maintenances.map((v:IVehicle) => {
+      //   return new Vehicle(v.name, v.licensePlate, v.id);
+      // });
+      setMaintenances(maintenances);
       return true;
     }
     return false;
@@ -73,7 +91,7 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
   // }, [fleet]);
 
   return (
-    <MaintenanceContext.Provider value={{ maintenances: maintenances, getAll, setMaintenances: setMaintenances, del, update, create }}>
+    <MaintenanceContext.Provider value={{ maintenances: maintenances, getAll, getByVehicleName, setMaintenances: setMaintenances, del, update, create }}>
       {children}
     </MaintenanceContext.Provider>
   );

@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 export default class  BaseModel<T> {
-  protected model: any;
+  public model: any;
   protected propNames: string[];
 
   constructor(model: any, propNames: string[]=['id']) {
@@ -9,7 +9,7 @@ export default class  BaseModel<T> {
     this.propNames = propNames;
   }
 
-  private filterToSelectedFields = (obj:any, fields:string[]) => {
+  public filterToSelectedFields = (obj:any, fields:string[]) => {
     return obj.map((dbObj:any) => {
       const obj:any = {};
       fields.forEach(propName => {
@@ -20,6 +20,7 @@ export default class  BaseModel<T> {
   };
 
   private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
+    console.log('model findAll');
     const dbData = await this.model.findAll({ ...whereOption });
     return this.filterToSelectedFields(dbData, fields);
   }
@@ -33,11 +34,6 @@ export default class  BaseModel<T> {
       },
     }, fields);
   }
-
-  // public async findOne(id:string, fields = this.propNames): Promise<T> {
-  //   const dbData = await this.model.findOne({where: {id}});
-  //   return this.filterToSelectedFields([dbData], fields)[0];
-  // }
 
   public async delete(id:string): Promise<void> { 
     await this.model.destroy({where: {id}});

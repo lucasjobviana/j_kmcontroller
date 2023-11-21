@@ -6,6 +6,8 @@ export default abstract class BaseService<T> {
   ) { }
 
   public async findAllLikeByFieldName(fieldName:string='name',searchValue:string) {
+    console.log('fieldName', fieldName);
+    console.log('searchValue', searchValue);
     const data = await this.model.findAllLikeByFieldName(fieldName,searchValue);
     return data;
   }

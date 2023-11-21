@@ -12,9 +12,12 @@ export default class ServiceTaskService extends BaseService<TServiceTask> {
 
   public async delete(id:string): Promise<void> { 
     if(await MaintenanceServiceAssociation.findOne({where: {serviceId: id}})) {
-      // throw new Error('Service is associated with one or more Maintenance');
       throw new AppResponseError('Service is associated with one or more Maintenance');
     }
     await super.delete(id);
   }
+
+  // public async findAllLikeByVehicleName(name:string): Promise<TServiceTask[]> {
+  //   return await this.fleetModel.findAllLikeByFieldName('name',name);
+  // }
 } 

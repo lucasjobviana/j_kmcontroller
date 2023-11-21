@@ -1,26 +1,45 @@
 import BaseModel from './BaseModel';
 import SequelizeMaintenanceModel from '../database/models/SequelizeMaintenanceModel';
-import { TMaintenance } from '../interfaces';
+import { ISearchAbleByVehicleName, TMaintenance } from '../interfaces';
 import { Op } from 'sequelize';
 import SequelizeServiceTaskModel from '../database/models/SequelizeServiceTaskModel';
 import MaintenanceServiceAssociation from '../database/models/SequelizeMaintenanceServiceAssModel';
+import SequelizeFleetModel from '../database/models/SequelizeFleetModel';
 
-export default class MaintenanceModel extends BaseModel<TMaintenance>{
+export default class MaintenanceModel extends BaseModel<TMaintenance> implements ISearchAbleByVehicleName{
   constructor(
   ) { super(SequelizeMaintenanceModel,['id','initialDate','endDate','workshopId','vehicleId','description']);  }
 
   public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<TMaintenance[]> {
     const maintenances = await this.model.findAll({
+      include: [
+        { model: SequelizeServiceTaskModel, as: 'services', attributes: ['id','name','description'] },
+      ],
       where: {
         [fieldName]: {
           [Op.like]: `%${searchValue}%`,
         }
       },
+    });
+    const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services'] );
+    return data;
+  }
+
+  public async findAllLikeByVehicleName(name:string='1'): Promise<TMaintenance[]> {
+    const maintenances = await this.model.findAll({
       include: [
         { model: SequelizeServiceTaskModel, as: 'services', attributes: ['id','name','description'] },
+        { model: SequelizeFleetModel, as: 'vehicle', where: { name: { [Op.like]: `%${name}%` } } },
       ],
+      where: {
+        [Op.or]: [
+          { '$vehicle.name$': { [Op.like]: `%${name}%` } },
+        ]
+      },
     });
-    return maintenances;
+
+    const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services','vehicle']);
+    return data;
   }
 
   public async update(id:string, obj:TMaintenance): Promise<TMaintenance> {
