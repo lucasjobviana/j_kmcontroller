@@ -22,14 +22,16 @@ export function Maintenances() {
   const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { maintenances, create, del, getAll, getByVehicleName } = useMaintenanceContext();
+  const { maintenances, create, del, getByVehicleName } = useMaintenanceContext();
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
     { label: 'Descricao', name: 'name' },
+    { label: 'Veiculo', name: 'vehicleName' },
+    { label: 'Oficina', name: 'workShopName' },
   ];
   const tableHeaders = tableHeaderProps.map((header) => ({
-    field: header.name, headerName: header.label, editable: false, width: 150,
+    field: header.name, headerName: header.label, editable: false, width: header.label.length *30,
   }));
   const tableHeadersWithButtons = [...tableHeaders,
     { field: 'btnEdit',
@@ -67,13 +69,15 @@ export function Maintenances() {
   const tableRowProps = maintenances.map((maintenance) => ({
     id: maintenance.id,
     name: maintenance.description || 'sem descrição',
+    vehicleName: maintenance.vehicle?.name || 'sem veiculo',
+    workShopName: maintenance.workshop?.name || 'sem oficina',
   }));
 
   const getDataFromStorage = async (vehicleName:string) => {
     debounce(async () => {
       setIsLoading(true);
       const querySuccess = await getByVehicleName(vehicleName);
-      setTimeout(() => setIsLoading(!querySuccess), 1000);
+      setTimeout(() => setIsLoading(!querySuccess), 600);
     });
   };
 
@@ -90,6 +94,8 @@ export function Maintenances() {
     getDataFromStorage(search);
   }, [search]);
 
+  console.log('Minhas manutenções: ', maintenances);
+  console.log(maintenances[0]);
 
   return (
     <LayoutBase

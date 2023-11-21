@@ -5,6 +5,7 @@ import { Op } from 'sequelize';
 import SequelizeServiceTaskModel from '../database/models/SequelizeServiceTaskModel';
 import MaintenanceServiceAssociation from '../database/models/SequelizeMaintenanceServiceAssModel';
 import SequelizeFleetModel from '../database/models/SequelizeFleetModel';
+import SequelizeWorkShopModel from '../database/models/SequelizeWorkShopModel';
 
 export default class MaintenanceModel extends BaseModel<TMaintenance> implements ISearchAbleByVehicleName{
   constructor(
@@ -30,6 +31,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance> implements
       include: [
         { model: SequelizeServiceTaskModel, as: 'services', attributes: ['id','name','description'] },
         { model: SequelizeFleetModel, as: 'vehicle', where: { name: { [Op.like]: `%${name}%` } } },
+        { model: SequelizeWorkShopModel, as: 'workshop', attributes: ['id','name']}
       ],
       where: {
         [Op.or]: [
@@ -38,7 +40,7 @@ export default class MaintenanceModel extends BaseModel<TMaintenance> implements
       },
     });
 
-    const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services','vehicle']);
+    const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services','vehicle','workshop']);
     return data;
   }
 
