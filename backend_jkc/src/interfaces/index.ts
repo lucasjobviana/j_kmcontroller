@@ -5,4 +5,5 @@ export * from './IVehicleModel';
 export * from './IWorkShopModel';
 export * from './ISearchAbleByName';
 export * from './ISearchAbleByVehicleId';
-export * from './ISearchAbleByVehicleName';
+export * from './ISearchAbleByVehicleNameOrWorkshopName';
+export * from './ISearchAbleByVehicleNameAndWorkshopName';
