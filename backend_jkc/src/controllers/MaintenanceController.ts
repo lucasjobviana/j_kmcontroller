@@ -15,7 +15,7 @@ export default class MaintenanceController extends BaseController<TMaintenance> 
 
   public async findAllLikeByVehicleNameOrWorkShopName(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): Promise<Response<any, Record<string, any>>> {
     const search = req.query.search?.toString()||'';
-    const split = search.split('/');
+    const split = search.split('(e)');
 
     if(split.length === 2 && split[1] !== ''){
       const data = await this.maintenanceService.findAllLikeByVehicleNameAndWorkshopName(split[0],split[1]);

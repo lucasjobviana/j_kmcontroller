@@ -5,7 +5,7 @@ import  { mapToDefaultStorage }  from '../tools';
 
 interface IMaintenanceContext  {
     maintenances: IMaintenance[] | []; 
-    create: (name: string ) => Promise<boolean>;
+    create: (vehicleId: number, workshopId:number ) => Promise<boolean>;
     del: (id: number) => void; 
     update: (maintenance: Maintenance) => void;
     // getAll: () => void;
@@ -24,8 +24,10 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
   const defaultStorage = mapToDefaultStorage();
   const [maintenances, setMaintenances] = useState<IMaintenance[]|[]>([]); 
 
-  const create = useCallback( async ( ) => {
+  const create = useCallback( async ( vehicleId:number, workshopId:number ) => {
     const maintenance = new Maintenance();
+    maintenance.vehicleId = vehicleId;
+    maintenance.workshopId = workshopId;
     const newMaintenance = await defaultStorage('createMaintenance', maintenance);
     if(newMaintenance) {
       setMaintenances((main) => [...main, newMaintenance]);

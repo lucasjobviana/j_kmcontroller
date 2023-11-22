@@ -4,3 +4,4 @@ export * from './FormServiceTaskDetail';
 export * from './FormWorkShopDetail';
 export * from './FormWorkShopDetail';
 export * from './FormMaintenanceDetail';
+export * from './FormPrevMaintenanceCreate';

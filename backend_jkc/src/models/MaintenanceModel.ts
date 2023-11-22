@@ -60,9 +60,6 @@ export default class MaintenanceModel extends BaseModel<TMaintenance> implements
     });
 
     const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services','vehicle','workshop']);
-    console.log('data: ',data);
-    // console.log('maintenances: ',maintenances);
-    
     return data;
   }
 

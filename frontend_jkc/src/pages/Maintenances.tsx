@@ -1,5 +1,6 @@
 import React,{ useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Form } from '@unform/web';
 import { Box, Button, Paper } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -9,6 +10,7 @@ import { useMaintenanceContext } from '../shared/contexts';
 import { useDebounce } from '../shared/tools';
 import { Maintenance } from '../shared/Entities';
 import { ViewBlock } from '../shared/components/view-block';
+import { FormPrevMaintenanceCreate } from '../shared/components';
 
 interface Expense{
   row: {
@@ -19,6 +21,7 @@ interface Expense{
 
 export function Maintenances() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isVehicleAndWorkshopFormActive, setIsVehicleAndWorkshopFormActive] = useState<boolean>(false);
   const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
@@ -97,51 +100,76 @@ export function Maintenances() {
   console.log('Minhas manutenções: ', maintenances);
   console.log(maintenances[0]);
 
+  const handleClickAdd = async () => {
+    // alert('Adicionar manutenção');
+    setIsVehicleAndWorkshopFormActive(true);
+    // const id = await create('Nova Manutenção'); navigate(`edit/${id}`);
+  };
+
+
   return (
-    <LayoutBase
-      title="Manutenções"
-      toolBar={ <J_ToolBar
-        searchButtonEnabled
-        addButtonEnabled
-        deleteButtonEnabled
-        saveButtonEnabled
-        searchButtonLoading={ isLoading }
-        addButtonLoading={ isLoading }
-        saveButtonLoading={ isLoading }
-        deleteButtonLoading={ isLoading }
-        addLabelText="Nova manutenção"
-        searchText={ search }
-        handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
-        handleClickAdd={ async () => { const id = await create('Nova Manutenção'); navigate(`edit/${id}`); } }
-      /> }
-    >
-      {' '}
-      {maintenances.length}
+    isVehicleAndWorkshopFormActive ? (
+      <Box>
+        <h1>Veiculo e Oficina</h1>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={ () => setIsVehicleAndWorkshopFormActive(false) }
+        >
+          {' '}
+          Fechar
+        </Button>
 
-      <Box component={ Paper } variant="outlined" sx={ { height: 'auto', width: '100%' } }>
-        <DataGrid
-          rows={ tableRowProps }
-          loading={ isLoading }
-          columns={ tableHeadersWithButtons }
-          rowHeight={ 45 }
-          onRowClick={ (row) => handleRowClick(row.row) }
+        <FormPrevMaintenanceCreate />
+        
 
-          initialState={ {
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          } }
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
       </Box>
+    ):
+      (
+        <LayoutBase
+          title="Manutenções"
+          toolBar={ <J_ToolBar
+            searchButtonEnabled
+            addButtonEnabled
+            deleteButtonEnabled
+            saveButtonEnabled
+            searchButtonLoading={ isLoading }
+            addButtonLoading={ isLoading }
+            saveButtonLoading={ isLoading }
+            deleteButtonLoading={ isLoading }
+            addLabelText="Nova manutenção"
+            searchText={ search }
+            handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
+            handleClickAdd={ handleClickAdd}
+          /> }
+        >
+          {' '}
+          {maintenances.length}
 
-      {/* <J_ListCard list={ workShops } handleClickCard={handleRowClick} /> */}
+          <Box component={ Paper } variant="outlined" sx={ { height: 'auto', width: '100%' } }>
+            <DataGrid
+              rows={ tableRowProps }
+              loading={ isLoading }
+              columns={ tableHeadersWithButtons }
+              rowHeight={ 45 }
+              onRowClick={ (row) => handleRowClick(row.row) }
+
+              initialState={ {
+                pagination: {
+                  paginationModel: {
+                    pageSize: 10,
+                  },
+                },
+              } }
+              checkboxSelection
+              disableRowSelectionOnClick
+            />
+          </Box>
+
+          {/* <J_ListCard list={ workShops } handleClickCard={handleRowClick} /> */}
  
-      {
-        selectedMaintenance.length > 0
+          {
+            selectedMaintenance.length > 0
         && (
           <Box>
             <h3>Manutenções selecionadas</h3>
@@ -154,10 +182,10 @@ export function Maintenances() {
             </ul>
           </Box>
         )
-      }
+          }
 
-      {
-        selectedMaintenance.length > 0
+          {
+            selectedMaintenance.length > 0
         && (
           <>
             {/* /  <h3>Veiculos selecionados</h3> */}
@@ -170,7 +198,8 @@ export function Maintenances() {
              
           </>
         )
-      }
-    </LayoutBase>
+          }
+        </LayoutBase>
+      )
   );
 }

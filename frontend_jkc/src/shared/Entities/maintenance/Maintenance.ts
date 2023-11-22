@@ -13,8 +13,8 @@ export class Maintenance implements IMaintenance {
   description?: string | undefined = 'Nova manutenção em veiculo x, oficina y, com os serviços z, ...';
   initialDate: Date=new Date();
   endDate: Date=new Date();
-  workshopId: number=0;
-  vehicleId: number=0;
+  workshopId=0;
+  vehicleId=0;
   serviceId?: number[] | undefined;
   vehicle?: IVehicle;
   workshop?: IWorkShop;
