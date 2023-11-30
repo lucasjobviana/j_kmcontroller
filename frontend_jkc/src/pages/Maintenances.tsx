@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { useMaintenanceContext } from '../shared/contexts';
-import { useDebounce } from '../shared/tools';
+import { convertoToBrazilianDateFormat, useDebounce } from '../shared/tools';
 import { Maintenance } from '../shared/Entities';
 import { ViewBlock } from '../shared/components/view-block';
 import { FormPrevMaintenanceCreate } from '../shared/components';
@@ -25,13 +25,15 @@ export function Maintenances() {
   const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { maintenances, create, del, getByVehicleName } = useMaintenanceContext();
+  const { maintenances, del, getByVehicleName } = useMaintenanceContext();
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
     { label: 'Descricao', name: 'name' },
     { label: 'Veiculo', name: 'vehicleName' },
     { label: 'Oficina', name: 'workShopName' },
+    { label: 'Inicio', name: 'initialDate' },
+    { label: 'Fim', name: 'endDate' },
   ];
   const tableHeaders = tableHeaderProps.map((header) => ({
     field: header.name, headerName: header.label, editable: false, width: header.label.length *30,
@@ -69,11 +71,15 @@ export function Maintenances() {
       ) },
   ];
 
+  // const initialDate = new Date(maintenance.initialDate);
+
   const tableRowProps = maintenances.map((maintenance) => ({
     id: maintenance.id,
     name: maintenance.description || 'sem descrição',
     vehicleName: maintenance.vehicle?.name || 'sem veiculo',
     workShopName: maintenance.workshop?.name || 'sem oficina',
+    initialDate:  convertoToBrazilianDateFormat(maintenance.initialDate.toString()) || 'sem data',
+    endDate: convertoToBrazilianDateFormat(maintenance.endDate.toString()) || 'sem data',
   }));
 
   const getDataFromStorage = async (vehicleName:string) => {
@@ -161,7 +167,7 @@ export function Maintenances() {
                   },
                 },
               } }
-              checkboxSelection
+              
               disableRowSelectionOnClick
             />
           </Box>

@@ -12,6 +12,8 @@ const up = (queryInterface: QueryInterface) => {
     },
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
     licensePlate: { type: DataTypes.STRING, allowNull: false, field: 'license_plate' },
+    description: { type: DataTypes.STRING, allowNull: true, field: 'description' },
+    image: { type: DataTypes.STRING, allowNull: true, field: 'image' },
   });
 
 };

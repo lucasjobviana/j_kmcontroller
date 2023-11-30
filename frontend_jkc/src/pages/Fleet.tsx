@@ -92,6 +92,8 @@ export function Fleet() {
     getDataFromStorage(search);
   }, [search]);
 
+  console.log(fleet);
+
 
   return (
     <LayoutBase
@@ -129,7 +131,7 @@ export function Fleet() {
               },
             },
           } }
-          checkboxSelection
+          
           disableRowSelectionOnClick
         />
       </Box>

@@ -56,7 +56,10 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
      
     if(fleet) {
       const newFleet = fleet.map((v:IVehicle) => {
-        return new Vehicle(v.name, v.licensePlate, v.id);
+        const vehicle = new Vehicle(v.name, v.licensePlate, v.id);
+        v.description && (vehicle.description = v.description);
+        v.image && (vehicle.image = v.image);
+        return vehicle;
       });
       setFleet(newFleet);
       return true;

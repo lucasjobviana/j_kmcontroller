@@ -12,6 +12,8 @@ InferCreationAttributes<SequelizeFleetModel>> {
   declare id: CreationOptional<number>;
   declare name: string;
   declare licensePlate: string;
+  declare description?: CreationOptional<string>;
+  declare image?: CreationOptional<string>;
 }
 
 SequelizeFleetModel.init({
@@ -23,6 +25,8 @@ SequelizeFleetModel.init({
   },
   name: { type: DataTypes.STRING, allowNull: false },
   licensePlate: { type: DataTypes.STRING, allowNull: false },
+  description: { type: DataTypes.STRING, allowNull: true },
+  image: { type: DataTypes.STRING, allowNull: true },
 }, {
   sequelize: db,
   modelName: 'vehicles',

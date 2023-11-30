@@ -129,7 +129,7 @@ export function WorkShops() {
               },
             },
           } }
-          checkboxSelection
+          
           disableRowSelectionOnClick
         />
       </Box>

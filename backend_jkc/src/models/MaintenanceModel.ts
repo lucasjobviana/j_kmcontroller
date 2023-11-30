@@ -57,6 +57,9 @@ export default class MaintenanceModel extends BaseModel<TMaintenance> implements
           { '$vehicle.name$': { [Op.like]: `%${name.trim()}%` } },
         ]
       },
+      order: [
+        ['id', 'DESC'],
+      ],
     });
 
     const data = this.filterToSelectedFields(maintenances, ['id','initialDate','endDate','workshopId','vehicleId','description','services','vehicle','workshop']);
