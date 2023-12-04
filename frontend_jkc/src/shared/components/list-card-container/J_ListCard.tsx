@@ -5,17 +5,17 @@ import { IVehicle } from '../../Entities';
 
 interface IListCardProps{
   list: IVehicle[],
-  handleClickCard?: (vehicle: IVehicle) => void;
+  handleClickCard: (vehicle: IVehicle, fieldName:string) => void;
 }
 
-export const J_ListCard: React.FC<IListCardProps> = ({list}) => {
+export const J_ListCard: React.FC<IListCardProps> = ({list, handleClickCard}) => {
   const mock = list;
   return (
     <> 
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
           {
-            mock.map((obj)=>(<J_Card key={obj.name} to="asd" obj={obj} />))
+            mock.map((obj)=>(<J_Card key={obj.name} to="asd" obj={obj} handleClick={handleClickCard} />))
           } 
         </Grid>
       </Container> 

@@ -7,7 +7,7 @@ import { useMaintenanceContext } from '../shared/contexts';
 import { FormMaintenanceDetail } from '../shared/components';
  
 export const MaintenanceEdit = () => {
-  const { del, create } = useMaintenanceContext();
+  const { del } = useMaintenanceContext();
   const { id='nova' } = useParams<'id'>();
   const { maintenances } = useMaintenanceContext();
   const navigate = useNavigate();

@@ -137,12 +137,12 @@ export function Maintenances() {
           toolBar={ <J_ToolBar
             searchButtonEnabled
             addButtonEnabled
-            deleteButtonEnabled
+            // deleteButtonEnabled
             saveButtonEnabled
             searchButtonLoading={ isLoading }
             addButtonLoading={ isLoading }
             saveButtonLoading={ isLoading }
-            deleteButtonLoading={ isLoading }
+            // deleteButtonLoading={ isLoading }
             addLabelText="Nova manutenção"
             searchText={ search }
             handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }

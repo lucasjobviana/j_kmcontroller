@@ -54,7 +54,7 @@ export function Fleet() {
           variant="contained"
           color="primary"
           onClick={ async () => {
-            if (confirm(`Deseja excluir a categoria ${expense.row.name} `)) {
+            if (confirm(`Deseja excluir o veículo ${expense.row.name} ?`)) {
               await del(expense.row.id);
             }
           } }
@@ -79,8 +79,8 @@ export function Fleet() {
     });
   };
 
-  const handleRowClick = (vehicle:Vehicle) => {
-    if(!selectedVehicle.some((v)=>v.id === vehicle.id))
+  const handleRowClick = (vehicle:Vehicle,fieldName:string) => {
+    if(fieldName !== 'btnDeletar' && !selectedVehicle.some((v)=>v.id === vehicle.id))
       setSelectedVehicle([...selectedVehicle, vehicle]);
   };
 
@@ -101,7 +101,7 @@ export function Fleet() {
       toolBar={ <J_ToolBar
         searchButtonEnabled
         addButtonEnabled
-        deleteButtonEnabled
+        // deleteButtonEnabled
         saveButtonEnabled
         searchButtonLoading={ isLoading }
         addButtonLoading={ isLoading }
@@ -122,7 +122,7 @@ export function Fleet() {
           loading={ isLoading }
           columns={ tableHeadersWithButtons }
           rowHeight={ 45 }
-          onRowClick={ (row) => handleRowClick(row.row) }
+          onCellClick={ (row) => handleRowClick(row.row, row.field) }
 
           initialState={ {
             pagination: {
