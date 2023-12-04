@@ -8,17 +8,17 @@ export const getAllMaintenances = async () => {
   return maintenances; 
 }; 
 
-// export const getMaintenancesByName = async ({ search }) => {
-//   const token = JSON.parse(localStorage.getItem('token')) ;
-//   const maintenances = await api.get(`/maintenance/name?search=${search}`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`
-//     }
-//   }).then((response) => {
-//     return response.data;
-//   });
-//   return maintenances;
-// };
+export const getMaintenancesByVehicleName = async ({ search }) => {
+  const token = JSON.parse(localStorage.getItem('token')) ;
+  const maintenances = await api.get(`/maintenance?search=${search}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }).then((response) => {
+    return response.data;
+  });
+  return maintenances;
+};
 
 // export const getVehicleById = async (id: number) => {
 //   const token = JSON.parse(localStorage.getItem('token')) ;

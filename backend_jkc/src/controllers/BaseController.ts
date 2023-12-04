@@ -27,8 +27,11 @@ export default abstract class BaseController<T> {
   }
 
   public async create(req: Request, res:Response) {
+    console.log('create method called from BaseController');
     const data = req.body; 
+    console.log(data);
     const createdObject = await this.service.create(data);
+    console.log(createdObject);
     return res.status(201).json(createdObject); 
   }
 }

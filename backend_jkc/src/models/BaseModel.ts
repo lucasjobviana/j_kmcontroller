@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 export default class  BaseModel<T> {
-  protected model: any;
+  public model: any;
   protected propNames: string[];
 
   constructor(model: any, propNames: string[]=['id']) {
@@ -9,7 +9,7 @@ export default class  BaseModel<T> {
     this.propNames = propNames;
   }
 
-  private filterToSelectedFields = (obj:any, fields:string[]) => {
+  public filterToSelectedFields = (obj:any, fields:string[]) => {
     return obj.map((dbObj:any) => {
       const obj:any = {};
       fields.forEach(propName => {
@@ -20,11 +20,12 @@ export default class  BaseModel<T> {
   };
 
   private async findAll(whereOption = {}, fields = this.propNames): Promise<T[]> {
+    console.log('model findAll');
     const dbData = await this.model.findAll({ ...whereOption });
     return this.filterToSelectedFields(dbData, fields);
   }
 
-  public async findAllLikeByFieldName(fieldName='name', searchValue = '',  fields = this.propNames): Promise<T[]> {
+  public async findAllLikeByFieldName(fieldName='name', searchValue = '', fields = this.propNames): Promise<T[]> {
     return this.findAll({
       where: {
         [fieldName]: {

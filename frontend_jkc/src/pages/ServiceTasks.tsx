@@ -88,12 +88,12 @@ export const ServiceTasks = () => {
       <LayoutBase title='Serviços' toolBar={<J_ToolBar
         searchButtonEnabled
         addButtonEnabled
-        deleteButtonEnabled
+        // deleteButtonEnabled
         saveButtonEnabled
         searchButtonLoading={isLoading}
         addButtonLoading={isLoading}
         saveButtonLoading={isLoading}
-        deleteButtonLoading={isLoading}
+        // deleteButtonLoading={isLoading}
         addLabelText='Novo serviço'
         searchText={search}
         handleChangeSearchText={(texto) => setSearchParams({ search: texto }, { replace: true })}
@@ -115,7 +115,7 @@ export const ServiceTasks = () => {
                 },
               },
             } }
-            checkboxSelection
+            
             disableRowSelectionOnClick
           />
         </Box>

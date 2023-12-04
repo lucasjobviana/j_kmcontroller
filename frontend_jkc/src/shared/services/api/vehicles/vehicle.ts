@@ -71,6 +71,10 @@ export const deleteVehicle = async (id: number) => {
       return true;
     }
     return response.data;
+  }).catch((error) => {
+    console.log(error);
+    alert(error.message);
+    return false;
   });
   console.log('category deleted:', deletedCategory);
   return deletedCategory;

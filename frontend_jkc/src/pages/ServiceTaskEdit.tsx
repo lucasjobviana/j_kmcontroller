@@ -26,7 +26,7 @@ export const ServiceTaskEdit = () => {
         deleteButtonEnabled
         backTo='/services'
         handleClickDelete={ handleDelete}
-        handleClickAdd={async () => {const id = await create('Novo Serviço');navigate(`/services/edit/${id}`);}}
+        handleClickAdd={async () => {await create('Novo Serviço');navigate('/services');}}
       />}  >
 
         <Box height={30} display={'flex'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} marginBottom={1} component={Paper} variant='outlined' >

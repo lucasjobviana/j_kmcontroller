@@ -3,6 +3,7 @@ import {
   Model,
   InferAttributes,
   InferCreationAttributes,
+  CreationOptional,
 } from 'sequelize';
 import db from '.';
 
@@ -11,6 +12,8 @@ class MaintenanceServiceAssociation extends Model<InferAttributes<MaintenanceSer
 InferCreationAttributes<MaintenanceServiceAssociation>> {
   declare maintenanceId: number;
   declare serviceId: number;
+  declare description: CreationOptional<string>;
+  declare totalPrice: CreationOptional<number>;
 }
 
 MaintenanceServiceAssociation.init({
@@ -32,6 +35,8 @@ MaintenanceServiceAssociation.init({
       key: 'id',
     },
   },
+  description: { type: DataTypes.STRING, allowNull: true, field: 'description' },
+  totalPrice: { type: DataTypes.FLOAT, allowNull: true, field: 'total_price' },
 }, {
   sequelize: db,
   modelName: 'maintenance_service_association',

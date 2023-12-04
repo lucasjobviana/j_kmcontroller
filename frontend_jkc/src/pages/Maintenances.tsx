@@ -1,14 +1,16 @@
 import React,{ useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Form } from '@unform/web';
 import { Box, Button, Paper } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { LayoutBase } from '../shared/layouts';
 import { J_ToolBar } from '../shared/components/tool-bar';
 import { useMaintenanceContext } from '../shared/contexts';
-import { useDebounce } from '../shared/tools';
+import { convertoToBrazilianDateFormat, useDebounce } from '../shared/tools';
 import { Maintenance } from '../shared/Entities';
 import { ViewBlock } from '../shared/components/view-block';
+import { FormPrevMaintenanceCreate } from '../shared/components';
 
 interface Expense{
   row: {
@@ -19,17 +21,22 @@ interface Expense{
 
 export function Maintenances() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isVehicleAndWorkshopFormActive, setIsVehicleAndWorkshopFormActive] = useState<boolean>(false);
   const [selectedMaintenance, setSelectedMaintenance] = useState<Maintenance[]|[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
-  const { maintenances, create, del, getAll } = useMaintenanceContext();
+  const { maintenances, del, getByVehicleName } = useMaintenanceContext();
   const navigate = useNavigate();
   const tableHeaderProps = [
     { label: 'ID', name: 'id' },
     { label: 'Descricao', name: 'name' },
+    { label: 'Veiculo', name: 'vehicleName' },
+    { label: 'Oficina', name: 'workShopName' },
+    { label: 'Inicio', name: 'initialDate' },
+    { label: 'Fim', name: 'endDate' },
   ];
   const tableHeaders = tableHeaderProps.map((header) => ({
-    field: header.name, headerName: header.label, editable: false, width: 150,
+    field: header.name, headerName: header.label, editable: false, width: header.label.length *30,
   }));
   const tableHeadersWithButtons = [...tableHeaders,
     { field: 'btnEdit',
@@ -64,16 +71,22 @@ export function Maintenances() {
       ) },
   ];
 
+  // const initialDate = new Date(maintenance.initialDate);
+
   const tableRowProps = maintenances.map((maintenance) => ({
     id: maintenance.id,
     name: maintenance.description || 'sem descrição',
+    vehicleName: maintenance.vehicle?.name || 'sem veiculo',
+    workShopName: maintenance.workshop?.name || 'sem oficina',
+    initialDate:  convertoToBrazilianDateFormat(maintenance.initialDate.toString()) || 'sem data',
+    endDate: convertoToBrazilianDateFormat(maintenance.endDate.toString()) || 'sem data',
   }));
 
-  const getDataFromStorage = async () => {
+  const getDataFromStorage = async (vehicleName:string) => {
     debounce(async () => {
       setIsLoading(true);
-      const querySuccess = await getAll();
-      setTimeout(() => setIsLoading(!querySuccess), 1000);
+      const querySuccess = await getByVehicleName(vehicleName);
+      setTimeout(() => setIsLoading(!querySuccess), 600);
     });
   };
 
@@ -87,55 +100,82 @@ export function Maintenances() {
   }, [searchParams]);
 
   useEffect(() => {
-    getDataFromStorage();
+    getDataFromStorage(search);
   }, [search]);
+
+  console.log('Minhas manutenções: ', maintenances);
+  console.log(maintenances[0]);
+
+  const handleClickAdd = async () => {
+    // alert('Adicionar manutenção');
+    setIsVehicleAndWorkshopFormActive(true);
+    // const id = await create('Nova Manutenção'); navigate(`edit/${id}`);
+  };
 
 
   return (
-    <LayoutBase
-      title="Manutenções"
-      toolBar={ <J_ToolBar
-        searchButtonEnabled
-        addButtonEnabled
-        deleteButtonEnabled
-        saveButtonEnabled
-        searchButtonLoading={ isLoading }
-        addButtonLoading={ isLoading }
-        saveButtonLoading={ isLoading }
-        deleteButtonLoading={ isLoading }
-        addLabelText="Nova manutenção"
-        searchText={ search }
-        handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
-        handleClickAdd={ async () => { const id = await create('Nova Manutenção'); navigate(`edit/${id}`); } }
-      /> }
-    >
-      {' '}
-      {maintenances.length}
+    isVehicleAndWorkshopFormActive ? (
+      <Box>
+        <h1>Veiculo e Oficina</h1>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={ () => setIsVehicleAndWorkshopFormActive(false) }
+        >
+          {' '}
+          Fechar
+        </Button>
 
-      <Box component={ Paper } variant="outlined" sx={ { height: 'auto', width: '100%' } }>
-        <DataGrid
-          rows={ tableRowProps }
-          loading={ isLoading }
-          columns={ tableHeadersWithButtons }
-          rowHeight={ 45 }
-          onRowClick={ (row) => handleRowClick(row.row) }
+        <FormPrevMaintenanceCreate />
+        
 
-          initialState={ {
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          } }
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
       </Box>
+    ):
+      (
+        <LayoutBase
+          title="Manutenções"
+          toolBar={ <J_ToolBar
+            searchButtonEnabled
+            addButtonEnabled
+            // deleteButtonEnabled
+            saveButtonEnabled
+            searchButtonLoading={ isLoading }
+            addButtonLoading={ isLoading }
+            saveButtonLoading={ isLoading }
+            // deleteButtonLoading={ isLoading }
+            addLabelText="Nova manutenção"
+            searchText={ search }
+            handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
+            handleClickAdd={ handleClickAdd}
+          /> }
+        >
+          {' '}
+          {maintenances.length}
 
-      {/* <J_ListCard list={ workShops } handleClickCard={handleRowClick} /> */}
+          <Box component={ Paper } variant="outlined" sx={ { height: 'auto', width: '100%' } }>
+            <DataGrid
+              rows={ tableRowProps }
+              loading={ isLoading }
+              columns={ tableHeadersWithButtons }
+              rowHeight={ 45 }
+              onRowClick={ (row) => handleRowClick(row.row) }
+
+              initialState={ {
+                pagination: {
+                  paginationModel: {
+                    pageSize: 10,
+                  },
+                },
+              } }
+              
+              disableRowSelectionOnClick
+            />
+          </Box>
+
+          {/* <J_ListCard list={ workShops } handleClickCard={handleRowClick} /> */}
  
-      {
-        selectedMaintenance.length > 0
+          {
+            selectedMaintenance.length > 0
         && (
           <Box>
             <h3>Manutenções selecionadas</h3>
@@ -148,10 +188,10 @@ export function Maintenances() {
             </ul>
           </Box>
         )
-      }
+          }
 
-      {
-        selectedMaintenance.length > 0
+          {
+            selectedMaintenance.length > 0
         && (
           <>
             {/* /  <h3>Veiculos selecionados</h3> */}
@@ -164,7 +204,8 @@ export function Maintenances() {
              
           </>
         )
-      }
-    </LayoutBase>
+          }
+        </LayoutBase>
+      )
   );
 }

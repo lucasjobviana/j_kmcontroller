@@ -3,6 +3,8 @@ import { Model, DataTypes, QueryInterface,  } from 'sequelize';
 type TAss = {
   maintenanceId: number;
   serviceId: number;
+  description: string;
+  totalPrice: number;
 }
 
 const up = (queryInterface: QueryInterface) => {
@@ -27,6 +29,8 @@ const up = (queryInterface: QueryInterface) => {
         key: 'id',
       }, 
     }, 
+    description: { type: DataTypes.STRING, allowNull: true, field: 'description' },
+    totalPrice: { type: DataTypes.FLOAT, allowNull: true, field: 'total_price' },
   });
 };
 

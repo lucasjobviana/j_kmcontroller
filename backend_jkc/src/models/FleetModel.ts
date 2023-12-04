@@ -4,5 +4,5 @@ import { TVehicle } from '../interfaces';
 
 export default class VehicleModel extends BaseModel<TVehicle>{
   constructor(
-  ) { super(SequelizeFleetModel,['id','name','licensePlate']);  }
+  ) { super(SequelizeFleetModel,['id','name','licensePlate','description','image']);  }
 } 

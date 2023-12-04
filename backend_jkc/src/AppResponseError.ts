@@ -4,6 +4,9 @@ class AppResponseError extends Error {
   private error400 = (errorMessage:string):number | undefined => {
     switch (errorMessage) {
     case 'All fields must be filled':
+    case 'Service is associated with one or more Maintenance':
+    case 'Vehicle is associated with one or more Maintenance':
+    case 'Workshop is associated with one or more Maintenance':
       return 400;
     default:
     }

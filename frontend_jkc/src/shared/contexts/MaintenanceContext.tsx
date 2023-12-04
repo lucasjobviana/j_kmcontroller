@@ -5,12 +5,13 @@ import  { mapToDefaultStorage }  from '../tools';
 
 interface IMaintenanceContext  {
     maintenances: IMaintenance[] | []; 
-    create: (name: string ) => Promise<boolean>;
+    create: (vehicleId: number, workshopId:number ) => Promise<boolean>;
     del: (id: number) => void; 
     update: (maintenance: Maintenance) => void;
     // getAll: () => void;
     // getById: (id: number) => void;
     getAll: () => Promise<boolean>;
+    getByVehicleName: (name?: string) => Promise<boolean>;
     setMaintenances: React.Dispatch<React.SetStateAction<IMaintenance[] | []>>;
 }
 
@@ -23,8 +24,10 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
   const defaultStorage = mapToDefaultStorage();
   const [maintenances, setMaintenances] = useState<IMaintenance[]|[]>([]); 
 
-  const create = useCallback( async ( ) => {
+  const create = useCallback( async ( vehicleId:number, workshopId:number ) => {
     const maintenance = new Maintenance();
+    maintenance.vehicleId = vehicleId;
+    maintenance.workshopId = workshopId;
     const newMaintenance = await defaultStorage('createMaintenance', maintenance);
     if(newMaintenance) {
       setMaintenances((main) => [...main, newMaintenance]);
@@ -46,13 +49,30 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
       console.log('Maintenance deleted', newMaintenance);
     }
   }, [maintenances]);
-
+ 
   const getAll = useCallback( async () => {
+    console.clear();
+    console.log('get all Maintenance');
+    console.log(maintenances);
+    console.log(name);
     const maintenance = await defaultStorage('getAllMaintenances', { search:name });    
 
     if(maintenance) {
       setMaintenances(maintenance);
       console.log('Maintenance get all', maintenance);
+      return true;
+    }
+    return false;
+  }, [maintenances]);
+
+  const getByVehicleName = useCallback( async (name: string='') => { 
+    const maintenances = await defaultStorage('getMaintenancesByVehicleName', { search:name });
+     
+    if(maintenances) {
+      // const newFleet = maintenances.map((v:IVehicle) => {
+      //   return new Vehicle(v.name, v.licensePlate, v.id);
+      // });
+      setMaintenances(maintenances);
       return true;
     }
     return false;
@@ -73,7 +93,7 @@ export const MaintenanceProvider: React.FC<IMaintenancesProviderProps> = ({ chil
   // }, [fleet]);
 
   return (
-    <MaintenanceContext.Provider value={{ maintenances: maintenances, getAll, setMaintenances: setMaintenances, del, update, create }}>
+    <MaintenanceContext.Provider value={{ maintenances: maintenances, getAll, getByVehicleName, setMaintenances: setMaintenances, del, update, create }}>
       {children}
     </MaintenanceContext.Provider>
   );

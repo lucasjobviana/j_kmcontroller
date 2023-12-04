@@ -99,12 +99,12 @@ export function WorkShops() {
       toolBar={ <J_ToolBar
         searchButtonEnabled
         addButtonEnabled
-        deleteButtonEnabled
+        // deleteButtonEnabled
         saveButtonEnabled
         searchButtonLoading={ isLoading }
         addButtonLoading={ isLoading }
         saveButtonLoading={ isLoading }
-        deleteButtonLoading={ isLoading }
+        // deleteButtonLoading={ isLoading }
         addLabelText="Nova oficina"
         searchText={ search }
         handleChangeSearchText={ (texto) => setSearchParams({ search: texto }, { replace: true }) }
@@ -129,7 +129,7 @@ export function WorkShops() {
               },
             },
           } }
-          checkboxSelection
+          
           disableRowSelectionOnClick
         />
       </Box>

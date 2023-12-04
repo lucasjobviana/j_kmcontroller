@@ -7,7 +7,7 @@ import { useMaintenanceContext } from '../shared/contexts';
 import { FormMaintenanceDetail } from '../shared/components';
  
 export const MaintenanceEdit = () => {
-  const { del, create } = useMaintenanceContext();
+  const { del } = useMaintenanceContext();
   const { id='nova' } = useParams<'id'>();
   const { maintenances } = useMaintenanceContext();
   const navigate = useNavigate();
@@ -22,11 +22,12 @@ export const MaintenanceEdit = () => {
   return (
     <>
       <LayoutBase title='Manutenções - Editar' toolBar={<J_ToolBar
-        addButtonEnabled
+        // addButtonEnabled
         deleteButtonEnabled
+        deleteLabelText='deletar manutenção'
         backTo='/maintenances'
         handleClickDelete={ handleDelete}
-        handleClickAdd={async () => {const id = await create('Nova Manutenção');navigate(`/maintenances/edit/${id}`);}}
+        // handleClickAdd={async () => {const id = await create('Nova Manutenção');navigate(`/maintenances/edit/${id}`);}}
       />}  >
 
         <Box height={30} display={'flex'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} marginBottom={1} component={Paper} variant='outlined' >

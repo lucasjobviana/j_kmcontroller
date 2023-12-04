@@ -8,7 +8,7 @@ const router = Router();
 
 router.get(
   '/',
-  (req: Request, res: Response) => maintenanceController.findAllLikeByVehicle(req, res),
+  (req: Request, res: Response) => maintenanceController.findAllLikeByVehicleNameOrWorkShopName(req, res),
 ); 
 
 router.delete(
