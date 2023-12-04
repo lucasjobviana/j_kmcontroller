@@ -15,8 +15,10 @@ export interface IFormVehicleDetailProps extends IReactRCProps {
 export const FormVehicleDetail: React.FC<IFormVehicleDetailProps> = ({ children, vehicleId, vehicle, ...rest }) => {
   const {  update } = useFleetContext();
   const navigate = useNavigate();
-
+  console.log('vehicleId no meu form vehicle detail: ', vehicleId);
+  console.log(vehicle);
   if(vehicle) {
+    console.log('dentro do if');
     return (
       <Form {...rest} onSubmit={async (v) => {
         const vehicle = new Vehicle(v.name, v.licensePlate);
@@ -34,4 +36,6 @@ export const FormVehicleDetail: React.FC<IFormVehicleDetailProps> = ({ children,
       </Form>
     );
   }
+  return (
+    <>fdsf</>);
 };

@@ -10,8 +10,10 @@ export function VehicleDetail() {
   const { id = 'nova' } = useParams<'id'>();
   const { create, del, fleet } = useFleetContext();
   const navigate = useNavigate();
+  console.log('id no meu vehicle detail: ', id);
   const vehicle = fleet.find((vehicle) => Number(vehicle.id) === Number(id)) || undefined;
-
+  console.log(vehicle);
+  console.log(fleet);
   const handleDelete = async () => {
     if (confirm(`Deseja excluir o veiculo ${id} `)) {
       await del(Number(id));
@@ -28,7 +30,7 @@ export function VehicleDetail() {
             deleteButtonEnabled
             backTo="/frota"
             handleClickDelete={ handleDelete }
-            handleClickAdd={ async () => { const id = await create('Novo Veículo'); navigate(`/frota/details/${id}`); } }
+            handleClickAdd={ async () => { await create('Novo Veículo');  navigate('/frota'); } }
           /> 
         }
     >

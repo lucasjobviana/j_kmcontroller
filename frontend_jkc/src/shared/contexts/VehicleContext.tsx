@@ -26,10 +26,14 @@ export const FleetProvider: React.FC<IFleetProviderProps> = ({ children }) => {
   const create = useCallback( async (name='Novo Veiculo', licensePlate='Não emplacado') => {
     const vehicle = new Vehicle(name, licensePlate); 
     const newVehicle = await defaultStorage('createVehicle', vehicle);
+    console.log('Vehicle created', newVehicle);
     if(newVehicle) {
+      console.log('dentro do if');
+      console.log([...fleet,newVehicle]);
       setFleet((fleet) => [...fleet, newVehicle]);
       return newVehicle.id;
     }
+    console.log('no else');
     return false;
   }, [fleet]);
 

@@ -29,7 +29,7 @@ export function WorkShopEdit() {
             deleteButtonEnabled
             backTo="/workshops"
             handleClickDelete={ handleDelete }
-            handleClickAdd={ async () => { const id = await create('Nova Oficina'); navigate(`/workshops/edit/${id}`); } }
+            handleClickAdd={ async () => { await create('Nova Oficina'); navigate('/workshops'); } }
           /> 
         }
     >
